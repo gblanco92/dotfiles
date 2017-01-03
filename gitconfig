@@ -1,0 +1,9 @@
+[push]
+	default = matching
+[user]
+	name = Guillem Blanco
+	email = gblanco92@gmail.com
+[core]
+	editor = vim
+[web]
+	browser = google-chrome
