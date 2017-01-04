@@ -317,24 +317,24 @@ nnoremap <leader><Space> :Ag<Space>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup TexFiles
   " Treat long lines as break lines (useful when moving around in them)
-  autocmd FileType tex,txt,markdown map <buffer> j gj
-  autocmd FileType tex,txt,markdown map <buffer> k gk
+  autocmd FileType tex,text,markdown map <buffer> j gj
+  autocmd FileType tex,text,markdown map <buffer> k gk
 
   " Special motions for paragraphs
-  autocmd Filetype tex,txt,markdown map <buffer> 0 g^
-  autocmd Filetype tex,txt,markdown map <buffer> $ g$
+  autocmd Filetype tex,text,markdown map <buffer> 0 g^
+  autocmd Filetype tex,text,markdown map <buffer> $ g$
 
   " Enable spell checking
-  autocmd FileType tex,txt,markdown setlocal spell
+  autocmd FileType tex,text,markdown setlocal spell
 
   " Disable column limit marker
-  autocmd FileType tex,txt,markdown setlocal colorcolumn=""
+  autocmd FileType tex,text,markdown setlocal colorcolumn=""
 
   " Do not break words at the end of a line
-  autocmd FileType tex,txt,markdown setlocal linebreak
+  autocmd FileType tex,text,markdown setlocal linebreak
 
   " Do not highlight the cursor line
-  autocmd FileType tex,txt,markdown setlocal nocursorline
+  autocmd FileType tex,text,markdown setlocal nocursorline
 augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
