@@ -28,3 +28,10 @@ alias vim='nvim'
 
 # Autocomplete autocomplete for .. special dir
 zstyle ':completion:*' special-dirs true
+zstyle ':completion:*files' ignored-patterns \
+  '*?.a' '*?.out' '*?.o' '*?.so' '*?.exe' '*?.dll'  \
+  '*\~' '*?.bak' '*?.pyc' '*?.swp' '*?.tmp' \
+  '*?.zip' '*?.tar' '*?.gz' '*?.rar' '*?.bzip' '*?.7z' \
+  '*?.git' '*?.svn' '*?.hg' '*?.pdf' '*?.ps' \
+  '*?.bmp' '*?.gif' '*?.ico' '*?.jpg' '*?.png' \
+  '*?.aux' '*?.bbl' '*.fls' '*?.log' '*?.toc' '*?.brf' '*?.sig'

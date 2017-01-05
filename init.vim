@@ -1,4 +1,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable filetype plugins
 filetype plugin on
 "filetype indent on
@@ -11,12 +13,17 @@ if !has('nvim')
   set autoread
 endif
 
-"" With a map leader it's possible to do extra key combinations
+" With a map leader it's possible to do extra key combinations
 let mapleader = ","
 let g:mapleader = ","
 
 " Fast saving
 nmap <leader>w :w!<CR>
+
+" Recognize :W as :w
+command! -bar -nargs=* -complete=file -range=% -bang W         <line1>,<line2>write<bang> <args>
+command! -bar -nargs=* -complete=file -range=% -bang Write     <line1>,<line2>write<bang> <args>
+command! -bar -nargs=* -complete=file -range=% -bang Wq        <line1>,<line2>wq<bang> <args>
 
 " Use system clipboard instead of vim buffers
 set clipboard=unnamed
@@ -74,11 +81,11 @@ set scrolloff=7
 
 " Ignore files
 set wildignore+=*.a,*.o,*.out,*.so,*.exe,*.dll
-set wildignore+=*~,*.pyc,*.swp,*.tmp,.DS_Store
+set wildignore+=*~,*.bak,*.pyc,*.swp,*.tmp,.DS_Store
 set wildignore+=*.zip,*.tar,*.gz,*.rar,*.bzip,*.7z
 set wildignore+=*.git,*.svn,*.hg,*.pdf,*.ps
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
-set wildignore+=*.bbl,*.aux,*.fls,*.log,*.brf
+set wildignore+=*.bbl,*.aux,*.fls,*.log,*.brf,*.toc
 
 "Always show current position
 set ruler
