@@ -24,7 +24,7 @@ nmap <leader>w :w!<CR>
 command! -bar -nargs=* -complete=file -range=% -bang W         <line1>,<line2>write<bang> <args>
 command! -bar -nargs=* -complete=file -range=% -bang Write     <line1>,<line2>write<bang> <args>
 command! -bar -nargs=* -complete=file -range=% -bang Wq        <line1>,<line2>wq<bang> <args>
-command! -bar -nargs=* -complete=file -range=% -bang Q         quit<bang> <args>
+command! -bang Q                                               quit<bang>
 
 " Use system clipboard instead of vim buffers
 set clipboard=unnamed
