@@ -129,8 +129,8 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Usefull remapings for non-US keyboards
-nmap +s ]s
-nmap `s [s
+map + ]
+map ` [
 
 " Set region to US English
 set spelllang=en_us
