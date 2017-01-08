@@ -132,7 +132,7 @@ endif
 nmap +s ]s
 nmap `s [s
 
-" Set region to USA English
+" Set region to US English
 set spelllang=en_us
 
 " Use always the same spellfile
@@ -205,9 +205,6 @@ set list
 " Remap 0 to first non-blank character & $ to last non-blank character
 map 0 ^
 map $ g_
-
-" Disable highlight & redraw when <CR> is pressed (double <CR> necessary)
-nnoremap <silent> <CR> :noh <bar> :redraw<CR><CR>
 
 " Smart way to move between windows
 map <C-j> <C-W>j
@@ -286,6 +283,9 @@ function! HLNext (blinktime)
     call matchdelete(ring)
     redraw
 endfunction
+
+" Disable highlight
+nnoremap <silent> <ESC> :noh <ESC>
 
 " For regular expressions turn magic on
 set magic
