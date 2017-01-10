@@ -69,7 +69,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug '~/.vim/plugged/m2-syntax'
 " Other
   Plug 'luochen1990/rainbow' " Rainbow parenthesis
-  Plug 'blueyed/vim-diminactive' " Mark active split
   Plug 'kshenoy/vim-signature' " Display marks
   Plug 'tpope/vim-surround' " Surround objects
 call plug#end()
@@ -86,7 +85,7 @@ set wildignore+=*~,*.bak,*.pyc,*.swp,*.tmp,.DS_Store
 set wildignore+=*.zip,*.tar,*.gz,*.rar,*.bzip,*.7z
 set wildignore+=*.git,*.svn,*.hg,*.pdf,*.ps
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
-set wildignore+=*.bbl,*.aux,*.fls,*.log,*.brf,*.toc
+set wildignore+=*.bbl,*.aux,*.fls,*.log,*.brf,*.toc,*.fdb_latexmk
 
 "Always show current position
 set ruler
@@ -257,6 +256,20 @@ function! HLNext (blinktime)
     redraw
 endfunction
 
+function! AdjustWindowHeight(minheight, maxheight)
+  let l = 1
+  let n_lines = 0
+  let w_width = winwidth(0)
+  while l <= line('$')
+    " number to float for division
+    let l_len = strlen(getline(l)) + 0.0
+    let line_width = l_len/w_width
+    let n_lines += float2nr(ceil(line_width))
+    let l += 1
+  endw
+  exe max([min([n_lines, a:maxheight]), a:minheight]) . "wincmd _"
+endfunction
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vimgrep searching and cope displaying
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -306,13 +319,13 @@ endif
 nnoremap <silent> K :grep! --word-regexp "<C-R><C-W>"<CR>:bo cwindow<CR>
 
 " Create the Ag command
-command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|bo cwindow|redraw!
+command! -nargs=+ -complete=file -bar Ag silent! grep! <args> | bo cwindow | redraw!
 
 " Map <leader><Space> to :Ag<Space>
 nnoremap <leader><Space> :Ag<Space>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Tex(t) files options
+" => Filetye options
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup TexFiles
   " Treat long lines as break lines (useful when moving around in them)
@@ -334,6 +347,26 @@ augroup TexFiles
 
   " Do not highlight the cursor line
   autocmd FileType tex,text,markdown setlocal nocursorline
+augroup END
+
+augroup QuickFix
+  " Disable line highlighting
+  if has('nvim')
+    autocmd FileType qf highlight! link QuickFixLine Normal
+  else " QuickFixLine not present in vim
+    autocmd FileType qf highlight! link Search Normal
+  endif
+
+  " Remove configs for quickfix windows
+  autocmd FileType qf setlocal nonumber
+  autocmd FileType qf setlocal colorcolumn=
+  autocmd FileType qf setlocal nocursorline
+
+  " Open quickfix automatically
+  autocmd QuickFixCmdPost * botright copen
+
+  " Readjust windows height (must the last autocmd)
+  autocmd FileType qf call AdjustWindowHeight(3, 10)
 augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

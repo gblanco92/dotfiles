@@ -34,4 +34,4 @@ zstyle ':completion:*files' ignored-patterns \
   '*?.zip' '*?.tar' '*?.gz' '*?.rar' '*?.bzip' '*?.7z' \
   '*?.git' '*?.svn' '*?.hg' '*?.pdf' '*?.ps' \
   '*?.bmp' '*?.gif' '*?.ico' '*?.jpg' '*?.png' \
-  '*?.aux' '*?.bbl' '*.fls' '*?.log' '*?.toc' '*?.brf' '*?.sig'
+  '*?.aux' '*?.bbl' '*.fls' '*?.log' '*?.toc' '*?.brf' '*?.sig' '*?.fdb_latexmk'
