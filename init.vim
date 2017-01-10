@@ -216,12 +216,8 @@ map <C-l> <C-W>l
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<CR>:pwd<CR>
 
-" Specify the behavior when switching between buffers
-try
-  set switchbuf=useopen,usetab,newtab
-  set stal=2
-catch
-endtry
+" Specify the behavior when switching between buffers using a quickfix windows
+set switchbuf=useopen
 
 " Switch buffer using <leader> + <Tab>
 map <silent> <leader><Tab> :bn<CR>
@@ -239,7 +235,7 @@ noremap <Right> <NOP>
 set mouse=c
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Editing mappings
+" => Custom functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Delete trailing white space on save.
 func! DeleteTrailingWS()
@@ -248,6 +244,18 @@ func! DeleteTrailingWS()
   call winrestview(l:save)
 endfunc
 autocmd BufWrite * :call DeleteTrailingWS()
+
+" Blink on search
+function! HLNext (blinktime)
+    let [bufnum, lnum, col, off] = getpos('.')
+    let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+    let target_pat = '\c\%#\%('.@/.'\)'
+    let ring = matchadd('ColorColumn', target_pat, 101)
+    redraw
+    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+    call matchdelete(ring)
+    redraw
+endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vimgrep searching and cope displaying
@@ -267,17 +275,6 @@ endif
 " This rewires n and N to do the highlighing...
 nnoremap <silent> n   n:call HLNext(0.2)<cr>
 nnoremap <silent> N   N:call HLNext(0.2)<cr>
-
-function! HLNext (blinktime)
-    let [bufnum, lnum, col, off] = getpos('.')
-    let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
-    let target_pat = '\c\%#\%('.@/.'\)'
-    let ring = matchadd('ColorColumn', target_pat, 101)
-    redraw
-    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
-    call matchdelete(ring)
-    redraw
-endfunction
 
 " Disable highlight
 nnoremap <silent> <ESC> :noh <ESC>
@@ -305,11 +302,11 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor\ -m\ 50
 endif
 
-" K searches for the word unfer the cursor
-nnoremap <silent> K :grep! --word-regexp "<C-R><C-W>"<CR>:cwindow<CR>
+" K searches for the word unfer the cursor (:bo for quickfix across windows)
+nnoremap <silent> K :grep! --word-regexp "<C-R><C-W>"<CR>:bo cwindow<CR>
 
 " Create the Ag command
-command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|bo cwindow|redraw!
 
 " Map <leader><Space> to :Ag<Space>
 nnoremap <leader><Space> :Ag<Space>
