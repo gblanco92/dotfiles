@@ -23,8 +23,10 @@ export MANPATH="/usr/local/man:$MANPATH"
 export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-export EDITOR='nvim'
-alias vim='nvim'
+if [[ -a `brew --prefix`/bin/nvim ]]; then
+  export EDITOR='nvim'
+  alias vim='nvim'
+fi
 
 # Autocomplete autocomplete for .. special dir
 zstyle ':completion:*' special-dirs true
