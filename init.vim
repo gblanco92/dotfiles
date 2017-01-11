@@ -237,11 +237,11 @@ set mouse=c
 " => Custom functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Delete trailing white space on save.
-func! DeleteTrailingWS()
+function! DeleteTrailingWS()
   let l:save = winsaveview()
   %s/\s\+$//e
   call winrestview(l:save)
-endfunc
+endfunction
 autocmd BufWrite * :call DeleteTrailingWS()
 
 " Blink on search
@@ -256,6 +256,7 @@ function! HLNext (blinktime)
     redraw
 endfunction
 
+" Adjust QuickFix window height
 function! AdjustWindowHeight(minheight, maxheight)
   let l = 1
   let n_lines = 0
@@ -339,8 +340,11 @@ augroup TexFiles
   " Enable spell checking
   autocmd FileType tex,text,markdown setlocal spell
 
+  " Remove spell cheking in help files
+  autocmd FileType help setlocal nospell
+
   " Disable column limit marker
-  autocmd FileType tex,text,markdown setlocal colorcolumn=""
+  autocmd FileType tex,text,markdown setlocal colorcolumn=
 
   " Do not break words at the end of a line
   autocmd FileType tex,text,markdown setlocal linebreak
@@ -351,16 +355,12 @@ augroup END
 
 augroup QuickFix
   " Disable line highlighting
-  if has('nvim')
-    autocmd FileType qf highlight! link QuickFixLine Normal
-  else " QuickFixLine not present in vim
-    autocmd FileType qf highlight! link Search Normal
-  endif
+  autocmd FileType qf highlight! link QuickFixLine Normal
 
   " Remove configs for quickfix windows
   autocmd FileType qf setlocal nonumber
   autocmd FileType qf setlocal colorcolumn=
-  autocmd FileType qf setlocal nocursorline
+  "autocmd FileType qf setlocal nocursorline
 
   " Open quickfix automatically
   autocmd QuickFixCmdPost * botright copen
