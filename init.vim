@@ -1,9 +1,47 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Bootstrap vim-plug
+if empty(glob("~/.config/nvim/autoload/plug.vim"))
+  exe '!curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+endif
+
+" Plug section
+call plug#begin('~/.config/nvim/plugged')
+" C/C++
+  Plug 'rhysd/vim-clang-format', {'for' : ['c', 'cpp']} " Formatting
+  Plug 'Shougo/deoplete.nvim', {'for' : ['c', 'cpp']} " Completing
+  Plug 'zchee/deoplete-clang', {'for' : ['c', 'cpp']} " Completing
+  Plug 'ervandew/supertab', {'for' : ['c', 'cpp']} " Completing
+  Plug 'Shougo/neoinclude.vim', {'for' : ['c', 'cpp']} " Includes
+  Plug 'octol/vim-cpp-enhanced-highlight', {'for' : ['c', 'cpp']} " Highlighting
+" Searching
+  Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'scrooloose/nerdtree'
+" Tmux
+  Plug 'christoomey/vim-tmux-navigator'
+  Plug 'edkolev/tmuxline.vim'
+" Themes
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'iCyMind/NeoSolarized'
+  Plug 'morhetz/gruvbox'
+"" Maths
+  Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for' : 'tex' }
+  Plug '~/.config/nvim/plugged/m2-syntax'
+  Plug '~/.config/nvim/plugged/vim-magma'
+"" Other
+  Plug 'luochen1990/rainbow' " Rainbow parenthesis
+  Plug 'kshenoy/vim-signature' " Display marks
+  Plug 'tpope/vim-surround' " Surround objects
+call plug#end()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable filetype plugins
 filetype plugin on
-"filetype indent on
+filetype indent off
 
 " Show commands
 set showcmd
@@ -36,44 +74,6 @@ endif
 set noswapfile
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Plugins
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Bootstrap vim-plug
-if empty(glob("~/.config/nvim/autoload/plug.vim"))
-  exe '!curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'
-endif
-
-" Plug section
-call plug#begin('~/.config/nvim/plugged')
-" C/C++
-  Plug 'rhysd/vim-clang-format', {'for' : ['c', 'cpp']} " Formatting
-  Plug 'Shougo/deoplete.nvim', {'for' : ['c', 'cpp']} " Completing
-  Plug 'zchee/deoplete-clang', {'for' : ['c', 'cpp']} " Completing
-  Plug 'ervandew/supertab', {'for' : ['c', 'cpp']} " Completing
-  Plug 'Shougo/neoinclude.vim', {'for' : ['c', 'cpp']} " Includes
-  Plug 'octol/vim-cpp-enhanced-highlight', {'for' : ['c', 'cpp']} " Highlighting
-" Searching
-  Plug 'ctrlpvim/ctrlp.vim'
-  Plug 'scrooloose/nerdtree'
-" Tmux
-  Plug 'christoomey/vim-tmux-navigator'
-  Plug 'edkolev/tmuxline.vim'
-" Themes
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-  Plug 'iCyMind/NeoSolarized'
-  Plug 'morhetz/gruvbox'
-" Maths
-  Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for' : 'tex' }
-  Plug '~/.vim/plugged/vim-magma'
-  Plug '~/.vim/plugged/m2-syntax'
-" Other
-  Plug 'luochen1990/rainbow' " Rainbow parenthesis
-  Plug 'kshenoy/vim-signature' " Display marks
-  Plug 'tpope/vim-surround' " Surround objects
-call plug#end()
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set 7 lines to the cursor - when moving vertically using j/k
@@ -85,7 +85,7 @@ set wildignore+=*~,*.bak,*.pyc,*.swp,*.tmp,.DS_Store
 set wildignore+=*.zip,*.tar,*.gz,*.rar,*.bzip,*.7z
 set wildignore+=*.git,*.svn,*.hg,*.pdf,*.ps
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
-set wildignore+=*.bbl,*.aux,*.fls,*.log,*.brf,*.toc,*.fdb_latexmk
+set wildignore+=*.bbl,*.aux,*.fls,*.log,*.brf,*.toc,*.fdb_latexmk,*.sig
 
 "Always show current position
 set ruler
