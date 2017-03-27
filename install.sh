@@ -16,7 +16,7 @@ mkdir -p ~/.config/nvim/ftplugin/tex
 mkdir -p ~/.vim/ftplugin
 mkdir -p ~/.vim/ftplugin/tex
 
-rm -f ~/.config/nvim/ftplugin/cpp.vim && ln -s $DIR/ftplugin/cpp.vim ~/.config/nvim/ftplugin
-rm -f ~/.config/nvim/ftplugin/tex/* && ln -s $DIR/ftplugin/tex/* ~/.config/nvim/ftplugin/tex
-rm -f ~/.vim/ftplugin/cpp.vim && ln -s $DIR/ftplugin/cpp.vim ~/.vim/ftplugin
-rm -f ~/.vim/ftplugin/tex/* && ln -s $DIR/ftplugin/tex/* ~/.vim/ftplugin/tex
+rm -f ~/.config/nvim/ftplugin/*.vim && ln -s $DIR/ftplugin/*.vim ~/.config/nvim/ftplugin/
+rm -f ~/.config/nvim/ftplugin/tex/* && ln -s $DIR/ftplugin/tex/*.vim ~/.config/nvim/ftplugin/tex/
+rm -f ~/.vim/ftplugin/*.vim && ln -s $DIR/ftplugin/*.vim ~/.vim/ftplugin/
+rm -f ~/.vim/ftplugin/tex/*.vim && ln -s $DIR/ftplugin/tex/*.vim ~/.vim/ftplugin/tex/

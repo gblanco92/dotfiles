@@ -132,7 +132,6 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Spell checking
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " Usefull remapings for non-US keyboards
 map + ]
 map ` [
@@ -145,6 +144,9 @@ set spellfile=~/.config/nvim/spell/en.utf-8.add
 
 " Pressing ,ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<CR>
+
+" Remove spell cheking in help files
+setlocal nospell
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors, Fonts and Encodings
@@ -227,7 +229,7 @@ set switchbuf=useopen
 map <silent> <leader><Tab> :bn<CR>
 
 " Return to last edit position when opening files
-autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+autocmd! BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
   \ | exe "normal! g`\"" | endif
 
 " Disable arrows (all modes)
@@ -251,7 +253,7 @@ function! DeleteTrailingWS()
   %s/\s\+$//e
   call winrestview(l:save)
 endfunction
-autocmd BufWrite * :call DeleteTrailingWS()
+autocmd! BufWrite * :call DeleteTrailingWS()
 
 " Blink on search
 function! HLNext (blinktime)
@@ -336,56 +338,6 @@ command! -nargs=+ -complete=file -bar
 nnoremap <leader><Space> :Ag<Space>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Filetye options
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-augroup TexFiles
-  " Treat long lines as break lines (useful when moving around in them)
-  autocmd FileType tex,text,markdown map <buffer> j gj
-  autocmd FileType tex,text,markdown map <buffer> k gk
-
-  " Special motions for paragraphs
-  autocmd Filetype tex,text,markdown map <buffer> 0 g^
-  autocmd Filetype tex,text,markdown map <buffer> $ g$
-
-  " Enable spell checking
-  autocmd FileType tex,text,markdown setlocal spell
-
-  " Remove spell cheking in help files
-  autocmd FileType help setlocal nospell
-
-  " Disable column limit marker
-  autocmd FileType tex,text,markdown setlocal colorcolumn=
-
-  " Do not break words at the end of a line
-  autocmd FileType tex,text,markdown setlocal linebreak
-
-  " Do not highlight the cursor line
-  autocmd FileType tex,text,markdown setlocal nocursorline
-augroup END
-
-augroup QuickFix
-  " Disable line highlighting
-  autocmd FileType qf highlight! link QuickFixLine Normal
-
-  " Remove configs for quickfix windows
-  autocmd FileType qf setlocal nonumber
-  autocmd FileType qf setlocal colorcolumn=
-  "autocmd FileType qf setlocal nocursorline
-
-  " Open quickfix automatically
-  autocmd QuickFixCmdPost * botright copen
-
-  " Close quickfix automatically
-  autocmd BufWinEnter quickfix nnoremap <silent> <buffer>
-                \ q :cclose<cr>:lclose<cr>
-    autocmd BufEnter * if (winnr('$') == 1 && &buftype ==# 'quickfix' ) |
-                \ bd | q | endif
-
-  " Readjust windows height (must bet the last autocmd!)
-  autocmd FileType qf call AdjustWindowHeight(3, 10)
-augroup END
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Airline
@@ -415,5 +367,5 @@ let g:ctrlp_user_ignore = ['.git',
   \ 'cd %s && git ls-files -co --exclude-standard']
 
 " NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree")
+autocmd! bufenter * if (winnr("$") == 1 && exists("b:NERDTree")
   \ && b:NERDTree.isTabTree()) | q | endif
