@@ -60,10 +60,14 @@ let g:mapleader = ","
 nmap <leader>w :w!<CR>
 
 " Recognize :W as :w
-command! -bar -nargs=* -complete=file -range=% -bang W         <line1>,<line2>write<bang> <args>
-command! -bar -nargs=* -complete=file -range=% -bang Write     <line1>,<line2>write<bang> <args>
-command! -bar -nargs=* -complete=file -range=% -bang Wq        <line1>,<line2>wq<bang> <args>
-command! -bang Q                                               quit<bang>
+command! -bar -nargs=* -complete=file -range=% -bang W
+  \ <line1>,<line2>write<bang> <args>
+command! -bar -nargs=* -complete=file -range=% -bang Write
+  \ <line1>,<line2>write<bang> <args>
+command! -bar -nargs=* -complete=file -range=% -bang Wq
+  \ <line1>,<line2>wq<bang> <args>
+command! -bang Q
+  \ quit<bang>
 
 " Use system clipboard instead of vim buffers
 set clipboard=unnamed
@@ -108,7 +112,7 @@ set number
 set cursorline
 
 " Highlight column 81
-set colorcolumn=81
+set colorcolumn=80
 
 " Always show the status line
 if !has('nvim')
@@ -223,7 +227,8 @@ set switchbuf=useopen
 map <silent> <leader><Tab> :bn<CR>
 
 " Return to last edit position when opening files
-autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+  \ | exe "normal! g`\"" | endif
 
 " Disable arrows (all modes)
 noremap <Up> <NOP>
@@ -233,6 +238,9 @@ noremap <Right> <NOP>
 
 "Don't use the mouse
 set mouse=c
+
+"Don't move to the beginning of line when switching buffers
+set nostartofline
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Custom functions
@@ -321,7 +329,8 @@ endif
 nnoremap <silent> K :grep! --word-regexp "<C-R><C-W>"<CR>:bo cwindow<CR>
 
 " Create the Ag command
-command! -nargs=+ -complete=file -bar Ag silent! grep! <args> | bo cwindow | redraw!
+command! -nargs=+ -complete=file -bar
+  \ Ag silent! grep! <args> | bo cwindow | redraw!
 
 " Map <leader><Space> to :Ag<Space>
 nnoremap <leader><Space> :Ag<Space>
@@ -366,7 +375,13 @@ augroup QuickFix
   " Open quickfix automatically
   autocmd QuickFixCmdPost * botright copen
 
-  " Readjust windows height (must the last autocmd)
+  " Close quickfix automatically
+  autocmd BufWinEnter quickfix nnoremap <silent> <buffer>
+                \ q :cclose<cr>:lclose<cr>
+    autocmd BufEnter * if (winnr('$') == 1 && &buftype ==# 'quickfix' ) |
+                \ bd | q | endif
+
+  " Readjust windows height (must bet the last autocmd!)
   autocmd FileType qf call AdjustWindowHeight(3, 10)
 augroup END
 
@@ -386,7 +401,7 @@ set noshowmode
 " Rainbown parenthesis
 let g:rainbow_active = 1
 let g:rainbow_conf = { 'ctermfgs' : ['brown'],
-\                       'guifgs' : ['SaddleBrown'] }
+\                      'guifgs' : ['SaddleBrown'] }
 
 " Ctrl-P
 let g:ctrlp_working_path_mode = 'ra'
@@ -396,10 +411,12 @@ let g:ctrlp_custom_ignore = {
   \ 'link': 'some_bad_symbolic_links',
   \ }
 let g:ctrlp_user_command = 'find %s -type f'
-let g:ctrlp_user_ignore = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:ctrlp_user_ignore = ['.git',
+  \ 'cd %s && git ls-files -co --exclude-standard']
 
 " NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree")
+  \ && b:NERDTree.isTabTree()) | q | endif
 
 " C++ formating
 let g:clang_format#command = "clang-format-3.8"
@@ -407,8 +424,10 @@ let g:clang_format#detect_style_file = 1
 nmap <leader>f :ClangFormat<CR>
 
 " C++ completion
-let g:deoplete#sources#clang#libclang_path = '/usr/local/Cellar/llvm38/3.8.1/lib/llvm-3.8/lib/libclang.dylib'
-let g:deoplete#sources#clang#clang_header = '/usr/local/Cellar/llvm38/3.8.1/lib/llvm-3.8/lib/clang'
+let g:deoplete#sources#clang#libclang_path =
+  \ '/usr/local/Cellar/llvm38/3.8.1/lib/llvm-3.8/lib/libclang.dylib'
+let g:deoplete#sources#clang#clang_header =
+  \ '/usr/local/Cellar/llvm38/3.8.1/lib/llvm-3.8/lib/clang'
 let g:deoplete#enable_at_startup = 1
 set completeopt-=preview
 let g:deoplete#ignore_sources = {}
@@ -418,18 +437,54 @@ let g:deoplete#ignore_sources._ = ['buffer']
 let g:cpp_class_scope_highlight = 1
 let g:cpp_experimental_template_highlight = 0
 
-" Latex-Box
+" LaTeX-Box
 let g:LatexBox_viewer = "/Applications/Skim.app/Contents/MacOS/Skim"
 let g:LatexBox_quickfix = 2
 let g:LatexBox_latexmk_options = "-pdflatex='pdflatex -synctex=1 \%O \%S'"
-nmap <leader>c :w<CR>:Latexmk<CR>
-nmap <leader>v :w<CR>:LatexView<CR>
+let g:LatexBox_ignore_warnings = []
+nmap <silent> <leader>c :w<CR>:call ChangeTexDraftState()<CR>:Latexmk<CR>
+nmap <silent> <leader>v :w<CR>:LatexView<CR>
 map <silent> <Leader>s :w<CR>:silent
                 \ !/Applications/Skim.app/Contents/SharedSupport/displayline -g
                 \ <C-R>=line('.')<CR> "<C-R>=LatexBox_GetOutputFile()<CR>"
                 \ "%:p" <CR>
 " When reinstalling Skim set: "defaults write -app Skim SKAutoReloadFileUpdate
 " -boolean true" to avoid pop-up on PDF reloading.
+
+" Detects whether the a LaTeX file is in draft mode or not. Changes
+" configuration variables accordingly
+let b:LatexBox_is_draft = 0
+function! ChangeTexDraftState()
+  if expand('%:p') == LatexBox_GetMainTexFile()
+    let l:save = winsaveview()
+
+    exec cursor(1, 1)
+    while getline(search("documentclass")) =~ '\(^\s*\)\@<=%'
+      " pass
+    endwhile
+
+    let l:is_draft = search("draft", 'n', line('.'))
+
+    if l:is_draft != 0 && b:LatexBox_is_draft == 0
+      let b:LatexBox_is_draft = 1
+      let g:LatexBox_ignore_warnings =
+        \ ['Overfull', 'Underfull', 'draft',
+        \ 'undefined on input line', 'undefined references']
+
+      unlet b:LatexBox_loaded
+      call plug#load("LaTeX-Box")
+
+      let g:LatexBox_ignore_warnings = []
+    elseif l:is_draft == 0 && b:LatexBox_is_draft != 0
+      let b:LatexBox_is_draft = 0
+
+      unlet b:LatexBox_loaded
+      call plug#load("LaTeX-Box")
+    endif
+
+    call winrestview(l:save)
+  endif
+endfunction
 
 " QuickTex
 let g:quicktex_math = {
@@ -517,7 +572,7 @@ let g:quicktex_math = {
     \'empty' : '\varempty ',
     \'pair'  : '(<+++>, <++>) <++>',
     \'dots'  : '\dots ',
-    \'cdots'  : '\cdots ',
+    \'cdots' : '\cdots ',
 \'Section: Logic' : 'COMMENT',
     \'exists'  : '\exists ',
     \'nexists' : '\nexists ',
@@ -543,20 +598,20 @@ let g:quicktex_math = {
     \'neq'     : '\neq ',
     \'neg'     : '\neg ',
 \'Section: Operations' : 'COMMENT',
-    \'add'   : '+ ',
-    \'plus'  : '+ ',
-    \'minus' : '- ',
-    \'pm'    : '\pm ',
-    \'mp'    : '\mp ',
-    \'mult'  : '* ',
-    \'frac'  : '\frac{<+++>}{<++>} <++>',
-    \'recip' : '\frac{1}{<+++>} <++>',
-    \'dot'   : '\cdot ',
-    \'pow'   : "\<BS>^{<+++>} <++>",
-    \'sq'    : "\<BS>^2 ",
-    \'inv'   : "\<BS>^{-1} ",
-    \'cross' : '\times ',
-    \'wedge' : '\wedge ',
+    \'add'    : '+ ',
+    \'plus'   : '+ ',
+    \'minus'  : '- ',
+    \'pm'     : '\pm ',
+    \'mp'     : '\mp ',
+    \'mult'   : '* ',
+    \'frac'   : '\frac{<+++>}{<++>} <++>',
+    \'recip'  : '\frac{1}{<+++>} <++>',
+    \'dot'    : '\cdot ',
+    \'pow'    : "\<BS>^{<+++>} <++>",
+    \'sq'     : "\<BS>^2 ",
+    \'inv'    : "\<BS>^{-1} ",
+    \'cross'  : '\times ',
+    \'wedge'  : '\wedge ',
     \'dd'     : '\dd ',
     \'otimes' : '\otimes ',
     \'oplus'  : '\oplus ',
@@ -729,6 +784,7 @@ let g:quicktex_tex = {
 \'Section: Environments' : 'COMMENT',
     \'doc'     : "\\begin{document}{<+++>}\<CR><++>\<CR>\\end{document}",
     \'exe'     : "\\begin{exercise}{<+++>}\<CR><++>\<CR>\\end{exercise}",
+    \'def'     : "\\begin{definition}{<+++>}\<CR><++>\<CR>\\end{definition}",
     \'prf'     : "\\begin{proof}\<CR><+++>\<CR>\\end{proof}",
     \'thm'     : "\\begin{theorem}\<CR><+++>\<CR>\\end{theorem}",
     \'prop'    : "\\begin{proposition}\<CR><+++>\<CR>\\end{proposition}",
