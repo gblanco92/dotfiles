@@ -28,7 +28,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'morhetz/gruvbox'
 "" Maths
   Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for' : 'tex' }
-  Plug 'brennier/quicktex', { 'for' : 'tex' }
+" Plug 'brennier/quicktex', { 'for' : 'tex' }
   Plug '~/.config/nvim/plugged/m2-syntax'
   Plug '~/.config/nvim/plugged/vim-magma'
 "" Other
@@ -77,6 +77,12 @@ endif
 
 " No swap files
 set noswapfile
+
+" Persistent undo across different vim runs
+if !empty($TMPDIR)
+  set undofile
+  set undodir=$TMPDIR
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" => VIM user interface
@@ -183,7 +189,7 @@ if has('gui_running')
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Text, tab and indent related
+" => Spaces, tabs and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use spaces instead of tabs
 set expandtab
@@ -290,6 +296,12 @@ set ignorecase
 
 " When searching try to be smart about cases
 set smartcase
+
+" Search in for directories in path recursively
+set path+=**
+
+" Default suffixes when searching files using vim
+set suffixesadd=.c,.cpp,.cc,.h,.hpp,.hh,.vim,.tex,.py,.sh,.m,.m2
 
 " Highlight search results
 if !has('nvim')
