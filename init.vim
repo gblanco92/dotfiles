@@ -28,7 +28,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'morhetz/gruvbox'
 "" Maths
   Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for' : 'tex' }
-" Plug 'brennier/quicktex', { 'for' : 'tex' }
+  Plug 'brennier/quicktex', { 'for' : 'tex' }
   Plug '~/.config/nvim/plugged/m2-syntax'
   Plug '~/.config/nvim/plugged/vim-magma'
 "" Other
