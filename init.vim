@@ -417,14 +417,16 @@ function! ChangeTexDraftState()
         \ 'undefined on input line', 'undefined references']
 
       unlet b:LatexBox_loaded
-      call plug#load("LaTeX-Box")
+			source ~/.config/nvim/plugged/LaTeX-Box/ftplugin/tex_LatexBox.vim
+      "call plug#load("LaTeX-Box")
 
       let g:LatexBox_ignore_warnings = []
     elseif l:is_draft == 0 && b:LatexBox_is_draft != 0
       let b:LatexBox_is_draft = 0
 
       unlet b:LatexBox_loaded
-      call plug#load("LaTeX-Box")
+			source ~/.config/nvim/plugged/LaTeX-Box/ftplugin/tex_LatexBox.vim
+      "call plug#load("LaTeX-Box")
     endif
 
     call winrestview(l:save)
