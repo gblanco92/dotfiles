@@ -17,7 +17,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'octol/vim-cpp-enhanced-highlight', {'for' : ['c', 'cpp']} " Highlighting
 " Searching
   Plug 'ctrlpvim/ctrlp.vim'
-  Plug 'scrooloose/nerdtree'
 " Tmux
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'edkolev/tmuxline.vim'
@@ -378,10 +377,6 @@ let g:ctrlp_user_command = 'find %s -type f'
 let g:ctrlp_user_ignore = ['.git',
   \ 'cd %s && git ls-files -co --exclude-standard']
 
-" NERDTree
-autocmd! bufenter * if (winnr("$") == 1 && exists("b:NERDTree")
-  \ && b:NERDTree.isTabTree()) | q | endif
-
 " LaTeX-Box
 let g:LatexBox_viewer = "/Applications/Skim.app/Contents/MacOS/Skim"
 let g:LatexBox_quickfix = 2
@@ -417,7 +412,7 @@ function! ChangeTexDraftState()
         \ 'undefined on input line', 'undefined references']
 
       unlet b:LatexBox_loaded
-			source ~/.config/nvim/plugged/LaTeX-Box/ftplugin/tex_LatexBox.vim
+      source ~/.config/nvim/plugged/LaTeX-Box/ftplugin/tex_LatexBox.vim
       "call plug#load("LaTeX-Box")
 
       let g:LatexBox_ignore_warnings = []
@@ -425,7 +420,7 @@ function! ChangeTexDraftState()
       let b:LatexBox_is_draft = 0
 
       unlet b:LatexBox_loaded
-			source ~/.config/nvim/plugged/LaTeX-Box/ftplugin/tex_LatexBox.vim
+      source ~/.config/nvim/plugged/LaTeX-Box/ftplugin/tex_LatexBox.vim
       "call plug#load("LaTeX-Box")
     endif
 
