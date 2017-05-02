@@ -44,7 +44,9 @@ filetype plugin on
 filetype indent off
 
 " Show commands
-set showcmd
+if !has('nvim')
+  set showcmd
+endif
 
 " Set to auto read when a file is changed from the outised
 if !has('nvim')
@@ -83,6 +85,11 @@ if !empty($TMPDIR)
   set undodir=$TMPDIR
 endif
 
+" Disable bell
+if !has('nvim')
+  set belloff="all"
+endif
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -98,7 +105,9 @@ set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
 set wildignore+=*.bbl,*.aux,*.fls,*.log,*.brf,*.toc,*.fdb_latexmk,*.sig
 
 "Always show current position
-set ruler
+if !has('nvim')
+  set ruler
+endif
 
 " A buffer becomes hidden when it is abandoned
 set hidden
@@ -127,11 +136,6 @@ endif
 " Graphical menu when completing commands
 if !has('nvim')
   set wildmenu
-endif
-
-" Change cursor shape in insert mode
-if has('nvim')
-  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
