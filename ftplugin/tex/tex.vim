@@ -9,11 +9,23 @@ map <buffer> $ g$
 " Enable spell checking
 setlocal spell
 
+" Complete using dictionary words
+setlocal complete+=kspell
+
 " Disable column limit marker
 setlocal colorcolumn=
 
 " Do not break words at the end of a line
 setlocal linebreak
 
-" Do not highlight the cursor line
+" Do not highlight the cursor line (better performance)
 setlocal nocursorline
+
+" Do not use relativenumber (better performance)
+setlocal norelativenumber
+
+" Do not use cursorcolumn (better performance)
+setlocal nocursorcolumn
+
+" Better performance when redrawing
+setlocal lazyredraw

@@ -90,6 +90,14 @@ if !has('nvim')
   set belloff="all"
 endif
 
+" Make dot work over visual line selections
+xnoremap . :norm.<CR>
+
+" Autoread when file is changed
+if !has('nvim')
+  set autoread
+endif
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -138,6 +146,9 @@ if !has('nvim')
   set wildmenu
 endif
 
+" Automatically equalize splits when Vim is resized
+autocmd VimResized * wincmd =
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Spell checking
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -153,9 +164,6 @@ set spellfile=~/.config/nvim/spell/en.utf-8.add
 
 " Pressing ,ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<CR>
-
-" Remove spell cheking in help files
-setlocal nospell
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors, Fonts and Encodings
@@ -297,6 +305,9 @@ endfunction
 " Ignore case when searching
 set ignorecase
 
+" But respect case when in completions
+set infercase
+
 " When searching try to be smart about cases
 set smartcase
 
@@ -313,8 +324,8 @@ if !has('nvim')
 endif
 
 " This rewires n and N to do the highlighing...
-nnoremap <silent> n   n:call HLNext(0.2)<cr>
-nnoremap <silent> N   N:call HLNext(0.2)<cr>
+nnoremap <silent> n  n:call HLNext(0.2)<cr>
+nnoremap <silent> N  N:call HLNext(0.2)<cr>
 
 " Disable highlight
 nnoremap <silent> <ESC> :noh <ESC>
