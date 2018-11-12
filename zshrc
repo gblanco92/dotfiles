@@ -37,3 +37,4 @@ zstyle ':completion:*files' ignored-patterns \
   '*?.git' '*?.svn' '*?.hg' '*?.pdf' '*?.ps' \
   '*?.bmp' '*?.gif' '*?.ico' '*?.jpg' '*?.png' \
   '*?.aux' '*?.bbl' '*.fls' '*?.log' '*?.toc' '*?.brf' '*?.sig' '*?.fdb_latexmk'
+export PATH="/usr/local/sbin:$PATH"

@@ -30,6 +30,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'brennier/quicktex', { 'for' : 'tex' }
   Plug '~/.config/nvim/plugged/m2-syntax'
   Plug '~/.config/nvim/plugged/vim-magma'
+  Plug '~/.config/nvim/plugged/singular-syntax'
 "" Other
   Plug 'luochen1990/rainbow' " Rainbow parenthesis
   Plug 'kshenoy/vim-signature' " Display marks
