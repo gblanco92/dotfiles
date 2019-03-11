@@ -28,6 +28,11 @@ if [[ -a `brew --prefix`/bin/nvim ]]; then
   alias vim='nvim'
 fi
 
+# Use exa instead of ls
+if [[ -a `brew --prefix`/bin/exa ]]; then
+  alias ls='exa'
+fi
+
 # Autocomplete autocomplete for .. special dir
 zstyle ':completion:*' special-dirs true
 zstyle ':completion:*files' ignored-patterns \
