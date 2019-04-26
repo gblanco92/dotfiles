@@ -24,14 +24,13 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'iCyMind/NeoSolarized'
-  Plug 'morhetz/gruvbox'
 "" Maths
   Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for' : 'tex' }
   Plug 'brennier/quicktex', { 'for' : 'tex' }
   Plug '~/.config/nvim/plugged/m2-syntax'
   Plug '~/.config/nvim/plugged/vim-magma'
   Plug '~/.config/nvim/plugged/singular-syntax'
-"" Other
+"" Others
   Plug 'luochen1990/rainbow' " Rainbow parenthesis
   Plug 'kshenoy/vim-signature' " Display marks
   Plug 'tpope/vim-surround' " Surround objects
@@ -57,9 +56,6 @@ endif
 " With a map leader it's possible to do extra key combinations
 let mapleader = ","
 let g:mapleader = ","
-
-" Fast saving
-nmap <leader>w :w!<CR>
 
 " Recognize :W as :w
 command! -bar -nargs=* -complete=file -range=% -bang W
@@ -173,32 +169,29 @@ map <leader>ss :setlocal spell!<CR>
 syntax on
 
 " Use truecolors
-if has('gui_running') || has('nvim')
+if has('nvim')
   set termguicolors
 endif
 
 try
   colorscheme NeoSolarized
-  "colorscheme gruvbox
 catch
   colorscheme desert
 endtry
 
-if has('gui_running')
+if has('gui_vimr') || has('gui_running')
   set background=light
   let g:neosolarized_contrast = "high"
+  " Nicer search highlight color for Solarized light
+  hi Search guifg=wheat guibg=peru
+  " VimR does not set the following options correctly when compared to MacVim
+  hi IncSearch guifg=khaki guibg=indianred
 else
   set background=dark
 endif
 
 "Better line number on Solarized
 hi CursorLineNr guifg=DarkGrey
-
-if has('gui_running')
-  set guifont=Inconsolata\ for\ Powerline:h16
-  set guioptions=
-  set gcr=n:blinkon0
-endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Spaces, tabs and indent related
@@ -316,7 +309,7 @@ set smartcase
 set path+=**
 
 " Default suffixes when searching files using vim
-set suffixesadd=.c,.cpp,.cc,.h,.hpp,.hh,.vim,.tex,.py,.sh,.m,.m2
+set suffixesadd=.c,.cpp,.cc,.h,.hpp,.hh,.vim,.tex,.txt,.bib,.py,.sh,.m,.m2,.sing
 
 " Highlight search results
 if !has('nvim')
@@ -371,6 +364,7 @@ nnoremap <leader><Space> :Ag<Space>
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#enabled = 1
+" Do not show the mode in the last line, it is already shown in the airline.
 set noshowmode
 " If airline does not show properly on tmux/nvim or MacVim the problem is
 " probably on the font not begin Powerline (or Powerline enough). Currently
@@ -379,6 +373,8 @@ set noshowmode
 
 " Rainbown parenthesis
 let g:rainbow_active = 1
+" Disable Rainbow for certain filetypes
+au FileType text,tex RainbowToggle
 let g:rainbow_conf = { 'ctermfgs' : ['brown'],
 \                      'guifgs' : ['SaddleBrown'] }
 
@@ -398,7 +394,8 @@ let g:LatexBox_viewer = "/Applications/Skim.app/Contents/MacOS/Skim"
 let g:LatexBox_quickfix = 2
 let g:LatexBox_latexmk_options = "-pdflatex='pdflatex -synctex=1 \%O \%S'"
 let g:LatexBox_ignore_warnings = []
-nmap <silent> <leader>c :w<CR>:call ChangeTexDraftState()<CR>:Latexmk<CR>
+let g:LatexBox_ref_pattern = '\c\\\a*ref\*\?\_\s*{'
+nmap <silent> <leader>c :w<CR>:Latexmk<CR>
 nmap <silent> <leader>v :w<CR>:LatexView<CR>
 map <silent> <Leader>s :w<CR>:silent
                 \ !/Applications/Skim.app/Contents/SharedSupport/displayline -g
@@ -406,40 +403,3 @@ map <silent> <Leader>s :w<CR>:silent
                 \ "%:p" <CR>
 " When reinstalling Skim set: "defaults write -app Skim SKAutoReloadFileUpdate
 " -boolean true" to avoid pop-up on PDF reloading.
-
-" Detects whether the a LaTeX file is in draft mode or not. Changes
-" configuration variables accordingly
-let b:LatexBox_is_draft = 0
-function! ChangeTexDraftState()
-  if expand('%:p') == LatexBox_GetMainTexFile()
-    let l:save = winsaveview()
-
-    exec cursor(1, 1)
-    while getline(search("documentclass")) =~ '\(^\s*\)\@<=%'
-      " pass
-    endwhile
-
-    let l:is_draft = search("draft", 'n', line('.'))
-
-    if l:is_draft != 0 && b:LatexBox_is_draft == 0
-      let b:LatexBox_is_draft = 1
-      let g:LatexBox_ignore_warnings =
-        \ ['Overfull', 'Underfull', 'draft',
-        \ 'undefined on input line', 'undefined references']
-
-      unlet b:LatexBox_loaded
-      source ~/.config/nvim/plugged/LaTeX-Box/ftplugin/tex_LatexBox.vim
-      "call plug#load("LaTeX-Box")
-
-      let g:LatexBox_ignore_warnings = []
-    elseif l:is_draft == 0 && b:LatexBox_is_draft != 0
-      let b:LatexBox_is_draft = 0
-
-      unlet b:LatexBox_loaded
-      source ~/.config/nvim/plugged/LaTeX-Box/ftplugin/tex_LatexBox.vim
-      "call plug#load("LaTeX-Box")
-    endif
-
-    call winrestview(l:save)
-  endif
-endfunction
