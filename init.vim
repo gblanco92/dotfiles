@@ -359,7 +359,6 @@ set noshowmode
 " Rainbown parenthesis
 let g:rainbow_active = 1
 " Disable Rainbow for certain filetypes
-au FileType text,tex RainbowToggle
 let g:rainbow_conf = { 'ctermfgs' : ['brown'],
 \                      'guifgs' : ['SaddleBrown'] }
 
@@ -381,6 +380,9 @@ let g:vimtex_view_method = 'skim'
 let g:tex_flavor = 'latex'
 let g:vimtex_view_skim_activate = 1
 let g:vimtex_view_skim_reading_bar = 0
-let g:vimtex_complete_ref = { 'custom_patterns' : ['fref'] }
-" Matching is too slow
-let g:vimtex_matchparen_enabled = 0
+" Matching is too slow? Try a small number of lines...
+"let g:vimtex_matchparen_enabled = 0
+let g:vimtex_delim_stopline = 10
+" Disable several options for better performance on tex(t) files
+au FileType text,tex RainbowToggle
+au FileType text,tex NoMatchParen
