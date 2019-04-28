@@ -25,7 +25,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'vim-airline/vim-airline-themes'
   Plug 'iCyMind/NeoSolarized'
 "" Maths
-  Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for' : 'tex' }
+  Plug 'lervag/vimtex', { 'for' : 'tex' }
   Plug 'brennier/quicktex', { 'for' : 'tex' }
   Plug '~/.config/nvim/plugged/m2-syntax'
   Plug '~/.config/nvim/plugged/vim-magma'
@@ -278,21 +278,6 @@ function! HLNext (blinktime)
     redraw
 endfunction
 
-" Adjust QuickFix window height
-function! AdjustWindowHeight(minheight, maxheight)
-  let l = 1
-  let n_lines = 0
-  let w_width = winwidth(0)
-  while l <= line('$')
-    " number to float for division
-    let l_len = strlen(getline(l)) + 0.0
-    let line_width = l_len/w_width
-    let n_lines += float2nr(ceil(line_width))
-    let l += 1
-  endw
-  exe max([min([n_lines, a:maxheight]), a:minheight]) . "wincmd _"
-endfunction
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vimgrep searching and cope displaying
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -389,17 +374,13 @@ let g:ctrlp_user_command = 'find %s -type f'
 let g:ctrlp_user_ignore = ['.git',
   \ 'cd %s && git ls-files -co --exclude-standard']
 
-" LaTeX-Box
-let g:LatexBox_viewer = "/Applications/Skim.app/Contents/MacOS/Skim"
-let g:LatexBox_quickfix = 2
-let g:LatexBox_latexmk_options = "-pdflatex='pdflatex -synctex=1 \%O \%S'"
-let g:LatexBox_ignore_warnings = []
-let g:LatexBox_ref_pattern = '\c\\\a*ref\*\?\_\s*{'
-nmap <silent> <leader>c :w<CR>:Latexmk<CR>
-nmap <silent> <leader>v :w<CR>:LatexView<CR>
-map <silent> <Leader>s :w<CR>:silent
-                \ !/Applications/Skim.app/Contents/SharedSupport/displayline -g
-                \ <C-R>=line('.')<CR> "<C-R>=LatexBox_GetOutputFile()<CR>"
-                \ "%:p" <CR>
-" When reinstalling Skim set: "defaults write -app Skim SKAutoReloadFileUpdate
-" -boolean true" to avoid pop-up on PDF reloading.
+" vimtex
+let maplocalleader = ','
+let g:vimtex_enabled = 1
+let g:vimtex_view_method = 'skim'
+let g:tex_flavor = 'latex'
+let g:vimtex_view_skim_activate = 1
+let g:vimtex_view_skim_reading_bar = 0
+let g:vimtex_complete_ref = { 'custom_patterns' : ['fref'] }
+" Matching is too slow
+let g:vimtex_matchparen_enabled = 0
