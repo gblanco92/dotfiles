@@ -378,6 +378,7 @@ let maplocalleader = ','
 let g:vimtex_enabled = 1
 let g:vimtex_view_method = 'skim'
 let g:tex_flavor = 'latex'
+let g:vimtex_toc_config = { 'show_help' : 0 }
 let g:vimtex_view_skim_activate = 1
 let g:vimtex_view_skim_reading_bar = 0
 " Matching is too slow? Try a small number of lines...
@@ -386,3 +387,5 @@ let g:vimtex_delim_stopline = 10
 " Disable several options for better performance on tex(t) files
 au FileType text,tex RainbowToggle
 au FileType text,tex NoMatchParen
+
+
