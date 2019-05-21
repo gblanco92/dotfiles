@@ -336,8 +336,10 @@ endif
 nnoremap <silent> K :grep! --word-regexp "<C-R><C-W>"<CR>:bo cwindow<CR>
 
 " Create the Ag command
-command! -nargs=+ -complete=file -bar
-  \ Ag silent! grep! <args> | bo cwindow | redraw!
+if executable("Ag")
+  command! -nargs=+ -complete=file -bar
+    \ Ag silent! grep! <args> | bo cwindow | redraw!
+endif
 
 " Map <leader><Space> to :Ag<Space>
 nnoremap <leader><Space> :Ag<Space>
