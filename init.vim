@@ -9,9 +9,6 @@ endif
 " Plug section
 call plug#begin('~/.config/nvim/plugged')
 " C/C++
-  Plug 'Shougo/deoplete.nvim', {'for' : ['c', 'cpp']} " Completing
-  Plug 'zchee/deoplete-clang', {'for' : ['c', 'cpp']} " Completing
-  Plug 'Shougo/neoinclude.vim', {'for' : ['c', 'cpp']} " Includes
   Plug 'octol/vim-cpp-enhanced-highlight', {'for' : ['c', 'cpp']} " Highlighting
 " Searching
   Plug 'ctrlpvim/ctrlp.vim'
