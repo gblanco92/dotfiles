@@ -9,10 +9,8 @@ endif
 " Plug section
 call plug#begin('~/.config/nvim/plugged')
 " C/C++
-  Plug 'rhysd/vim-clang-format', {'for' : ['c', 'cpp']} " Formatting
   Plug 'Shougo/deoplete.nvim', {'for' : ['c', 'cpp']} " Completing
   Plug 'zchee/deoplete-clang', {'for' : ['c', 'cpp']} " Completing
-  Plug 'ervandew/supertab', {'for' : ['c', 'cpp']} " Completing
   Plug 'Shougo/neoinclude.vim', {'for' : ['c', 'cpp']} " Includes
   Plug 'octol/vim-cpp-enhanced-highlight', {'for' : ['c', 'cpp']} " Highlighting
 " Searching
@@ -279,7 +277,7 @@ function! HLNext (blinktime)
 endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => vimgrep searching and cope displaying
+" => vimgrep searching and qf displaying
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ignore case when searching
 set ignorecase
@@ -322,27 +320,29 @@ set gdefault
 " Search & replace the word under the cursor
 map <leader>r :%s/<C-r><C-w>/
 
-" Remap cope to cc. (See :help cope)
-map <leader>cc :botright cope<CR>
-map <leader>n :cn<CR>
-map <leader>p :cp<CR>
-
-" If available, use ag over grep
+" If available, use The Silver Searcher over grep
 if executable('ag')
+  " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor\ -m\ 50
-endif
 
-" K searches for the word unfer the cursor (:bo for quickfix across windows)
-nnoremap <silent> K :grep! --word-regexp "<C-R><C-W>"<CR>:bo cwindow<CR>
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
-" Create the Ag command
-if executable("Ag")
+  " K searches for the word unfer the cursor (:bo for quickfix across windows)
+  nnoremap <silent> K :grep! --word-regexp "<C-R><C-W>"
+    \ <CR>:bo cwindow<bar>set nobuflisted<CR>
+
+  " Create the Ag command
   command! -nargs=+ -complete=file -bar
-    \ Ag silent! grep! <args> | bo cwindow | redraw!
-endif
+    \ Ag silent! grep! <args> | bo cwindow | set nobuflisted | redraw!
 
-" Map <leader><Space> to :Ag<Space>
-nnoremap <leader><Space> :Ag<Space>
+  " For some reason I do not understand the set nobuflisted in the
+  " autogroup for QuickFix is not executed when opening this qf window
+  " so force the 'set nobuflisted' here.
+
+  " Map <leader><Space> to :Ag<Space>
+  nnoremap <leader><Space> :Ag<Space>
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configuration
@@ -369,11 +369,14 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
+  \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
   \ }
-let g:ctrlp_user_command = 'find %s -type f'
 let g:ctrlp_user_ignore = ['.git',
   \ 'cd %s && git ls-files -co --exclude-standard']
+" If silver searcher not present use find.
+if !executable('ag')
+  let g:ctrlp_user_command = 'find %s -type f'
+endif
 
 " vimtex
 let maplocalleader = ','
@@ -386,8 +389,3 @@ let g:vimtex_view_skim_reading_bar = 0
 " Matching is too slow? Try a small number of lines...
 "let g:vimtex_matchparen_enabled = 0
 let g:vimtex_delim_stopline = 10
-" Disable several options for better performance on tex(t) files
-au FileType text,tex RainbowToggle
-au FileType text,tex NoMatchParen
-
-
