@@ -321,25 +321,28 @@ map <leader>r :%s/<C-r><C-w>/
 if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor\ -m\ 50
-
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " K searches for the word unfer the cursor (:bo for quickfix across windows)
-  nnoremap <silent> K :grep! --word-regexp "<C-R><C-W>"
-    \ <CR>:bo cwindow<bar>set nobuflisted<CR>
-
-  " Create the Ag command
-  command! -nargs=+ -complete=file -bar
-    \ Ag silent! grep! <args> | bo cwindow | set nobuflisted | redraw!
-
-  " For some reason I do not understand the set nobuflisted in the
-  " autogroup for QuickFix is not executed when opening this qf window
-  " so force the 'set nobuflisted' here.
-
-  " Map <leader><Space> to :Ag<Space>
-  nnoremap <leader><Space> :Ag<Space>
+else
+  set grepprg=grep\ -nR
+  let g:ctrlp_user_command = 'find %s -type f'
 endif
+" The following commands should work independently of the silver searcher
+
+" K searches for the word unfer the cursor (:bo for quickfix across windows)
+nnoremap <silent> K :grep! --word-regexp "<C-R><C-W>" *
+  \ <CR>:bo cwindow<bar>set nobuflisted<CR>
+
+" Create the Ag command
+command! -nargs=+ -complete=file -bar
+  \ Ag silent! grep! <args> * | bo cwindow | set nobuflisted | redraw
+
+" For some reason I do not understand the set nobuflisted in the
+" autogroup for QuickFix is not executed when opening this qf window
+" so force the 'set nobuflisted' here.
+
+" Map <leader><Space> to :Ag<Space>
+nnoremap <leader><Space> :Ag<Space>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configuration
@@ -371,9 +374,6 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_user_ignore = ['.git',
   \ 'cd %s && git ls-files -co --exclude-standard']
 " If silver searcher not present use find.
-if !executable('ag')
-  let g:ctrlp_user_command = 'find %s -type f'
-endif
 
 " vimtex
 let maplocalleader = ','
