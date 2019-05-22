@@ -19,6 +19,7 @@ def SkipDir(dir):
 # apply only for c++
 if 'c++' in gdb.execute('show language', to_string=True):
     SkipDir("/usr")
+    SkipDir("/build")
 end
 end
 
