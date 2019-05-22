@@ -20,8 +20,10 @@ mkdir -p ~/.config/nvim/plugged/
 
 rm -f ~/.config/nvim/ftplugin/*.vim && ln -s $DIR/ftplugin/*.vim ~/.config/nvim/ftplugin/
 rm -f ~/.config/nvim/ftplugin/tex/* && ln -s $DIR/ftplugin/tex/*.vim ~/.config/nvim/ftplugin/tex/
+ln -s $DIR/ftplugin/tex/tex.vim ~/.config/nvim/ftpluing/text.vim
 rm -f ~/.vim/ftplugin/*.vim && ln -s $DIR/ftplugin/*.vim ~/.vim/ftplugin/
 rm -f ~/.vim/ftplugin/tex/*.vim && ln -s $DIR/ftplugin/tex/*.vim ~/.vim/ftplugin/tex/
+ln -s $DIR/ftplugin/tex/tex.vim ~/.vim/ftpluing/text.vim
 rm -Rf ~/.config/nvim/plugged/singular-syntax/ && ln -s $DIR/plugged/singular-syntax/ ~/.config/nvim/plugged/
 rm -Rf ~/.config/nvim/plugged/m2-syntax/ && ln -s $DIR/plugged/m2-syntax/ ~/.config/nvim/plugged/
 rm -Rf ~/.config/nvim/plugged/vim-magma/ && ln -s $DIR/plugged/vim-magma/ ~/.config/nvim/plugged/
