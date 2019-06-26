@@ -1,0 +1,2790 @@
+" Vim syntax file
+" Language: Magma
+" Maintainer: petRUShka <petrushkin@yandex.ru>
+" URL: https://github.com/petRUShka/vim-magma
+" Last Change:  2015-03-10
+
+" This syntax file is based on the ada.vim syntax file
+
+" For version 5.x: Clear all syntax items
+" For version 6.x: Quit when a syntax file was already loaded
+if version < 600
+ syntax clear
+elseif exists("b:current_syntax")
+ finish
+endif
+
+" We don't need to look backwards to highlight correctly;
+" this speeds things up greatly.
+syn sync minlines=1 maxlines=1
+
+" Magma builtin functions.
+" Stolen from documentation with
+" $ cat $magmadoc/*.htm | sed -nr "s/^.*NAME = \"([A-Z][[:alnum:]]*)\".*$/\1/p" | sort
+syn keyword magmaBuiltin A5 Abelian AbelianBasis AbelianExtension
+syn keyword magmaBuiltin AbelianGroup AbelianGroup2 AbelianInvariants
+syn keyword magmaBuiltin AbelianLieAlgebra AbelianNormalQuotient
+syn keyword magmaBuiltin AbelianNormalSubgroup Abelianp AbelianpExtension
+syn keyword magmaBuiltin AbelianQuotient AbelianQuotientInvariants
+syn keyword magmaBuiltin AbelianSubfield AbelianSubgroups Abort Abs Absolute
+syn keyword magmaBuiltin AbsoluteAffineAlgebra AbsoluteAlgebra AbsoluteBasis
+syn keyword magmaBuiltin AbsoluteCartanMatrix AbsoluteCharacteristicPolynomial
+syn keyword magmaBuiltin AbsoluteDegree AbsoluteDiscriminant AbsoluteField
+syn keyword magmaBuiltin AbsoluteFunctionField AbsoluteGaloisGroup
+syn keyword magmaBuiltin AbsoluteInertiaDegree AbsoluteInertiaIndex
+syn keyword magmaBuiltin AbsoluteInvariants AbsoluteLogarithmicHeight
+syn keyword magmaBuiltin Absolutely AbsolutelyIrreducibleConstituents
+syn keyword magmaBuiltin AbsolutelyIrreducibleModule
+syn keyword magmaBuiltin AbsolutelyIrreducibleModules
+syn keyword magmaBuiltin AbsolutelyIrreducibleModulesBurnside
+syn keyword magmaBuiltin AbsolutelyIrreducibleModulesInit
+syn keyword magmaBuiltin AbsolutelyIrreducibleModulesSchur
+syn keyword magmaBuiltin AbsolutelyIrreducibleRepresentationProcessDelete
+syn keyword magmaBuiltin AbsolutelyIrreducibleRepresentationsInit
+syn keyword magmaBuiltin AbsolutelyIrreducibleRepresentationsSchur
+syn keyword magmaBuiltin AbsoluteMinimalPolynomial
+syn keyword magmaBuiltin AbsoluteModuleOverMinimalField
+syn keyword magmaBuiltin AbsoluteModulesOverMinimalField AbsoluteNorm
+syn keyword magmaBuiltin AbsoluteOrder AbsolutePolynomial AbsolutePrecision
+syn keyword magmaBuiltin AbsoluteQuotientRing AbsoluteRamificationDegree
+syn keyword magmaBuiltin AbsoluteRamificationIndex AbsoluteRank
+syn keyword magmaBuiltin AbsoluteRationalScroll AbsoluteRepresentation
+syn keyword magmaBuiltin AbsoluteRepresentationMatrix
+syn keyword magmaBuiltin AbsoluteTotallyRamifiedExtension AbsoluteTrace
+syn keyword magmaBuiltin AbsoluteValue AbsoluteValues Absolutize Abstract
+syn keyword magmaBuiltin Acceptor Access AccessOperations ACEProc1 ACEProc2
+syn keyword magmaBuiltin ACEProc3 ACEProc4 ACEProcCosetSpace ACEProcTransversal
+syn keyword magmaBuiltin Acting ActingGroup ActingWord Action ActionGenerator
+syn keyword magmaBuiltin ActionGenerators ActionGroup ActionImage ActionKernel
+syn keyword magmaBuiltin ActionMatrix Actions Adams AdamsOperator Add
+syn keyword magmaBuiltin AddAttribute AddColumn AddConstraints AddCubics
+syn keyword magmaBuiltin AddEdge AddEdges AddGenerator AddGroupRelations
+syn keyword magmaBuiltin Addition Additive AdditiveCode AdditiveCyclicCode
+syn keyword magmaBuiltin AdditiveGroup AdditiveHilbert90 AdditiveOrder
+syn keyword magmaBuiltin AdditivePolynomialFromRoots AdditiveQuasiCyclicCode
+syn keyword magmaBuiltin AdditiveRepetitionCode AdditiveUniverseCode
+syn keyword magmaBuiltin AdditiveZeroCode AdditiveZeroSumCode AddLinDiff
+syn keyword magmaBuiltin AddNormalizingGenerator AddRedundantGenerators
+syn keyword magmaBuiltin AddRelation AddRelator AddRepresentation AddRow
+syn keyword magmaBuiltin AddScaledMatrix Addsimplex AddSimplex
+syn keyword magmaBuiltin AddSubgroupGenerator AddVectorToLattice AddVertex
+syn keyword magmaBuiltin AddVertices AdemMilgram Adjacency AdjacencyMatrix
+syn keyword magmaBuiltin Adjoin Adjoint AdjointAlgebra AdjointIdeal
+syn keyword magmaBuiltin AdjointIdealForNodalCurve AdjointLinearSystem
+syn keyword magmaBuiltin AdjointLinearSystemForNodalCurve
+syn keyword magmaBuiltin AdjointLinearSystemFromIdeal AdjointMatrix
+syn keyword magmaBuiltin AdjointPreimage AdjointRepresentation
+syn keyword magmaBuiltin AdjointRepresentationDecomposition Adjoints
+syn keyword magmaBuiltin AdjointVersion Admissable AdmissableTriangleGroups
+syn keyword magmaBuiltin Admissible AdmissiblePair Advance Affine AffineAction
+syn keyword magmaBuiltin AffineAlgebra AffineAlgebraMapKernel
+syn keyword magmaBuiltin AffineDecomposition AffineGammaLinearGroup
+syn keyword magmaBuiltin AffineGeneralLinearGroup AffineGroup AffineImage
+syn keyword magmaBuiltin AffineKernel AffineLieAlgebra AffineNormalForm
+syn keyword magmaBuiltin AffinePatch AffinePlane AffineSigmaLinearGroup
+syn keyword magmaBuiltin AffineSigmaSymplecticGroup AffineSpace
+syn keyword magmaBuiltin AffineSpecialLinearGroup AffineSymplecticGroup AFG
+syn keyword magmaBuiltin AFRNumber AG AGamma AGammaL AGCode AGDecode AGDual
+syn keyword magmaBuiltin AGDualCode Agemo Aggr AGL AGM AHom AInfinity
+syn keyword magmaBuiltin AInfinityRecord Al Alarm Alg AlgAff AlgAss AlgBas
+syn keyword magmaBuiltin AlgChtrElt AlgClff AlgComb AlgCon Algebra
+syn keyword magmaBuiltin AlgebraGenerators Algebraic Algebraically
+syn keyword magmaBuiltin AlgebraicClosure AlgebraicGenerators
+syn keyword magmaBuiltin AlgebraicGeometricCode AlgebraicGeometricDualCode
+syn keyword magmaBuiltin AlgebraicPowerSeries AlgebraicToAnalytic AlgebraMap
+syn keyword magmaBuiltin AlgebraOverCenter Algebras AlgebraStructure AlgFP
+syn keyword magmaBuiltin AlgFP AlgFPElt AlgFPLHom AlgFPLieRank AlgFrElt AlgGen
+syn keyword magmaBuiltin AlgGroup1 AlgGroup2 AlgGrp AlgGrpSub AlgInv AlgKacElt
+syn keyword magmaBuiltin AlgLie AlgLieExtr AlgLieExtrBasis AlgLieExtrConstr
+syn keyword magmaBuiltin AlgLieExtrfVal AlgLieExtrMultInstance
+syn keyword magmaBuiltin AlgLieExtrMultTable AlgLieExtrVarietyDims AlgLieKM
+syn keyword magmaBuiltin AlgMat AlgModCreate Algorithm Algorithmic
+syn keyword magmaBuiltin AlgorithmicFunctionField AlgQEA AlgQEATP AlgQuat
+syn keyword magmaBuiltin AlgQUE AlgQUEElt AlgReln1 AlgReln2 AlgSrf AlgSym
+syn keyword magmaBuiltin AllCliques AllCompactChainMaps AllCones
+syn keyword magmaBuiltin AllDefiningPolynomials Alldeg AllExtensions AllFaces
+syn keyword magmaBuiltin AllHomomorphisms AllInformationSets
+syn keyword magmaBuiltin AllInverseDefiningPolynomials
+syn keyword magmaBuiltin AllIrreduciblePolynomials AllLinearRelations
+syn keyword magmaBuiltin AllNilpotentLieAlgebras AllPairsShortestPaths
+syn keyword magmaBuiltin AllParallelClasses AllParallelisms AllPartitions
+syn keyword magmaBuiltin AllPassants AllRays AllResolutions AllRoots AllSecants
+syn keyword magmaBuiltin AllSlopes AllSolvableLieAlgebras AllSqrts
+syn keyword magmaBuiltin AllSquareRoots AllTangents AllVertices Almost
+syn keyword magmaBuiltin AlmostFermat AlmostFermatIndexed
+syn keyword magmaBuiltin AlmostSimpleGroupDatabase Alpha Alphabet AlphaBetaData
+syn keyword magmaBuiltin Alt Alternant AlternantCode Alternating
+syn keyword magmaBuiltin AlternatingCharacter AlternatingCharacterTable
+syn keyword magmaBuiltin AlternatingCharacterValue AlternatingDominant
+syn keyword magmaBuiltin AlternatingElementToWord AlternatingGroup
+syn keyword magmaBuiltin AlternatingOrSymmetricElementToWord AlternatingPower
+syn keyword magmaBuiltin AlternatingSquare AlternatingSquarePreimage
+syn keyword magmaBuiltin AlternatingSum AlternatingWeylSum Altsym Ambient
+syn keyword magmaBuiltin AmbientMatrix AmbientModule AmbientSpace
+syn keyword magmaBuiltin AmbientVariety Ambiguous AmbiguousForms Amicable
+syn keyword magmaBuiltin AModule AModules Ample Analytic Analytically
+syn keyword magmaBuiltin AnalyticDrinfeldModule AnalyticHomomorphisms
+syn keyword magmaBuiltin AnalyticInformation AnalyticJacobian
+syn keyword magmaBuiltin AnalyticJacobianlabel AnalyticModule AnalyticRank And
+syn keyword magmaBuiltin Anemic Angle Anisotropic AnisotropicSubdatum
+syn keyword magmaBuiltin Annihilator Anti Antiautomorphism AntiAutomorphismTau
+syn keyword magmaBuiltin Anticanonical Antipode Antisymmetric
+syn keyword magmaBuiltin AntisymmetricForms AntisymmetricMatrix Apparent
+syn keyword magmaBuiltin ApparentCodimension ApparentEquationDegrees
+syn keyword magmaBuiltin ApparentSyzygyDegrees Append Apply ApplyContravariant
+syn keyword magmaBuiltin ApplyTransformation Approximant Approximate
+syn keyword magmaBuiltin ApproximateByTorsionGroup ApproximateByTorsionPoint
+syn keyword magmaBuiltin ApproximateOrder ApproximateStabiliser Approximation
+syn keyword magmaBuiltin AQ AQInvariants AQPrimes Arc Arccos Arccosec Arccot
+syn keyword magmaBuiltin Arcsec Arcsin Arctan Arctan2 Are AreCohomologous
+syn keyword magmaBuiltin AreGenerators AreIdentical AreInvolutionsConjugate
+syn keyword magmaBuiltin AreLinearlyEquivalent AreProportional Arf ArfInvariant
+syn keyword magmaBuiltin Arg Argcosech Argcosh Argcoth Argsech Argsinh Argtanh
+syn keyword magmaBuiltin Argument Arithmetic Arithmetically
+syn keyword magmaBuiltin ArithmeticFuchsianGroups ArithmeticGenus
+syn keyword magmaBuiltin ArithmeticGenusOfDesingularization
+syn keyword magmaBuiltin ArithmeticGeometricMean ArithmeticTriangleGroup
+syn keyword magmaBuiltin ArithmeticVolume Array Arrows Artin ArtinMap
+syn keyword magmaBuiltin ArtinRepresentation ArtinRepresentations
+syn keyword magmaBuiltin ArtinSchreierExtension ArtinSchreierImage
+syn keyword magmaBuiltin ArtinSchreierMap ArtinSchreierReduction
+syn keyword magmaBuiltin ArtinTateFormula ArtRep As AsExtensionOf ASigma
+syn keyword magmaBuiltin ASigmaL ASigmaSp ASL ASp AsPolynomial Assert
+syn keyword magmaBuiltin AssertAttribute AssertEmbedding Assertions Assign
+syn keyword magmaBuiltin AssignCapacities AssignCapacity AssignEdgeLabels
+syn keyword magmaBuiltin AssignLabel AssignLabels AssignLDPCMatrix
+syn keyword magmaBuiltin AssignNamePrefix AssignNames AssignVertexLabels
+syn keyword magmaBuiltin AssignWeight AssignWeights Assoc Associated
+syn keyword magmaBuiltin AssociatedEllipticCurve AssociatedGradedAlgebra
+syn keyword magmaBuiltin AssociatedHyperellipticCurve AssociatedNewSpace
+syn keyword magmaBuiltin AssociatedPrimitiveCharacter
+syn keyword magmaBuiltin AssociatedPrimitiveGrossencharacter Associative
+syn keyword magmaBuiltin AssociativeAlgebra AssociativeArray Asymptotic At Ate
+syn keyword magmaBuiltin AtEof Ateq AteqPairing AteTPairing Atkin AtkinLehner
+syn keyword magmaBuiltin AtkinLehnerInvolution AtkinLehnerOperator
+syn keyword magmaBuiltin AtkinModularPolynomial ATLAS ATLASGroup
+syn keyword magmaBuiltin ATLASGroupNames Attach Attached AttachSpec Attack
+syn keyword magmaBuiltin Attribute Attributes Augment Augmentation
+syn keyword magmaBuiltin AugmentationIdeal AugmentationMap AugmentCode Aut Auto
+syn keyword magmaBuiltin AutoAction AutoCorrelation AutoL19 Automatic
+syn keyword magmaBuiltin AutomaticGroup Automaton Automorphism
+syn keyword magmaBuiltin AutomorphismAction AutomorphismGroup
+syn keyword magmaBuiltin AutomorphismGroupMatchingIdempotents
+syn keyword magmaBuiltin AutomorphismGroupOverCyclotomicExtension
+syn keyword magmaBuiltin AutomorphismGroupOverExtension AutomorphismGroupOverQ
+syn keyword magmaBuiltin AutomorphismGroupSolubleGroup
+syn keyword magmaBuiltin AutomorphismGroupStabilizer
+syn keyword magmaBuiltin AutoMorphismGroupWithWeight AutomorphismOmega
+syn keyword magmaBuiltin Automorphisms AutomorphismSubgroup AutomorphismTalpha
+syn keyword magmaBuiltin Automorphous AutomorphousClasses Auxiliary
+syn keyword magmaBuiltin AuxiliaryLevel B5Wgraph Bach BachBound Background Bad
+syn keyword magmaBuiltin BadPlaces BadPrimeData BadPrimes Baer BaerDerivation
+syn keyword magmaBuiltin BaerSubplane Balanced Ball Bang Bar BarAutomorphism
+syn keyword magmaBuiltin Barycentric BarycentricSubdivision Base BaseChange
+syn keyword magmaBuiltin BaseChangeMatrix BaseComponent BaseCurve BaseElement
+syn keyword magmaBuiltin BaseExtend BaseExtension BaseField BaseImage
+syn keyword magmaBuiltin BaseImageWordStrip BaseLocus BaseModule
+syn keyword magmaBuiltin BaseMPolynomial BasePoint BasePoints BaseRing Bases
+syn keyword magmaBuiltin BaseScheme Basic BasicAccess BasicAlgebra
+syn keyword magmaBuiltin BasicAlgebraOfBlockAlgebra
+syn keyword magmaBuiltin BasicAlgebraOfEndomorphismAlgebra
+syn keyword magmaBuiltin BasicAlgebraOfExtAlgebra BasicAlgebraOfGroupAlgebra
+syn keyword magmaBuiltin BasicAlgebraOfHeckeAlgebra BasicAlgebraOfMatrixAlgebra
+syn keyword magmaBuiltin BasicAlgebraOfPrincipalBlock
+syn keyword magmaBuiltin BasicAlgebraOfSchurAlgebra BasicAlgebras
+syn keyword magmaBuiltin BasicCodegrees BasicDegrees BasicInvariants
+syn keyword magmaBuiltin BasicOperations BasicOrbit BasicOrbitLength
+syn keyword magmaBuiltin BasicOrbitLengths BasicOrbits BasicProperties
+syn keyword magmaBuiltin BasicRootMatrices Basics BasicStabiliser
+syn keyword magmaBuiltin BasicStabiliserChain BasicStabilizer
+syn keyword magmaBuiltin BasicStabilizerChain Basis BasisChange
+syn keyword magmaBuiltin BasisDenominator BasisElement BasisMatrix
+syn keyword magmaBuiltin BasisOfDegree0CoxMonomials
+syn keyword magmaBuiltin BasisOfDifferentialsFirstKind
+syn keyword magmaBuiltin BasisOfHolomorphicDifferentials
+syn keyword magmaBuiltin BasisOfRationalFunctionField BasisProduct
+syn keyword magmaBuiltin BasisProducts BasisReduction Basket Bass BBSModulus
+syn keyword magmaBuiltin BCH BCHBound BCHCode BDLC BDLCLower BDLCLowerBound
+syn keyword magmaBuiltin BDLCUpper BDLCUpperBound Beep Bell Berlekamp
+syn keyword magmaBuiltin BerlekampMassey Bernoulli BernoulliApproximation
+syn keyword magmaBuiltin BernoulliNumber BernoulliPolynomial Bessel
+syn keyword magmaBuiltin BesselFunction BesselFunctionSecondKind Best
+syn keyword magmaBuiltin BestApproximation BestDimensionLinearCode
+syn keyword magmaBuiltin BestKnownLinearCode BestKnownQuantumCode
+syn keyword magmaBuiltin BestLengthLinearCode BestTranslation Beta
+syn keyword magmaBuiltin BetterRankBounds Betti BettiNumber BettiNumbers
+syn keyword magmaBuiltin BettiTable Between BFSTree Bianchi BianchiCuspForms
+syn keyword magmaBuiltin Bicomponents Biconnected Big BigO BigPeriodMatrix
+syn keyword magmaBuiltin BigPeriodMatrixlabel BigTorus Bijective Bilinear
+syn keyword magmaBuiltin Binary BinaryForms BinaryQuadraticForms
+syn keyword magmaBuiltin BinaryResidueCode BinaryString BinaryTorsionCode
+syn keyword magmaBuiltin Binomial BinomialToricEmbedding Bipartite
+syn keyword magmaBuiltin BipartiteGraph Bipartition Biquadratic
+syn keyword magmaBuiltin BiquadraticResidueSymbol Bit BitFlip BitPrecision Bits
+syn keyword magmaBuiltin Bitwise BitwiseAnd BitwiseNot BitwiseOr BitwiseXor
+syn keyword magmaBuiltin BKLC BKLCLower BKLCLowerBound BKLCUpper BKLCUpperBound
+syn keyword magmaBuiltin BKQC BKZ Black BLLC BLLCLower BLLCLowerBound BLLCUpper
+syn keyword magmaBuiltin BLLCUpperBound Block BlockDegree BlockDegrees
+syn keyword magmaBuiltin BlockGraph BlockGroup BlockMatrix Blocks BlocksAction
+syn keyword magmaBuiltin BlocksActions BlockSet BlocksImage BlockSize
+syn keyword magmaBuiltin BlockSizes BlocksKernel Blowup Blum BlumBlumShub
+syn keyword magmaBuiltin BlumBlumShubModulus Bogomolov BogomolovNumber Boolean
+syn keyword magmaBuiltin BooleanPolynomialRing Booleans Bordered BoolElt
+syn keyword magmaBuiltin BorderedDoublyCirculantQRCode Borel BorelSubgroup
+syn keyword magmaBuiltin Bottle Bottom Bound Boundary BoundaryIntersection
+syn keyword magmaBuiltin BoundaryMap BoundaryMaps BoundaryMatrix BoundaryPoints
+syn keyword magmaBuiltin Bounded BoundedFSubspace Bounding BoundingBox Bounds
+syn keyword magmaBuiltin Box BoxElements BQPlotkin BQPlotkinSum Bracket Braid
+syn keyword magmaBuiltin BraidGroup BraidGroups Branch BranchCollect
+syn keyword magmaBuiltin BranchFrTovM BranchToDM BranchVertexPath Brandt
+syn keyword magmaBuiltin BrandtModule BrandtModuleDimension
+syn keyword magmaBuiltin BrandtModuleDimensionOfNewSubspace Brauer
+syn keyword magmaBuiltin BrauerCharacter BrauerClass Bravais BravaisGroup
+syn keyword magmaBuiltin Breadth BreadthFirstSearchTree Brickells Browser
+syn keyword magmaBuiltin Bruhat BruhatDescendants BruhatLessOrEqual BSD BSD389A
+syn keyword magmaBuiltin BSGS BString Buffer Build
+syn keyword magmaBuiltin BuildHomomorphismFromGradedCap Building BuildSubgroups
+syn keyword magmaBuiltin Bundle Burau BurauRepresentation Burnside
+syn keyword magmaBuiltin BurnsideCokernel BurnsideMatrix By Bytes Calabi
+syn keyword magmaBuiltin CalabiYau Calculate CalculateCanonicalClass
+syn keyword magmaBuiltin CalculateMultiplicities
+syn keyword magmaBuiltin CalculateTransverseIntersections Calculus Calderbank
+syn keyword magmaBuiltin CalderbankShorSteaneCode Cambridge CambridgeMatrix Can
+syn keyword magmaBuiltin CanBasMod CanChangeRing CanChangeUniverse
+syn keyword magmaBuiltin CanContinueEnumeration CanDetermineIsomorphism
+syn keyword magmaBuiltin CanIdentifyGroup CanNormalize Canonical CanonicalBasis
+syn keyword magmaBuiltin CanonicalClass CanonicalCoordinateIdeal CanonicalCurve
+syn keyword magmaBuiltin CanonicalDissidentPoints CanonicalDivisor
+syn keyword magmaBuiltin CanonicalElement CanonicalElements
+syn keyword magmaBuiltin CanonicalFactorRepresentation CanonicalForms
+syn keyword magmaBuiltin CanonicalGraph CanonicalHeight CanonicalImage
+syn keyword magmaBuiltin CanonicalInvolution Canonicalisation CanonicalLength
+syn keyword magmaBuiltin CanonicalLinearSystem CanonicalLinearSystemFromIdeal
+syn keyword magmaBuiltin CanonicalMap CanonicalModularPolynomial
+syn keyword magmaBuiltin CanonicalScheme CanonicalSheaf CanonicalWeightedModel
+syn keyword magmaBuiltin CanRedoEnumeration CanSignNormalize Canteaut
+syn keyword magmaBuiltin CanteautChabaudsAttack Cap Capacitated Capacities
+syn keyword magmaBuiltin Capacity Cardinality Carlitz CarlitzModule Carlo
+syn keyword magmaBuiltin Carmichael CarmichaelLambda Cartan Cartan
+syn keyword magmaBuiltin CartanInteger CartanMatrices CartanMatrix
+syn keyword magmaBuiltin CartanMatrixConstruction CartanMatrixEquivalence
+syn keyword magmaBuiltin CartanMatrixOperations CartanMatrixProperties
+syn keyword magmaBuiltin CartanName CartanSubalgebra Cartesian CartesianPower
+syn keyword magmaBuiltin CartesianProduct Cartier CartierRepresentation
+syn keyword magmaBuiltin CartierToWeilMap Case Casimir CasimirValue Cassels
+syn keyword magmaBuiltin CasselsMap CasselsTatePairing Catalan Categories
+syn keyword magmaBuiltin Category Cayley CayleyGraph CBM Ceiling Cell
+syn keyword magmaBuiltin CellNumber Cells CellSize Center CenterDensity
+syn keyword magmaBuiltin Centered CenterPolynomials Central CentralCharacter
+syn keyword magmaBuiltin CentralCollineationGroup CentralEndomorphisms
+syn keyword magmaBuiltin CentralExtension CentralExtensionProcess
+syn keyword magmaBuiltin CentralExtensions CentralIdempotents Centraliser
+syn keyword magmaBuiltin CentraliserOfInvolution Centralising
+syn keyword magmaBuiltin CentralisingMatrix Centralizer CentralizerGLZ
+syn keyword magmaBuiltin CentralizerOfNormalSubgroup Centralizing CentralOrder
+syn keyword magmaBuiltin CentralValue Centre Centred CentredAffinePatch
+syn keyword magmaBuiltin CentreDensity CentreOfEndomorphismAlgebra
+syn keyword magmaBuiltin CentreOfEndomorphismRing CentrePolynomials Certificate
+syn keyword magmaBuiltin CFENew CFP Chabauds Chabauty Chabauty0 Chain
+syn keyword magmaBuiltin ChainComplex ChainCyclic Chainmap ChainMap Chainmaps
+syn keyword magmaBuiltin ChainmapToCohomology Chang Change ChangeAlgebra
+syn keyword magmaBuiltin ChangeAmbient ChangeBase ChangeBasis ChangeDerivation
+syn keyword magmaBuiltin ChangeDifferential ChangeDirectory ChangeEulerFactor
+syn keyword magmaBuiltin ChangeField ChangeIdempotents ChangeLocalInformation
+syn keyword magmaBuiltin ChangeModel ChangeOfAlphabet ChangeOfBasisMatrix
+syn keyword magmaBuiltin ChangeOrder ChangePrecision ChangeRepresentationType
+syn keyword magmaBuiltin ChangeRing ChangeSupport ChangeUniverse ChangGraphs
+syn keyword magmaBuiltin Char Char Character CharacterDegrees
+syn keyword magmaBuiltin CharacterDegreesPGroup Characteristic
+syn keyword magmaBuiltin CharacteristicPolynomial
+syn keyword magmaBuiltin CharacteristicPolynomialFromTraces Characteristics
+syn keyword magmaBuiltin CharacteristicSeries CharacteristicVector
+syn keyword magmaBuiltin CharacterMultiset CharacterRing Characters
+syn keyword magmaBuiltin CharacterTable CharacterTable2 CharacterTableConlon
+syn keyword magmaBuiltin CharacterTableDS CharacterWithSchurIndex Chebyshev
+syn keyword magmaBuiltin ChebyshevFirst ChebyshevSecond ChebyshevT ChebyshevU
+syn keyword magmaBuiltin Check CheckCodimension CheckFunctionalEquation
+syn keyword magmaBuiltin CheckPolynomial CheckWeilPolynomial Chern ChernNumber
+syn keyword magmaBuiltin Chevalley ChevalleyBasis ChevalleyBasis
+syn keyword magmaBuiltin ChevalleyBasisSmallChar ChevalleyGroup
+syn keyword magmaBuiltin ChevalleyGroupOrder ChevalleyOrderPolynomial Chief
+syn keyword magmaBuiltin ChiefFactors ChiefSeries Chien ChienChoyCode Children
+syn keyword magmaBuiltin Chinese ChineseRemainderTheorem Cholesky Choy
+syn keyword magmaBuiltin Chromatic ChromaticIndex ChromaticNumber
+syn keyword magmaBuiltin ChromaticPolynomial Chtr Circle Circulant Class
+syn keyword magmaBuiltin ClassCentraliser ClassCentralizer Classes ClassField
+syn keyword magmaBuiltin ClassFunctionSpace ClassGroup
+syn keyword magmaBuiltin ClassGroupAbelianInvariants
+syn keyword magmaBuiltin ClassGroupCyclicFactorGenerators
+syn keyword magmaBuiltin ClassGroupExactSequence ClassGroupGenerationBound
+syn keyword magmaBuiltin ClassGroupGetUseMemory ClassGroupPRank
+syn keyword magmaBuiltin ClassGroupPrimeRepresentatives ClassGroupSetUseMemory
+syn keyword magmaBuiltin ClassGroupStructure ClassGroupUnitGroup Classical
+syn keyword magmaBuiltin ClassicalChangeOfBasis
+syn keyword magmaBuiltin ClassicalConstructiveRecognition
+syn keyword magmaBuiltin ClassicalCovariantsOfCubicSurface ClassicalForms
+syn keyword magmaBuiltin ClassicalIntersection ClassicalMaximals
+syn keyword magmaBuiltin ClassicalModularPolynomial ClassicalPeriod
+syn keyword magmaBuiltin ClassicalRewrite ClassicalRewriteNatural
+syn keyword magmaBuiltin ClassicalStandardGenerators
+syn keyword magmaBuiltin ClassicalStandardPresentation ClassicalSylow
+syn keyword magmaBuiltin ClassicalSylowConjugation ClassicalSylowNormaliser
+syn keyword magmaBuiltin ClassicalSylowToPC ClassicalType Classification
+syn keyword magmaBuiltin Classify ClassifyRationalSurface ClassInvariants
+syn keyword magmaBuiltin ClassMap ClassNumber ClassNumberApproximation
+syn keyword magmaBuiltin ClassNumberApproximationBound ClassPowerCharacter
+syn keyword magmaBuiltin ClassRepresentative ClassRepresentativeFromInvariants
+syn keyword magmaBuiltin ClassTwo Clean CleanCompositionTree Clear
+syn keyword magmaBuiltin ClearDenominator ClearDenominators ClearPrevious
+syn keyword magmaBuiltin ClearStoredFactors ClearStoredModularForms
+syn keyword magmaBuiltin ClearVerbose Clebsch ClebschGraph ClebschInvariants
+syn keyword magmaBuiltin ClebschSalmonInvariants ClebschToIgusaClebsch ClffRef
+syn keyword magmaBuiltin CliffGenQuatEx CliffGrp Clifford CliffordAlgebra
+syn keyword magmaBuiltin CliffordIndexOne CliffQuatEx Clique CliqueComplex
+syn keyword magmaBuiltin CliqueNumber Cliques Clock ClockCycles Close Closed
+syn keyword magmaBuiltin Closest ClosestVectors ClosestVectorsMatrix
+syn keyword magmaBuiltin CloseVectors CloseVectorsMatrix CloseVectorsProcess
+syn keyword magmaBuiltin Closure ClosureGraph Cluster CM CMPoints CMTwists CO
+syn keyword magmaBuiltin Co1 Cobles CoblesRadicand Coboundary
+syn keyword magmaBuiltin CoboundaryMapImage Cocycle CocycleMap Cocycles Code
+syn keyword magmaBuiltin CodeAdd CodeAddFromCode CodeAddFromCodeFail
+syn keyword magmaBuiltin CodeAddFromMatrix CodeAlG CodeComplement CodeFld
+syn keyword magmaBuiltin CodeFromMatrix Codegree Codegrees CodeLDPC CodeRng
+syn keyword magmaBuiltin Codes CodeToString Codifferent Codimension Codomain
+syn keyword magmaBuiltin Coefficient CoefficientField CoefficientHeight
+syn keyword magmaBuiltin CoefficientIdeals CoefficientLength CoefficientMap
+syn keyword magmaBuiltin CoefficientRing Coefficients CoefficientsAndMonomials
+syn keyword magmaBuiltin CoefficientsNonSpiral CoefficientSpace Coercible
+syn keyword magmaBuiltin Coercion Cofactor Cofactors Cohen CohenCoxeterName
+syn keyword magmaBuiltin Cohomological CohomologicalDimension
+syn keyword magmaBuiltin CohomologicalDimensions Cohomologous Cohomology
+syn keyword magmaBuiltin CohomologyClass CohomologyDimension
+syn keyword magmaBuiltin CohomologyElementToChainMap
+syn keyword magmaBuiltin CohomologyElementToCompactChainMap
+syn keyword magmaBuiltin CohomologyGeneratorToChainMap CohomologyGroup
+syn keyword magmaBuiltin CohomologyLeftModuleGenerators CohomologyModule
+syn keyword magmaBuiltin CohomologyRightModuleGenerators CohomologyRing
+syn keyword magmaBuiltin CohomologyRingGenerators CohomologyRingQuotient
+syn keyword magmaBuiltin CohomologyToChainmap Coisogeny CoisogenyGroup Cokernel
+syn keyword magmaBuiltin Collect Collect CollectRelations Collinear
+syn keyword magmaBuiltin Collineation CollineationGroup
+syn keyword magmaBuiltin CollineationGroupStabilizer CollineationGSet
+syn keyword magmaBuiltin CollineationSubgroup Colon ColonIdeal
+syn keyword magmaBuiltin ColonIdealEquivalent ColonModule Colouring Column
+syn keyword magmaBuiltin ColumnLength Columns ColumnSkewLength ColumnSubmatrix
+syn keyword magmaBuiltin ColumnSubmatrixRange ColumnWeight ColumnWeights
+syn keyword magmaBuiltin ColumnWord Comb Combinatorial Combine
+syn keyword magmaBuiltin CombineIdealFactorisation CombineInvariants COMinus
+syn keyword magmaBuiltin Common CommonComplement CommonEigenspaces
+syn keyword magmaBuiltin CommonModularStructure CommonOverfield CommonZeros
+syn keyword magmaBuiltin Commutative Commutator CommutatorGraph CommutatorIdeal
+syn keyword magmaBuiltin CommutatorModule CommutatorSubgroup Comp Compact
+syn keyword magmaBuiltin CompactInjectiveResolution CompactPart
+syn keyword magmaBuiltin CompactPresentation CompactProjectiveResolution
+syn keyword magmaBuiltin CompactProjectiveResolutionPGroup
+syn keyword magmaBuiltin CompactProjectiveResolutionsOfSimpleModules Companion
+syn keyword magmaBuiltin CompanionMatrix Comparison Compatible CompFactors
+syn keyword magmaBuiltin Complement Complementary ComplementaryDivisor
+syn keyword magmaBuiltin ComplementaryErrorFunction ComplementBasis
+syn keyword magmaBuiltin ComplementOfImage Complements Complete CompleteDigraph
+syn keyword magmaBuiltin CompleteGraph CompleteKArc Completely
+syn keyword magmaBuiltin CompletelyReduciblePart CompleteTheSquare
+syn keyword magmaBuiltin CompleteUnion CompleteWeightEnumerator Completion
+syn keyword magmaBuiltin Complex ComplexCartanMatrix ComplexConjugate
+syn keyword magmaBuiltin ComplexEmbeddings Complexes ComplexField
+syn keyword magmaBuiltin ComplexReflectionGroup ComplexReflectionGroupByMatrix
+syn keyword magmaBuiltin ComplexReflectionGroups ComplexRootDatum
+syn keyword magmaBuiltin ComplexRootMatrices ComplexToPolar ComplexValue
+syn keyword magmaBuiltin Component ComponentGroup ComponentGroupOfIntersection
+syn keyword magmaBuiltin ComponentGroupOfKernel ComponentGroupOrder Components
+syn keyword magmaBuiltin Compose ComposeTransformations Composite
+syn keyword magmaBuiltin CompositeFields Composition CompositionFactors
+syn keyword magmaBuiltin CompositionReversion CompositionSeries CompositionTree
+syn keyword magmaBuiltin CompositionTreeCBM CompositionTreeElementToWord
+syn keyword magmaBuiltin CompositionTreeFactorNumber
+syn keyword magmaBuiltin CompositionTreeFastVerification
+syn keyword magmaBuiltin CompositionTreeNiceGroup CompositionTreeNiceToUser
+syn keyword magmaBuiltin CompositionTreeOrder CompositionTreeReductionInfo
+syn keyword magmaBuiltin CompositionTreeSeries CompositionTreeSLPGroup
+syn keyword magmaBuiltin CompositionTreeVerify Compositum CompSeries CompTree1
+syn keyword magmaBuiltin CompTree2 Computable ComputePrimeFactorisation
+syn keyword magmaBuiltin ComputeReducedFactorisation Comultiplication
+syn keyword magmaBuiltin Concatenated ConcatenatedCode Concurrent Condensation
+syn keyword magmaBuiltin CondensationMatrices Condensed CondensedAlgebra
+syn keyword magmaBuiltin Conditional ConditionalClassGroup Conditioned
+syn keyword magmaBuiltin ConditionedGroup Conditions Conductor
+syn keyword magmaBuiltin ConductorExponent ConductorRange Cone ConeIndices
+syn keyword magmaBuiltin ConeInSublattice ConeIntersection
+syn keyword magmaBuiltin ConeQuotientByLinearSubspace Cones ConesOfCodimension
+syn keyword magmaBuiltin ConeToPolyhedron ConeWithInequalities Confluent
+syn keyword magmaBuiltin Conformal ConformalHamiltonianLieAlgebra
+syn keyword magmaBuiltin ConformalOrthogonalGroup ConformalOrthogonalGroupMinus
+syn keyword magmaBuiltin ConformalOrthogonalGroupPlus
+syn keyword magmaBuiltin ConformalSpecialLieAlgebra ConformalSymplecticGroup
+syn keyword magmaBuiltin ConformalUnitaryGroup ConformalUnitaryGroup Congruence
+syn keyword magmaBuiltin CongruenceGroup CongruenceGroupAnemic CongruenceImage
+syn keyword magmaBuiltin CongruenceModulus Congruences CongruenceSubgroup Conic
+syn keyword magmaBuiltin ConicAccess ConicAutomorphisms ConicCreation
+syn keyword magmaBuiltin ConicCurve ConicMinimalModel Conjectural
+syn keyword magmaBuiltin ConjecturalRegulator ConjecturalSha Conjugacy
+syn keyword magmaBuiltin ConjugacyClasses Conjugate ConjugateIntoBorel
+syn keyword magmaBuiltin ConjugateIntoTorus ConjugatePartition Conjugates
+syn keyword magmaBuiltin ConjugatesProcess ConjugatesToPowerSums
+syn keyword magmaBuiltin ConjugateTranspose Conjugating Conjugation
+syn keyword magmaBuiltin ConjugationClassLength Conlon Connect Connected
+syn keyword magmaBuiltin ConnectedKernel Connecting ConnectingHomomorphism
+syn keyword magmaBuiltin Connection ConnectionNumber ConnectionPolynomial
+syn keyword magmaBuiltin Connectivity Consecutive Consistency Consistent Consta
+syn keyword magmaBuiltin ConstaCyclicCode Constant ConstantCoefficient
+syn keyword magmaBuiltin ConstantField ConstantFieldExtension ConstantMap
+syn keyword magmaBuiltin ConstantRing Constants ConstantWords Constituent
+syn keyword magmaBuiltin Constituents ConstituentsWithMultiplicities Constraint
+syn keyword magmaBuiltin Constraints ConstrSubNetwork Construct ConstructAFG1
+syn keyword magmaBuiltin ConstructByGroup ConstructByName ConstructByRoot
+syn keyword magmaBuiltin ConstructFromMatrix ConstructingHomomorphisms
+syn keyword magmaBuiltin Construction Constructions ConstructionX
+syn keyword magmaBuiltin ConstructionX3 ConstructionX3u ConstructionXChain
+syn keyword magmaBuiltin ConstructionXX ConstructionY1 Constructive Constructor
+syn keyword magmaBuiltin Constructors ConstructTable Contact ContactLieAlgebra
+syn keyword magmaBuiltin Containing ContainsQuadrangle ContainsZero
+syn keyword magmaBuiltin Content ContentAndPrimitivePart Contents Continuations
+syn keyword magmaBuiltin Continue Continued ContinuedFraction
+syn keyword magmaBuiltin ContinueEnumeration Contpp Contract Contraction
+syn keyword magmaBuiltin Contractions Contravariant Contravariants
+syn keyword magmaBuiltin ContravariantsOfCubicSurface Contribution ControlExtn
+syn keyword magmaBuiltin Controlled ControlledNot Convergents Converse
+syn keyword magmaBuiltin Conversion Convert ConvertFromManinSymbol
+syn keyword magmaBuiltin ConvertToCWIFormat Convex Convolution Conway
+syn keyword magmaBuiltin ConwayPolynomial Coordelt Coordinate CoordinateLattice
+syn keyword magmaBuiltin CoordinateMatrix CoordinateRing Coordinates
+syn keyword magmaBuiltin CoordinateSpace CoordinatesToElement CoordinateVector
+syn keyword magmaBuiltin Cop COPlus Coprime CoprimeBasis CoprimeBasisInsert
+syn keyword magmaBuiltin CoprimeRepresentative Copy CopyCoefficients Corank2
+syn keyword magmaBuiltin Corank2Case Corank3 Corank3Case Cordaro
+syn keyword magmaBuiltin CordaroWagnerCode Core Coreflection CoreflectionGroup
+syn keyword magmaBuiltin CoreflectionMatrices CoreflectionMatrix Corestrict
+syn keyword magmaBuiltin CorestrictCocycle Corestriction CorestrictionMapImage
+syn keyword magmaBuiltin Coroot CorootAction CorootGSet CorootHeight
+syn keyword magmaBuiltin CorootLattice CorootNorm CorootNorms CorootPosition
+syn keyword magmaBuiltin Coroots CorootSpace Correlation CorrelationGroup Cos
+syn keyword magmaBuiltin Cosec Cosech Coset CosetAction
+syn keyword magmaBuiltin CosetDistanceDistribution CosetEnumerationProcess
+syn keyword magmaBuiltin CosetGeometry CosetImage CosetKernel CosetLeaders
+syn keyword magmaBuiltin CosetRepresentatives Cosets CosetSatisfying CosetSpace
+syn keyword magmaBuiltin CosetsSatisfying CosetTable CosetTable1 CosetTable2
+syn keyword magmaBuiltin CosetTableToPermutationGroup
+syn keyword magmaBuiltin CosetTableToRepresentation Cosh Cost Cot Coth Counit
+syn keyword magmaBuiltin Count CountPGroups CountStandardTab Covalence
+syn keyword magmaBuiltin Covariant Covariants Cover CoverAlgebra Covering
+syn keyword magmaBuiltin CoveringCovariants CoveringRadius CoveringStructure
+syn keyword magmaBuiltin Covers Coweight CoweightLattice Coweights Cox Coxeter
+syn keyword magmaBuiltin CoxeterDiagram CoxeterElement CoxeterFinite
+syn keyword magmaBuiltin CoxeterForm CoxeterGraph CoxeterGraphOperations
+syn keyword magmaBuiltin CoxeterGraphProperties CoxeterGroup
+syn keyword magmaBuiltin CoxeterGroupFactoredOrder CoxeterGroupOrder
+syn keyword magmaBuiltin CoxeterIsomorphism CoxeterLength CoxeterMatrix
+syn keyword magmaBuiltin CoxeterMatrixConstruction CoxeterMatrixOperations
+syn keyword magmaBuiltin CoxeterMatrixProperties CoxeterNumber
+syn keyword magmaBuiltin CoxMonomialLattice CoxRing CPSHeight CPSHeightBounds
+syn keyword magmaBuiltin Cputime Create CreateA4wrC3 CreateA7
+syn keyword magmaBuiltin CreateCharacterFile CreateComplexField CreateCycleFile
+syn keyword magmaBuiltin CreateElements CreateEmbedded CreateHom CreateHomGHom
+syn keyword magmaBuiltin CreateK35 CreateK3Data CreateK6 CreateL27
+syn keyword magmaBuiltin CreateLattice CreateM11 CreateM12 CreateMatrices
+syn keyword magmaBuiltin CreatePolyAction CreateQ6 CreateSubgroupPoset
+syn keyword magmaBuiltin CreateVirtualRays CreateZ6 CreatingExtendedRootData
+syn keyword magmaBuiltin CreatingRootData CreatingRootDataHomomorphisms
+syn keyword magmaBuiltin CreatingRootSystemsMatrix CreatingRootSystemsName
+syn keyword magmaBuiltin Creation CreationElements CreationFromCurve
+syn keyword magmaBuiltin CreationFromCurve2 CreationTest Cremona
+syn keyword magmaBuiltin CremonaDatabase CremonaReference Critical
+syn keyword magmaBuiltin CriticalStrip Cross CrossCorrelation CrossPolytope CRT
+syn keyword magmaBuiltin Crv CrvCon CrvCon CrvEll CrvEllFldFin CrvEllFldFun
+syn keyword magmaBuiltin CrvEllQNF CrvG1 CrvHyp CrvHyp CrvMod CrvRat
+syn keyword magmaBuiltin Cryptographic CryptographicCurve Crystal CrystalGraph
+syn keyword magmaBuiltin Crystallographic CrystGrph CSp CSSCode CSSQuantConstr
+syn keyword magmaBuiltin CT CU Cubic CubicFromPoint Cubics
+syn keyword magmaBuiltin CubicSurfaceByHexahedralCoefficients
+syn keyword magmaBuiltin CubicSurfaceFromClebschSalmon Cunningham Current
+syn keyword magmaBuiltin CurrentLabel Curve CurveDifferential CurveDivisor
+syn keyword magmaBuiltin CurveFromInvts CurvePlace CurveQuotient Curves Cusp
+syn keyword magmaBuiltin CuspForms Cuspidal CuspidalInducingDatum
+syn keyword magmaBuiltin CuspidalProjection CuspidalSubgroup
+syn keyword magmaBuiltin CuspidalSubgroupTable CuspidalSubspace CuspIsSingular
+syn keyword magmaBuiltin CuspPlaces Cusps CuspWidth Cut CutVertices CWIFormat
+syn keyword magmaBuiltin Cycle CycleCount CycleDecomposition Cycles
+syn keyword magmaBuiltin CycleStructure Cyclic Cyclic6 CyclicCode CyclicGroup
+syn keyword magmaBuiltin CyclicPolytope CyclicQuantCodeGF4GF2
+syn keyword magmaBuiltin CyclicQuantCodePoly CyclicQuantCodesimple
+syn keyword magmaBuiltin CyclicSubgroups CyclicToRadical Cyclotomic
+syn keyword magmaBuiltin CyclotomicAutomorphismGroup CyclotomicCharacter
+syn keyword magmaBuiltin CyclotomicData CyclotomicFactors CyclotomicField
+syn keyword magmaBuiltin CyclotomicOrder CyclotomicPolynomial
+syn keyword magmaBuiltin CyclotomicRelativeField CyclotomicUnramifiedExtension
+syn keyword magmaBuiltin Cylinder Darstellungsgruppe Data Database Datum
+syn keyword magmaBuiltin Dawson DawsonIntegral De Debug Debugger Decimation
+syn keyword magmaBuiltin Decode DecodeEnsemble Decoding DecodingAttack
+syn keyword magmaBuiltin DecompArithmetic Decomposable Decompose
+syn keyword magmaBuiltin DecomposeAutomorphism DecomposeCharacter
+syn keyword magmaBuiltin DecomposeUsing DecomposeVector Decomposition
+syn keyword magmaBuiltin DecompositionField DecompositionGroup
+syn keyword magmaBuiltin DecompositionMatrix DecompositionMultiset
+syn keyword magmaBuiltin DecompositionType DecompositionTypeFrequency Decycle
+syn keyword magmaBuiltin Dedekind DedekindEta DedekindTest Deep DeepHoles Def
+syn keyword magmaBuiltin Default Deficient Defined Defines
+syn keyword magmaBuiltin DefinesAbelianSubvariety DefinesHomomorphism Defining
+syn keyword magmaBuiltin DefiningConstantField DefiningEquation
+syn keyword magmaBuiltin DefiningEquations DefiningIdeal DefiningMap
+syn keyword magmaBuiltin DefiningMatrix DefiningModularSymbolsSpace
+syn keyword magmaBuiltin DefiningMonomial DefiningPoints DefiningPolynomial
+syn keyword magmaBuiltin DefiningPolynomials DefiningSubschemePolynomial
+syn keyword magmaBuiltin Definite DefiniteGramMatrix DefiniteNorm Definition
+syn keyword magmaBuiltin Definitions Deformation DefRing Deg Deg4del Deg6
+syn keyword magmaBuiltin DEGaussian Degeneracy DegeneracyMap DegeneracyMatrix
+syn keyword magmaBuiltin DegeneracyOperator Degenerate Degree Degree0 Degree1
+syn keyword magmaBuiltin Degree3 Degree4 Degree5 Degree6 Degree6DelPezzoType2
+syn keyword magmaBuiltin Degree6DelPezzoType3 Degree6DelPezzoType4
+syn keyword magmaBuiltin Degree6DelPezzoType6 Degree7 Degree8 Degree9 DegreeMap
+syn keyword magmaBuiltin DegreeOfExactConstantField DegreeOfFieldExtension
+syn keyword magmaBuiltin DegreeOnePrimeIdeals DegreeRange DegreeReduction
+syn keyword magmaBuiltin Degrees DegreeSequence DegreesOfCohomologyGenerators
+syn keyword magmaBuiltin Del Delaunay Delaunaylabel Delete DeleteCapacities
+syn keyword magmaBuiltin DeleteCapacity DeleteData DeleteEdgeLabels
+syn keyword magmaBuiltin DeleteGenerator DeleteHeckePrecomputation DeleteLabel
+syn keyword magmaBuiltin DeleteLabels DeleteRelation DeleteVertexLabels
+syn keyword magmaBuiltin DeleteWeight DeleteWeights DelPezzoSurface Delsarte
+syn keyword magmaBuiltin DelsarteGoethalsCode Delta DeltaPreimage Demazure
+syn keyword magmaBuiltin DemazureD DemazureRvw Denominator Denominators Dense
+syn keyword magmaBuiltin Densely Density DensityEvolutionBinarySymmetric
+syn keyword magmaBuiltin DensityEvolutionGaussian Dependencies Dependent Depth
+syn keyword magmaBuiltin DepthFirstSearchTree Derivation DerivationAlgebra
+syn keyword magmaBuiltin Derivations Derivative Derived DerivedGroup
+syn keyword magmaBuiltin DerivedGroupMonteCarlo DerivedLength DerivedSeries
+syn keyword magmaBuiltin DerivedSubgroup Derksen DerksenIdeal DerSub
+syn keyword magmaBuiltin Desarguesian Desboves Descendant Descendants
+syn keyword magmaBuiltin Descending Descent DescentInformation DescentMaps
+syn keyword magmaBuiltin DescentSets Description Design Design Designed
+syn keyword magmaBuiltin Desingularization Detach DetachSpec Determinant
+syn keyword magmaBuiltin Determine DevelopDifferenceSet Development DFSTree
+syn keyword magmaBuiltin Diagonal DiagonalAutomorphism DiagonalForm
+syn keyword magmaBuiltin Diagonalisation Diagonalization DiagonalJoin
+syn keyword magmaBuiltin DiagonalMatrix DiagonalModel DiagonalSparseMatrix
+syn keyword magmaBuiltin DiagonalSum Diagram DiagramAutomorphism Diagrams
+syn keyword magmaBuiltin Diameter DiameterPath Dickman DickmanRho Dickson
+syn keyword magmaBuiltin DicksonFirst DicksonInvariant DicksonNearfield
+syn keyword magmaBuiltin DicksonPairs DicksonSecond DicksonTriples Dicyclic
+syn keyword magmaBuiltin DicyclicGroup Difference Differences DifferenceSet
+syn keyword magmaBuiltin Different DifferentDivisor Differential
+syn keyword magmaBuiltin DifferentialBasis DifferentialFieldExtension
+syn keyword magmaBuiltin DifferentialIdeal DifferentialLaurentSeriesRing
+syn keyword magmaBuiltin DifferentialOperator DifferentialOperatorRing
+syn keyword magmaBuiltin DifferentialRing DifferentialRingExtension
+syn keyword magmaBuiltin Differentials DifferentialSpace Differentiation
+syn keyword magmaBuiltin DifferentiationSequence Digraph Dihedral DihedralForms
+syn keyword magmaBuiltin DihedralGroup DihedralSubspace Dilog Dimension
+syn keyword magmaBuiltin Dimensional DimensionByFormula DimensionCuspForms
+syn keyword magmaBuiltin DimensionCuspFormsGamma0 DimensionCuspFormsGamma1
+syn keyword magmaBuiltin DimensionFormulas DimensionNewCuspFormsGamma0
+syn keyword magmaBuiltin DimensionNewCuspFormsGamma1
+syn keyword magmaBuiltin DimensionOfCentreOfEndomorphismRing
+syn keyword magmaBuiltin DimensionOfEndomorphismRing
+syn keyword magmaBuiltin DimensionOfExactConstantField
+syn keyword magmaBuiltin DimensionOfFieldOfGeometricIrreducibility
+syn keyword magmaBuiltin DimensionOfGlobalSections DimensionOfHomology
+syn keyword magmaBuiltin DimensionOfKernelZ2 DimensionOfSpanZ2 Dimensions
+syn keyword magmaBuiltin DimensionsEstimate DimensionsEstimate
+syn keyword magmaBuiltin DimensionsOfHomology DimensionsOfInjectiveModules
+syn keyword magmaBuiltin DimensionsOfProjectiveModules DimensionsOfTerms Dir
+syn keyword magmaBuiltin DIR Direct Directed Directory DirectProduct
+syn keyword magmaBuiltin DirectProductDualRadical DirectSum
+syn keyword magmaBuiltin DirectSumDecomposition DirectSumDual
+syn keyword magmaBuiltin DirectSumDualRadical Dirichlet DirichletCharacter
+syn keyword magmaBuiltin DirichletCharacterOverNF DirichletCharacterOverQ
+syn keyword magmaBuiltin DirichletCharacters DirichletGroup
+syn keyword magmaBuiltin DirichletRestriction Disc Disconnect DiscreteLog
+syn keyword magmaBuiltin Discriminant DiscriminantDivisor
+syn keyword magmaBuiltin DiscriminantFromShiodaInvariants
+syn keyword magmaBuiltin DiscriminantOfHeckeAlgebra DiscriminantRange
+syn keyword magmaBuiltin Discriminants DiscToPlane Disjoint Display
+syn keyword magmaBuiltin DisplayBurnsideMatrix DisplayCompTreeNodes
+syn keyword magmaBuiltin DisplayFareySymbolDomain DisplayPolygons
+syn keyword magmaBuiltin DisregardTheWarning Dissident Distance DistanceAngle
+syn keyword magmaBuiltin DistanceMatrix DistancePartition Distances Distinct
+syn keyword magmaBuiltin DistinctDegreeFactorization DistinctExtensions
+syn keyword magmaBuiltin Distinguished DistinguishedOrbitsOnSimples
+syn keyword magmaBuiltin Distribution Divide DivideOutIntegers Divisible
+syn keyword magmaBuiltin Division DivisionPoints DivisionPolynomial Divisor
+syn keyword magmaBuiltin DivisorClassGroup DivisorClassLattice DivisorGroup
+syn keyword magmaBuiltin Divisorial DivisorIdeal DivisorMap DivisorOfDegreeOne
+syn keyword magmaBuiltin Divisors DivisorSigma DivisorToSheaf DivNum DivNumElt
+syn keyword magmaBuiltin Dodecacode DodecacodeQuant Dold Domain Domian Dominant
+syn keyword magmaBuiltin DominantCharacter DominantDiagonalForm DominantLSPath
+syn keyword magmaBuiltin DominantWeight DominantWeights Dominating Dot
+syn keyword magmaBuiltin DotProduct DotProductMatrix Double DoubleCoset
+syn keyword magmaBuiltin DoubleCosetCanonical DoubleCosetRepresentatives
+syn keyword magmaBuiltin DoubleCosets DoubleGenusOneModel DoublePlotkinSum
+syn keyword magmaBuiltin Doubly DoublyCirculantQRCode DoublyCirculantQRCodeGF4
+syn keyword magmaBuiltin Down DP Drinfeld DS Dual DualAtkinLehner
+syn keyword magmaBuiltin DualBasisLattice DualCoxeterForm
+syn keyword magmaBuiltin DualEuclideanWeightDistribution DualFaceInDualFan
+syn keyword magmaBuiltin DualFan DualHeckeOperator DualIsogeny Duality
+syn keyword magmaBuiltin DualityAutomorphism DualKroneckerZ4
+syn keyword magmaBuiltin DualLeeWeightDistribution DualMorphism DualQuotient
+syn keyword magmaBuiltin DualRS DualStarInvolution DualVectorSpace
+syn keyword magmaBuiltin DualWeightDistribution DUpper Duval
+syn keyword magmaBuiltin DuvalPuiseuxExpansion Dyer Dynkin DynkinDiagram
+syn keyword magmaBuiltin DynkinDigraph E1 E2 E2NForm E4 E4Form E6 E6Form
+syn keyword magmaBuiltin Ealpha EARNS EAS Easy EasyBasis EasyBasis EasyIdeal
+syn keyword magmaBuiltin EasyIdeal ECchabauty ECDL ECDom ECF ECFBound Echelon
+syn keyword magmaBuiltin EchelonForm Echelonise EcheloniseWord Echo ECM
+syn keyword magmaBuiltin ECMFactored ECMFactoredOrder ECMOrder ECMSteps Edge
+syn keyword magmaBuiltin EdgeCapacities EdgeConnectivity EdgeDeterminant
+syn keyword magmaBuiltin EdgeFacetIncidenceMatrix EdgeGroup EdgeIndices
+syn keyword magmaBuiltin EdgeLabels EdgeMultiplicity Edges EdgeSeparator
+syn keyword magmaBuiltin EdgeSet EdgeSets EdgeUnion EdgeWeights Editor
+syn keyword magmaBuiltin EFAModule EFAModuleMaps EFAModules EFASeries Effective
+syn keyword magmaBuiltin EffectiveHodgeStructure EffectiveHypersurfaceTwist
+syn keyword magmaBuiltin EffectiveSubcanonicalCurves EgyptianFractions Ehrhart
+syn keyword magmaBuiltin EhrhartCoefficient EhrhartCoefficients
+syn keyword magmaBuiltin EhrhartDeltaVector EhrhartPolynomial EhrhartSeries
+syn keyword magmaBuiltin Eichler EichlerInvariant Eigenform Eigenforms
+syn keyword magmaBuiltin Eigenspace Eigenspaces Eigenvalue Eigenvalues
+syn keyword magmaBuiltin Eigenvectors Eight EightDescent Eisenstein
+syn keyword magmaBuiltin EisensteinData EisensteinProjection EisensteinSeries
+syn keyword magmaBuiltin EisensteinSubspace EisensteinTwo Element Elementary
+syn keyword magmaBuiltin ElementaryAbelianGroup ElementaryAbelianNormalSubgroup
+syn keyword magmaBuiltin ElementaryAbelianQuotient ElementaryAbelianSeries
+syn keyword magmaBuiltin ElementaryAbelianSeriesCanonical
+syn keyword magmaBuiltin ElementaryAbelianSubgroups ElementaryDivisors
+syn keyword magmaBuiltin ElementaryPhiModule ElementarySymmetricPolynomial
+syn keyword magmaBuiltin ElementaryToHomogeneousMatrix
+syn keyword magmaBuiltin ElementaryToMonomialMatrix ElementaryToPowerSumMatrix
+syn keyword magmaBuiltin ElementaryToSchurMatrix ElementCreate
+syn keyword magmaBuiltin ElementCreationAndRep ElementOperations Elements
+syn keyword magmaBuiltin ElementSequence ElementSet ElementToSequence
+syn keyword magmaBuiltin ElementType Elias EliasAsymptoticBound EliasBound
+syn keyword magmaBuiltin Eliece Elieces Eliminate EliminateGenerators
+syn keyword magmaBuiltin EliminateRedundancy Elimination EliminationIdeal
+syn keyword magmaBuiltin Elliptic EllipticCurve EllipticCurveDatabase
+syn keyword magmaBuiltin EllipticCurveFromjInvariant EllipticCurveFromPeriods
+syn keyword magmaBuiltin EllipticCurves EllipticCurveSearch
+syn keyword magmaBuiltin EllipticCurveWithGoodReductionSearch
+syn keyword magmaBuiltin EllipticCurveWithjInvariant EllipticExponential
+syn keyword magmaBuiltin EllipticInvariants EllipticLogarithm EllipticPeriods
+syn keyword magmaBuiltin EllipticPoints Elt Eltfromseq Eltlist EltOps Eltseq
+syn keyword magmaBuiltin EltTup Emacs EMaximal Embed Embedded Embedding
+syn keyword magmaBuiltin EmbeddingACurve EmbeddingMap EmbeddingMatrix
+syn keyword magmaBuiltin Embeddings EmbeddingSpace EmbedPlaneCurveInP3 EModule
+syn keyword magmaBuiltin Empty EmptyBasket EmptyDigraph EmptyGraph
+syn keyword magmaBuiltin EmptyPolyhedron EmptyScheme EmptySubscheme Encoding
+syn keyword magmaBuiltin End Endomorphism EndomorphismAlgebra EndomorphismRing
+syn keyword magmaBuiltin EndomorphismRinglabel Endomorphisms EndoRing Endpoint
+syn keyword magmaBuiltin EndpointWeight EndVertices Enriques Entries Entry Enum
+syn keyword magmaBuiltin EnumComb Enumerate Enumeration EnumerationCost
+syn keyword magmaBuiltin EnumerationCostArray Enumerator Env Env Enveloping
+syn keyword magmaBuiltin Environment Eof Epimorphisms Epsilon EpsilonFactor
+syn keyword magmaBuiltin Equal EqualDegreeFactorization Equality Equalize
+syn keyword magmaBuiltin EqualizeDegrees Equation EquationOrder
+syn keyword magmaBuiltin EquationOrderFinite EquationOrderInfinite Equations
+syn keyword magmaBuiltin Equidimensional EquidimensionalDecomposition
+syn keyword magmaBuiltin EquidimensionalPart Equidistant Equitable
+syn keyword magmaBuiltin EquitablePartition Equivalent EquivalentPoint Erf Erfc
+syn keyword magmaBuiltin Err Error ErrorFunction Estimate EstimateOrbit Et Eta
+syn keyword magmaBuiltin Etale Etaq EtaqPairing EtaTPairing Euclidean
+syn keyword magmaBuiltin EuclideanDistance EuclideanLeftDivision EuclideanNorm
+syn keyword magmaBuiltin EuclideanRightDivision EuclideanWeight
+syn keyword magmaBuiltin EuclideanWeightDistribution EuclideanWeightEnumerator
+syn keyword magmaBuiltin Euler EulerCharacteristic EulerFactor
+syn keyword magmaBuiltin EulerFactorModChar EulerFactorsByDeformation
+syn keyword magmaBuiltin EulerGamma Eulerian EulerianGraphDatabase
+syn keyword magmaBuiltin EulerianNumber EulerPhi EulerPhiInverse EulerProduct
+syn keyword magmaBuiltin Eval Evaluate EvaluateAt EvaluateByPowerSeries
+syn keyword magmaBuiltin EvaluatePolynomial Evaluation EvaluationPowerSeries
+syn keyword magmaBuiltin Even EvenDimMinus EvenDimPlus EvenSubalgebra
+syn keyword magmaBuiltin EvenSublattice EvenWeightCode EvenWeightSubcode
+syn keyword magmaBuiltin Everywhere Evolution Exact ExactConstantField
+syn keyword magmaBuiltin ExactExtension Exactly ExactQuotient ExactValue
+syn keyword magmaBuiltin EXAMPLE Examples Exceptional ExceptionalUnitOrbit
+syn keyword magmaBuiltin ExceptionalUnits Exchange Exclude Excluded
+syn keyword magmaBuiltin ExcludedConjugate ExcludedConjugates Exists
+syn keyword magmaBuiltin ExistsConwayPolynomial ExistsCosetSatisfying
+syn keyword magmaBuiltin ExistsCoveringStructure ExistsExcludedConjugate
+syn keyword magmaBuiltin ExistsGroupData ExistsModularCurveDatabase
+syn keyword magmaBuiltin ExistsNormalisingCoset ExistsNormalizingCoset Exp
+syn keyword magmaBuiltin Expand ExpandBasis ExpandToPrecision Expansion
+syn keyword magmaBuiltin Expansions Explicit ExplicitCoset
+syn keyword magmaBuiltin ExplicitLPSolutionsOne ExplicitLPSolutionsTwo Explode
+syn keyword magmaBuiltin Exponent ExponentDenominator Exponential
+syn keyword magmaBuiltin ExponentialFieldExtension ExponentialIntegral
+syn keyword magmaBuiltin ExponentialIntegralE1 ExponentLattice ExponentLaw
+syn keyword magmaBuiltin Exponents ExponentSum Expressions Expurgate
+syn keyword magmaBuiltin ExpurgateCode ExpurgateWeightCode Ext ExtAlgebra
+syn keyword magmaBuiltin Extend ExtendBasis ExtendCode Extended
+syn keyword magmaBuiltin ExtendedCategory ExtendedCohomologyClass ExtendedGcd
+syn keyword magmaBuiltin ExtendedGreatestCommonDivisor
+syn keyword magmaBuiltin ExtendedGreatestCommonLeftDivisor
+syn keyword magmaBuiltin ExtendedGreatestCommonRightDivisor
+syn keyword magmaBuiltin ExtendedLeastCommonLeftMultiple ExtendedOneCocycle
+syn keyword magmaBuiltin ExtendedPerfectCodeZ4 ExtendedType ExtendedUnitGroup
+syn keyword magmaBuiltin ExtendField ExtendGaloisCocycle ExtendGeodesic
+syn keyword magmaBuiltin ExtendIsometry Extends Extension ExtensionClasses
+syn keyword magmaBuiltin ExtensionExponents ExtensionField ExtensionNumbers
+syn keyword magmaBuiltin ExtensionPrimes ExtensionProcess Extensions
+syn keyword magmaBuiltin ExtensionsOfElementaryAbelianGroup
+syn keyword magmaBuiltin ExtensionsOfSolubleGroup Exterior ExteriorAlgebra
+syn keyword magmaBuiltin ExteriorPower ExteriorSquare External ExternalLines
+syn keyword magmaBuiltin ExtGenerators Extra ExtraAutomorphism Extract
+syn keyword magmaBuiltin ExtractBlock ExtractBlockRange ExtractGenerators
+syn keyword magmaBuiltin ExtractGroup ExtractRep Extraspecial
+syn keyword magmaBuiltin ExtraSpecialAction ExtraSpecialBasis ExtraSpecialGroup
+syn keyword magmaBuiltin ExtraSpecialNormaliser ExtraspecialPair
+syn keyword magmaBuiltin ExtraspecialPairs ExtraSpecialParameters
+syn keyword magmaBuiltin ExtraspecialSigns Extremal ExtremalLieAlgebra
+syn keyword magmaBuiltin ExtremalLieAlgebraKn ExtremalRayContraction
+syn keyword magmaBuiltin ExtremalRayContractionDivisor ExtremalRayContractions
+syn keyword magmaBuiltin ExtremalRays F27 F276 F29 Face FaceFunction
+syn keyword magmaBuiltin FaceIndices Faces FacesContaining FaceSupportedBy
+syn keyword magmaBuiltin Facet FacetIndices Facets Facint Facpol Fact Factor
+syn keyword magmaBuiltin FactorBasis Factored FactoredCarmichaelLambda
+syn keyword magmaBuiltin FactoredCharacteristicPolynomial
+syn keyword magmaBuiltin FactoredChevalleyGroupOrder
+syn keyword magmaBuiltin FactoredDefiningPolynomials FactoredDiscriminant
+syn keyword magmaBuiltin FactoredEulerPhi FactoredEulerPhiInverse
+syn keyword magmaBuiltin FactoredHeckePolynomial FactoredIndex
+syn keyword magmaBuiltin FactoredInverseDefiningPolynomials
+syn keyword magmaBuiltin FactoredMCPolynomials
+syn keyword magmaBuiltin FactoredMinimalAndCharacteristicPolynomials
+syn keyword magmaBuiltin FactoredMinimalPolynomial FactoredModulus
+syn keyword magmaBuiltin FactoredOrder FactoredProjectiveOrder Factorial
+syn keyword magmaBuiltin Factorisation FactorisationOverSplittingField
+syn keyword magmaBuiltin FactorisationToInteger FactorisationToPolynomial
+syn keyword magmaBuiltin Factorization FactorizationOverSplittingField
+syn keyword magmaBuiltin FactorizationToInteger Factors Faithful Fake
+syn keyword magmaBuiltin FakeIsogenySelmerSet FakeProjectiveSpace Falpha
+syn keyword magmaBuiltin Faltings FaltingsHeight Family Fan Fano FanoAuto
+syn keyword magmaBuiltin FanoBaseGenus FanoDatabase FanOfAffineSpace
+syn keyword magmaBuiltin FanOfFakeProjectiveSpace FanOfProjectiveSpace FanOfWPS
+syn keyword magmaBuiltin FanoGenus FanoIndex FanWithWeights Farey FareySymbol
+syn keyword magmaBuiltin Fast Feet Few FewGenerators Fiber Fibonacci Fibration
+syn keyword magmaBuiltin Fibre Fibres Field FieldAutomorphism FieldMorphism
+syn keyword magmaBuiltin FieldOfDefinition FieldOfFractions
+syn keyword magmaBuiltin FieldOfGeometricIrreducibility Fields File FILE Files
+syn keyword magmaBuiltin FillingLPObject Find FindCommonEmbeddings
+syn keyword magmaBuiltin FindDependencies Finder FindFirstGenerators
+syn keyword magmaBuiltin FindGenerators FindingPrimes FindN FindRelations
+syn keyword magmaBuiltin FindRelationsInCWIFormat FindWord Fine
+syn keyword magmaBuiltin FineEquidimensionalDecomposition Finite
+syn keyword magmaBuiltin FiniteAffinePlane FiniteDimensional FiniteDivisor
+syn keyword magmaBuiltin FiniteField FiniteFieldFactorization FiniteLieAlgebra
+syn keyword magmaBuiltin FiniteProjectivePlane FiniteSplit Fire FireCode Firm
+syn keyword magmaBuiltin First FirstIndexOfColumn FirstIndexOfRow FirstWeights
+syn keyword magmaBuiltin Fitting FittingGroup FittingIdeal FittingIdeals
+syn keyword magmaBuiltin FittingLength FittingSeries FittingSubgroup Fix Fixed
+syn keyword magmaBuiltin FixedArc FixedField FixedGroup FixedPoints
+syn keyword magmaBuiltin FixedSubspaceToPolyhedron Flag FlagComplex Flat FldAb
+syn keyword magmaBuiltin FldAb FldAC FldCom FldComElt FldCyc FldCyc FldCycElt
+syn keyword magmaBuiltin FldFin FldForms FldFun FldFunAb FldFunElt
+syn keyword magmaBuiltin FldFunFracSch FldFunFracSchElt FldFunG FldFunRat
+syn keyword magmaBuiltin FldFunRat FldFunRatElt FldNear FldNum FldPadElt
+syn keyword magmaBuiltin FldQuad FldQuad FldRat FldRe Flex Flexes Flip
+syn keyword magmaBuiltin FlipCoordinates Flipping Floor Flow Flush For Force
+syn keyword magmaBuiltin Forest Form Formal FormalGroupHomomorphism
+syn keyword magmaBuiltin FormalGroupLaw FormalLog FormalPoint FormalSet Format
+syn keyword magmaBuiltin Forms Forms1 FormType Formula Four FourCoverPullback
+syn keyword magmaBuiltin FourDescent FourToTwoCovering FPAlgebra
+syn keyword magmaBuiltin FPCoxeterGroups FPGroup FPGroup1 FPGroup2
+syn keyword magmaBuiltin FPGroupStrong FPQuotient Fraction Fractional
+syn keyword magmaBuiltin FractionalPart Fractions Frattini FrattiniQuotientRank
+syn keyword magmaBuiltin FrattiniSubgroup Free FreeAbelianGroup
+syn keyword magmaBuiltin FreeAbelianQuotient FreeAlgebra Freef FreefValues
+syn keyword magmaBuiltin FreefValues FreeGroup FreeLie FreeLieAlgebra
+syn keyword magmaBuiltin FreeMonoid FreeNilpotentGroup FreeProduct
+syn keyword magmaBuiltin FreeResolution FreeResolution1 FreeResolutionLocal
+syn keyword magmaBuiltin FreeSemigroup Frequency Frobenius
+syn keyword magmaBuiltin FrobeniusActionOnPoints
+syn keyword magmaBuiltin FrobeniusActionOnReducibleFiber
+syn keyword magmaBuiltin FrobeniusActionOnTrivialLattice FrobeniusAutomorphism
+syn keyword magmaBuiltin FrobeniusAutomorphisms FrobeniusElement
+syn keyword magmaBuiltin FrobeniusFormAlternating FrobeniusImage FrobeniusMap
+syn keyword magmaBuiltin FrobeniusMatrix FrobeniusPolynomial
+syn keyword magmaBuiltin FrobeniusTracesToWeilPolynomials From
+syn keyword magmaBuiltin FromAnalyticJacobian FromAnalyticJacobianlabel Fromj
+syn keyword magmaBuiltin FromLiE FSCentraliser FSCentralizer FSEqual FSFinite
+syn keyword magmaBuiltin FSFiniteIndex FSFree FSFreeGenerators FSIndex FSIs
+syn keyword magmaBuiltin FSIsConjugate FSIsIn FSIsSubgroup FSMeet FSNormaliser
+syn keyword magmaBuiltin FSNormalizer FSSupergroup FSubspace FTGeometry
+syn keyword magmaBuiltin Fuchsian FuchsianGroup FuchsianMatrixRepresentation
+syn keyword magmaBuiltin Full FullCone FullCorootLattice FullDirichletGroup
+syn keyword magmaBuiltin FullModule FullRootLattice Func Function Functional
+syn keyword magmaBuiltin Functionality FunctionDegree FunctionField
+syn keyword magmaBuiltin FunctionFieldDatabase FunctionFieldDifferential
+syn keyword magmaBuiltin FunctionFieldDivisor FunctionFieldPlace FunctionFields
+syn keyword magmaBuiltin Functions Fundamental FundamentalClosure
+syn keyword magmaBuiltin FundamentalCoweights FundamentalDiscriminant
+syn keyword magmaBuiltin FundamentalDomain FundamentalDomains
+syn keyword magmaBuiltin FundamentalElement FundamentalGroup
+syn keyword magmaBuiltin FundamentalInvariants FundamentalQuotient
+syn keyword magmaBuiltin FundamentalUnit FundamentalUnits FundamentalWeights
+syn keyword magmaBuiltin FunWithHeights Further G2 G23 G2Invariants
+syn keyword magmaBuiltin G2RootSystem G2ToIgusaInvariants G4 Gabidulin
+syn keyword magmaBuiltin GabidulinCode GalCohom Gallager GallagerCode Galois
+syn keyword magmaBuiltin GaloisCohomology GaloisConjugacyRepresentatives
+syn keyword magmaBuiltin GaloisConjugate GaloisField GaloisGroup
+syn keyword magmaBuiltin GaloisGroupInvariant GaloisGroups GaloisGroups2
+syn keyword magmaBuiltin GaloisImage GaloisOrbit GaloisProof GaloisQuotient
+syn keyword magmaBuiltin GaloisRepresentation GaloisRepresentations GaloisRing
+syn keyword magmaBuiltin GaloisRoot GaloisSplittingField GaloisSubfieldTower
+syn keyword magmaBuiltin GaloisSubgroup GalRep GalRep Gamma Gamma0 Gamma1
+syn keyword magmaBuiltin GammaAction GammaActionOnSimples GammaArray
+syn keyword magmaBuiltin GammaCorootSpace GammaD GammaFactors GammaGroup
+syn keyword magmaBuiltin GammaList GammaOrbitOnRoots GammaOrbitsOnRoots
+syn keyword magmaBuiltin GammaOrbitsRepresentatives GammaRootSpace GammaShifts
+syn keyword magmaBuiltin GammaUpper0 GammaUpper1 Gap GapNumbers Gauss Gaussian
+syn keyword magmaBuiltin GaussianBinomial GaussianFactorial GaussianPeriods
+syn keyword magmaBuiltin GaussNumber GaussReduce GaussReduceGram GaussValuation
+syn keyword magmaBuiltin GaussValuations GB GB GBoverZ Gcd GCD GCDs GCLD GCRD
+syn keyword magmaBuiltin Ge GE Gegenbauer GegenbauerPolynomial Genera General
+syn keyword magmaBuiltin Generalised GeneralisedRowReduction
+syn keyword magmaBuiltin GeneralisedWallForm Generalized
+syn keyword magmaBuiltin GeneralizedFibonacciNumber GeneralizedSrivastavaCode
+syn keyword magmaBuiltin GeneralLinearGroup GeneralLinearGroup
+syn keyword magmaBuiltin GeneralOrthogonalGroup GeneralOrthogonalGroupMinus
+syn keyword magmaBuiltin GeneralOrthogonalGroupPlus GeneralUnitaryGroup
+syn keyword magmaBuiltin Generate Generated GenerateGraphs Generatep
+syn keyword magmaBuiltin GeneratepGroups Generating GeneratingWords Generation
+syn keyword magmaBuiltin Generator GeneratorMatrix GeneratorNaming
+syn keyword magmaBuiltin GeneratorNamingSequence GeneratorNumber GeneratorOrder
+syn keyword magmaBuiltin GeneratorPolynomial Generators GeneratorsOverBaseRing
+syn keyword magmaBuiltin GeneratorsSequence GeneratorsSequenceOverBaseRing
+syn keyword magmaBuiltin GeneratorStructure Generic GenericAbelianGroup
+syn keyword magmaBuiltin GenericCurve GenericGroup GenericModel GenericPoint
+syn keyword magmaBuiltin GenericSubgroupCreation Genuine Genus Genus11Curve
+syn keyword magmaBuiltin Genus2 Genus2GonalMap Genus3 Genus3GonalMap Genus4
+syn keyword magmaBuiltin Genus4GonalMap Genus5 Genus5GonalMap
+syn keyword magmaBuiltin Genus5PlaneCurveModel Genus6 Genus6GonalMap
+syn keyword magmaBuiltin Genus6PlaneCurveModel GenusAndCanonicalMap
+syn keyword magmaBuiltin GenusContribution GenusField GenusOneModel
+syn keyword magmaBuiltin GenusRepresentatives Geodesic GeodesicExists Geodesics
+syn keyword magmaBuiltin GeodesicsIntersection Geometric Geometrically
+syn keyword magmaBuiltin GeometricAutomorphismGroup
+syn keyword magmaBuiltin GeometricAutomorphismGroupFromShiodaInvariants
+syn keyword magmaBuiltin GeometricAutomorphismGroupGenus2Classification
+syn keyword magmaBuiltin GeometricAutomorphismGroupGenus3Classification
+syn keyword magmaBuiltin GeometricGenus GeometricGenusOfDesingularization
+syn keyword magmaBuiltin GeometricMordellWeilLattice GeometricSupport
+syn keyword magmaBuiltin GeometricTorsionBound Geometry Get GetAssertions
+syn keyword magmaBuiltin GetAttributes GetAutoColumns GetAutoCompact GetBeep
+syn keyword magmaBuiltin Getc GetCells GetColumns GetCurrentDirectory
+syn keyword magmaBuiltin GetDefaultRealField GetEchoInput GetElementPrintFormat
+syn keyword magmaBuiltin GetEnv GetEnvironmentValue GetEvaluationComparison
+syn keyword magmaBuiltin GetForceCFP GetGMPVersion GetGPU
+syn keyword magmaBuiltin GetHelpExternalBrowser GetHelpExternalSystem
+syn keyword magmaBuiltin GetHelpUseExternal GetHistorySize GetIgnorePrompt
+syn keyword magmaBuiltin GetIgnoreSpaces GetIndent GetLibraries GetLibraryRoot
+syn keyword magmaBuiltin GetLineEditor GetMatrices GetMaximumMemoryUsage
+syn keyword magmaBuiltin GetMemoryLimit GetMemoryUsage GetMPCVersion
+syn keyword magmaBuiltin GetMPFRVersion GetNthreads GetPath Getpid GetPoly
+syn keyword magmaBuiltin GetPrecision GetPresentation GetPreviousSize
+syn keyword magmaBuiltin GetPrintLevel GetPrompt GetRep GetRows Gets GetSeed
+syn keyword magmaBuiltin GetShowRealTime GetStoredFactors GetTempDir GetTime
+syn keyword magmaBuiltin GetTraceback Getuid Getvecs GetVerbose GetVersion
+syn keyword magmaBuiltin GetViMode Gewirtz GewirtzGraph GF GF2 GF4 GHom
+syn keyword magmaBuiltin GHomOverCentralizingField Gilbert
+syn keyword magmaBuiltin GilbertVarshamovAsymptoticBound GilbertVarshamovBound
+syn keyword magmaBuiltin GilbertVarshamovLinearBound Girth GirthCycle GL GL2
+syn keyword magmaBuiltin GLat GLattice GLConjugate GLn Global Globally
+syn keyword magmaBuiltin GlobalSectionSubmodule GlobalUnitGroup GLQConjugate
+syn keyword magmaBuiltin GLSylow Glue GLZ GLZConjugate GModule GModuleAction
+syn keyword magmaBuiltin GModulePrimes GModules1 GMPVersion GNB GO Goethals
+syn keyword magmaBuiltin GoethalsCode GoethalsDelsarteCode Golay GolayCode
+syn keyword magmaBuiltin GolayCodeZ4 GOMinus Gonal Good GoodBasePoints
+syn keyword magmaBuiltin GoodLDPCEnsemble GOPlus Goppa GoppaCode
+syn keyword magmaBuiltin GoppaDesignedDistance Gorenstein GorensteinClosure
+syn keyword magmaBuiltin GorensteinIndex GPCGroup GPU GR Graded
+syn keyword magmaBuiltin GradedAutomorphismGroup
+syn keyword magmaBuiltin GradedAutomorphismGroupMatchingIdempotents
+syn keyword magmaBuiltin GradedCapHomomorphism GradedCone GradedCoverAlgebra
+syn keyword magmaBuiltin GradedGroupAlgebras GradedHomomorphism GradedModule
+syn keyword magmaBuiltin Gradient GradientVector GradientVectors Grading
+syn keyword magmaBuiltin Gradings Gram GramMatrix Graph Graph GraphAutomorphism
+syn keyword magmaBuiltin GraphGeneralAccess GraphGeneration Graphics
+syn keyword magmaBuiltin GraphIsomorphim Graphs GraphSizeInBytes Gray GrayMap
+syn keyword magmaBuiltin GrayMapImage GrdRng Greatest GreatestCommonDivisor
+syn keyword magmaBuiltin GreatestCommonLeftDivisor GreatestCommonRightDivisor
+syn keyword magmaBuiltin Grevlex GRHBound Griesmer GriesmerBound
+syn keyword magmaBuiltin GriesmerLengthBound GriesmerMinimumWeightBound
+syn keyword magmaBuiltin Groebner GroebnerBasis GroebnerBasisUnreduced Grossen
+syn keyword magmaBuiltin Grossencharacter GrossenTwist Grotzch Ground
+syn keyword magmaBuiltin GroundField Group GroupActions GroupAlgebra
+syn keyword magmaBuiltin GroupAlgebraAsStarAlgebra GroupAlgebraAsStarAlgebra2
+syn keyword magmaBuiltin GroupComputation GroupConstructors GroupData
+syn keyword magmaBuiltin GroupIdeal GroupName GroupOfLieType
+syn keyword magmaBuiltin GroupOfLieTypeFactoredOrder GroupOfLieTypeHomomorphism
+syn keyword magmaBuiltin GroupOfLieTypeOrder GroupOrders Groups GroupToRoot
+syn keyword magmaBuiltin Growth GrowthFunction Grp GrpAb GrpAb GrpAbGen GrpASim
+syn keyword magmaBuiltin GrpAtc GrpAtc GrpAtcElt GrpAuto GrpAuto GrpBB GrpBrd
+syn keyword magmaBuiltin GrpBrd GrpCoh GrpCox GrpData GrpDrchNFElt GrpFP
+syn keyword magmaBuiltin GrpFPCox GrpGPC GrpGPC GrpHeckeElt GrphRes GrpLie
+syn keyword magmaBuiltin GrpLieEltArith GrpLieEltProduct GrpLieSylow GrpLieTori
+syn keyword magmaBuiltin GrpLieTori2 GrpMat GrpMatFF GrpMatGen GrpMatInf
+syn keyword magmaBuiltin GrpMatQZ GrpPC GrpPC GrpPerm GrpPerm GrpPermCox
+syn keyword magmaBuiltin GrpPsl2 GrpPSL2 GrpPSL2 GrpPsl2Elt GrpPSL2Elt
+syn keyword magmaBuiltin GrpPSL2Shim GrpPSL2Shim GrpRfl GrpRWS GrpRWS GrpRWSElt
+syn keyword magmaBuiltin GrpSLP GRSCode GSet GSetFromIndexed GSets GU Guardian
+syn keyword magmaBuiltin Guess GuessAltsymDegree Hadamard Hadamard
+syn keyword magmaBuiltin HadamardAutomorphismGroup HadamardCanonicalForm
+syn keyword magmaBuiltin HadamardCodeZ4 HadamardColumnDesign HadamardDatabase
+syn keyword magmaBuiltin HadamardDatabaseInformation
+syn keyword magmaBuiltin HadamardDatabaseInformationEmpty HadamardGraph
+syn keyword magmaBuiltin HadamardInvariant HadamardMatrixFromInteger
+syn keyword magmaBuiltin HadamardMatrixToInteger HadamardNormalize
+syn keyword magmaBuiltin HadamardRowDesign HadamardTrasformation Half
+syn keyword magmaBuiltin HalfIntegralWeightForms Halfspace
+syn keyword magmaBuiltin HalfspaceToPolyhedron Hall HallSubgroup Hamiltonian
+syn keyword magmaBuiltin HamiltonianLieAlgebra Hamming HammingAsymptoticBound
+syn keyword magmaBuiltin HammingCode HammingWeightEnumerator Hand Harmonic
+syn keyword magmaBuiltin HarmonicNumber Has HasAdditionAlgorithm HasAffinePatch
+syn keyword magmaBuiltin HasAllPQuotientsMetacyclic HasAllRootsOnUnitCircle
+syn keyword magmaBuiltin HasAttribute HasClique HasClosedCosetTable HasCM
+syn keyword magmaBuiltin HasComplement HasCompleteCosetTable
+syn keyword magmaBuiltin HasComplexConjugate HasComplexMultiplication
+syn keyword magmaBuiltin HasCompositionTree HasComputableAbelianQuotient
+syn keyword magmaBuiltin HasComputableLCS HasDefinedModuleMap HasDefiningMap
+syn keyword magmaBuiltin HasDenseAndSparseRep HasDenseRep HasDenseRepOnly
+syn keyword magmaBuiltin HasElementaryBasis HasEmbedding
+syn keyword magmaBuiltin HasFiniteAbelianQuotient HasFiniteAQ
+syn keyword magmaBuiltin HasFiniteDimension HasFiniteIndex HasFiniteKernel
+syn keyword magmaBuiltin HasFiniteOrder HasFiniteOrder HasFiniteRank HasGCD
+syn keyword magmaBuiltin HasGNB HasGrevlexOrder HasGroebnerBasis Hash
+syn keyword magmaBuiltin HasHodgeStructure HasHomogeneousBasis HasIndexOne
+syn keyword magmaBuiltin HasIndexOneEverywhereLocally
+syn keyword magmaBuiltin HasInfiniteComputableAbelianQuotient
+syn keyword magmaBuiltin HasInfinitePSL2Quotient HasIntegralPoint
+syn keyword magmaBuiltin HasIntersectionProperty HasIntersectionPropertyN
+syn keyword magmaBuiltin HasInverse HasIrregularFibres HasIsotropicVector
+syn keyword magmaBuiltin HasKnownInverse HasLeviSubalgebra
+syn keyword magmaBuiltin HasLinearGrayMapImage HasMonomialBasis
+syn keyword magmaBuiltin HasMultiplicityOne HasNegativeWeightCycle
+syn keyword magmaBuiltin HasNonsingularPoint HasOddDegreeModel
+syn keyword magmaBuiltin HasOnlyOrdinarySingularities
+syn keyword magmaBuiltin HasOnlyOrdinarySingularitiesMonteCarlo
+syn keyword magmaBuiltin HasOnlySimpleSingularities HasOrder HasOutputFile Hasp
+syn keyword magmaBuiltin HasParallelClass HasParallelism HasPlace HasPoint
+syn keyword magmaBuiltin HasPointsEverywhereLocally HasPointsOverExtension
+syn keyword magmaBuiltin HasPolynomial HasPolynomialFactorization
+syn keyword magmaBuiltin HasPowerSumBasis HaspQuotientDefinitions
+syn keyword magmaBuiltin HaspQuotientDefinitions HasPreimage
+syn keyword magmaBuiltin HasProjectiveDerivation HasPRoot HasRandomPlace
+syn keyword magmaBuiltin HasRationalPoint HasRationalSolutions HasResolution
+syn keyword magmaBuiltin HasRoot HasRootOfUnity HasSchurBasis Hasse
+syn keyword magmaBuiltin HasseMinkowskiInvariant HasseMinkowskiInvariants
+syn keyword magmaBuiltin HasseWittInvariant HasSingularPointsOverExtension
+syn keyword magmaBuiltin HasSingularVector HasSparseRep HasSparseRepOnly
+syn keyword magmaBuiltin HasSquareSha HasSupplement HasTwistedHopfStructure
+syn keyword magmaBuiltin HasValidCosetTable HasValidIndex
+syn keyword magmaBuiltin HasWeakIntersectionProperty HasZeroDerivation
+syn keyword magmaBuiltin HBinomial HE Hecke HeckeAlgebra HeckeBound
+syn keyword magmaBuiltin HeckeCharacter HeckeCharacterGroup HeckeEigenvalue
+syn keyword magmaBuiltin HeckeEigenvalueBound HeckeEigenvalueField
+syn keyword magmaBuiltin HeckeEigenvalueRing HeckeEigenvectors HeckeLift
+syn keyword magmaBuiltin HeckeOperator HeckeOperators HeckePolynomial
+syn keyword magmaBuiltin HeckePolynomials Heegner Heegner2 Heegner3 Heegner4
+syn keyword magmaBuiltin Heegner5 HeegnerDiscriminants HeegnerForms
+syn keyword magmaBuiltin HeegnerPoint HeegnerPoints HeegnerTorsionElement
+syn keyword magmaBuiltin HeighestRoots Height HeightConstant
+syn keyword magmaBuiltin HeightDifferenceBounds HeightDifferenceLowerBound
+syn keyword magmaBuiltin HeightDifferenceUpperBound HeightOnAmbient
+syn keyword magmaBuiltin HeightPairing HeightPairing2 HeightPairingLattice
+syn keyword magmaBuiltin HeightPairingMatrix Heisenberg HeisenbergAlgebra Help
+syn keyword magmaBuiltin Hensel HenselLift Hereditary Hermite HermiteConstant
+syn keyword magmaBuiltin HermiteForm HermiteNumber HermitePolynomial Hermitian
+syn keyword magmaBuiltin HermitianAutomorphismGroup HermitianCode
+syn keyword magmaBuiltin HermitianFunctionField HermitianTranspose Heron Hesse
+syn keyword magmaBuiltin HesseCovariants HesseModel Hessenberg HessenbergForm
+syn keyword magmaBuiltin HessePolynomials Hessian HessianMatrix Hexacode
+syn keyword magmaBuiltin HexacodeQuant Hexahedral High Highest HighestCoroot
+syn keyword magmaBuiltin HighestLongCoroot HighestLongRoot HighestRoot
+syn keyword magmaBuiltin HighestRoots HighestShortCoroot HighestShortRoot
+syn keyword magmaBuiltin HighestWeight HighestWeightModule
+syn keyword magmaBuiltin HighestWeightRepresentation HighestWeights
+syn keyword magmaBuiltin HighestWeightsAndVectors HighestWeightVectors HighMap
+syn keyword magmaBuiltin HighProduct Hilbert Hilbert90 HilbertBasis
+syn keyword magmaBuiltin HilbertCharacterSubgroup HilbertClassField
+syn keyword magmaBuiltin HilbertClassPolynomial HilbertCoefficient
+syn keyword magmaBuiltin HilbertCoefficients HilbertCuspForms
+syn keyword magmaBuiltin HilbertDeltaVector HilbertDenominator HilbertFunction
+syn keyword magmaBuiltin HilbertGroebner HilbertGroebnerBasis HilbertIdeal
+syn keyword magmaBuiltin HilbertNumerator HilbertPolynomial
+syn keyword magmaBuiltin HilbertPolynomialOfCurve HilbertSeries
+syn keyword magmaBuiltin HilbertSeriesApproximation HilbertSeriesBetti
+syn keyword magmaBuiltin HilbertSeriesMultipliedByMinimalDenominator
+syn keyword magmaBuiltin HilbertSpace HilbertSpaceCreate HilbertSymbol Hirsch
+syn keyword magmaBuiltin HirschNumber History HKZ HKZGram HN Hodge HodgeNumber
+syn keyword magmaBuiltin HodgeStructure Holes Holomorph Holomorphic Hom
+syn keyword magmaBuiltin HomAdjoints HomComp Homeomorphic HomGenerators
+syn keyword magmaBuiltin Homogeneous HomogeneousComponent HomogeneousComponents
+syn keyword magmaBuiltin HomogeneousModuleTest HomogeneousModuleTest1
+syn keyword magmaBuiltin HomogeneousModuleTest2 HomogeneousModuleTestBasis
+syn keyword magmaBuiltin HomogeneousToElementaryMatrix
+syn keyword magmaBuiltin HomogeneousToMonomialMatrix
+syn keyword magmaBuiltin HomogeneousToPowerSumMatrix HomogeneousToSchurMatrix
+syn keyword magmaBuiltin Homogenization Homological HomologicalDimension
+syn keyword magmaBuiltin Homology HomologyBasis HomologyBasislabel
+syn keyword magmaBuiltin HomologyGenerators HomologyGroup
+syn keyword magmaBuiltin HomologyOfChainComplex Homomorphism
+syn keyword magmaBuiltin HomomorphismEmbedded Homomorphisms Homomorphisms1
+syn keyword magmaBuiltin Homomorphisms2 HomomorphismSpeed HomomorphismsProcess
+syn keyword magmaBuiltin Homorphism Homotopy Homs Hook HookLength Hopf
+syn keyword magmaBuiltin Horizontal HorizontalJoin Horrocks
+syn keyword magmaBuiltin HorrocksMumfordBundle HS HSeminvariant HTMLOutput
+syn keyword magmaBuiltin Hughes HughesPlane Hull Hyperbolic HyperbolicBasis
+syn keyword magmaBuiltin HyperbolicCoxeterGraph HyperbolicCoxeterMatrix
+syn keyword magmaBuiltin HyperbolicPair HyperbolicSplitting Hypercenter
+syn keyword magmaBuiltin Hypercentre Hyperelementary Hyperelliptic
+syn keyword magmaBuiltin HyperellipticCurve HyperellipticCurveFromG2Invariants
+syn keyword magmaBuiltin HyperellipticCurveFromIgusaClebsch
+syn keyword magmaBuiltin HyperellipticCurveFromShiodaInvariants
+syn keyword magmaBuiltin HyperellipticCurveOfGenus HyperellipticPolynomial
+syn keyword magmaBuiltin HyperellipticPolynomialFromShiodaInvariants
+syn keyword magmaBuiltin HyperellipticPolynomiallabel HyperellipticPolynomials
+syn keyword magmaBuiltin HyperellipticPolynomialsFromShiodaInvariants
+syn keyword magmaBuiltin Hypergeometric Hypergeometric2F1 HypergeometricData
+syn keyword magmaBuiltin HypergeometricMotiveClearTable
+syn keyword magmaBuiltin HypergeometricMotiveSaveLimit HypergeometricSeries
+syn keyword magmaBuiltin HypergeometricSeries2F1 HypergeometricU Hyperplane
+syn keyword magmaBuiltin HyperplaneAtInfinity HyperplaneSectionDivisor
+syn keyword magmaBuiltin HyperplaneToPolyhedron Hypersurface
+syn keyword magmaBuiltin HypersurfaceSingularityExpandFunction
+syn keyword magmaBuiltin HypersurfaceSingularityExpandFurther HypGeomMot Id
+syn keyword magmaBuiltin IdDataNLAC IdDataSLAC Ideal Ideal IdealArithmetic
+syn keyword magmaBuiltin IdealFactorisation Idealiser Idealizer IdealOfSupport
+syn keyword magmaBuiltin IdealQuotient Ideals IdealWithFixedBasis Idempotent
+syn keyword magmaBuiltin IdempotentActionGenerators IdempotentGenerators
+syn keyword magmaBuiltin IdempotentPositions Idempotents Identical
+syn keyword magmaBuiltin Identification IdentificationNumber Identifiers
+syn keyword magmaBuiltin Identify IdentifyAlmostSimpleGroup IdentifyGroup
+syn keyword magmaBuiltin IdentifyOneCocycle IdentifySimple IdentifyTwoCocycle
+syn keyword magmaBuiltin IdentifyZeroCocycle Identity IdentityAutomorphism
+syn keyword magmaBuiltin IdentityFieldMorphism IdentityHomomorphism
+syn keyword magmaBuiltin IdentityIsogeny IdentityMap IdentityMatrix
+syn keyword magmaBuiltin IdentitySparseMatrix IdentityTransformation Ignore
+syn keyword magmaBuiltin Igusa IgusaClebschInvariants IgusaClebschToIgusa
+syn keyword magmaBuiltin IgusaInvariants IgusaToG2Invariants Ihara IharaBound
+syn keyword magmaBuiltin IInvariant Ilog Ilog2 Im Image ImageBasis ImageFan
+syn keyword magmaBuiltin Images ImageSystem ImageWithBasis Imaginary Implicit
+syn keyword magmaBuiltin ImplicitCosetEnumeration ImplicitFunction
+syn keyword magmaBuiltin Implicitization Imprimitive ImprimitiveAction
+syn keyword magmaBuiltin ImprimitiveBasis ImprimitiveReflectionGroup Improve
+syn keyword magmaBuiltin ImproveAutomorphismGroup Incidence IncidenceDigraph
+syn keyword magmaBuiltin IncidenceGeometry IncidenceGeometry IncidenceGraph
+syn keyword magmaBuiltin IncidenceMatrix IncidenceStructure Incident
+syn keyword magmaBuiltin IncidentEdges Include IncludeAutomorphism
+syn keyword magmaBuiltin IncludeWeight Inclusion InclusionMap Inclusions
+syn keyword magmaBuiltin Increasing Indecomposable IndecomposableSummands
+syn keyword magmaBuiltin Indefinite InDegree Indent IndentPop IndentPush
+syn keyword magmaBuiltin Independence IndependenceNumber Independent
+syn keyword magmaBuiltin IndependentGenerators IndependentUnits Indeterminacy
+syn keyword magmaBuiltin IndeterminacyLocus Index Index1 IndexCalculus
+syn keyword magmaBuiltin IndexCalculusMatrix Indexed IndexedCoset
+syn keyword magmaBuiltin IndexedSetToSequence IndexedSetToSet IndexFormEquation
+syn keyword magmaBuiltin Indexing IndexOfPartition IndexOfSpeciality Indicator
+syn keyword magmaBuiltin Indices Indicial IndicialPolynomial Indivisible
+syn keyword magmaBuiltin IndivisibleSubdatum IndivisibleSubsystem Induce
+syn keyword magmaBuiltin Induced InducedAutomorphism InducedGammaGroup
+syn keyword magmaBuiltin InducedMap InducedMapOnHomology InducedOneCocycle
+syn keyword magmaBuiltin InducedPermutation InduceWG InduceWGtable Inducing
+syn keyword magmaBuiltin Induction Ineffective IneffectiveSubcanonicalCurves
+syn keyword magmaBuiltin Inequalities Inert Inertia InertiaDegree InertiaField
+syn keyword magmaBuiltin InertiaGroup InertiaInvariants Inertial
+syn keyword magmaBuiltin InertialElement Infimum Infinite InfiniteDivisor
+syn keyword magmaBuiltin InfinitePart InfinitePlaces InfinitePositiveChar
+syn keyword magmaBuiltin InfiniteSum Infinity Inflation InflationMap
+syn keyword magmaBuiltin InflationMapImage Inflection InflectionPoints Info
+syn keyword magmaBuiltin Information InformationRate InformationSet
+syn keyword magmaBuiltin InformationSpace Init Initial InitialCoefficients
+syn keyword magmaBuiltin Initialise InitialiseProspector Initialize
+syn keyword magmaBuiltin InitializeEvaluation InitialVertex Injection
+syn keyword magmaBuiltin Injections Injective InjectiveHull InjectiveModule
+syn keyword magmaBuiltin InjectiveResolution InjectiveSyzygyModule
+syn keyword magmaBuiltin InLineConditional InNeighbors InNeighbours Inner
+syn keyword magmaBuiltin InnerAutomorphism InnerAutomorphismGroup InnerFaces
+syn keyword magmaBuiltin InnerGenerators InnerNormal InnerNormals InnerProduct
+syn keyword magmaBuiltin InnerProductMatrix InnerShape InnerSlopes InnerTwists
+syn keyword magmaBuiltin InnerVertices Input Insert InsertBlock InsertVertex
+syn keyword magmaBuiltin Insoluble Insolvable Instance Instances
+syn keyword magmaBuiltin InstancesForDimensions Int Integer IntegerRelation
+syn keyword magmaBuiltin IntegerRing Integers IntegerSolutionVariables
+syn keyword magmaBuiltin IntegerToSequence IntegerToString Integral
+syn keyword magmaBuiltin IntegralBasis IntegralBasisLattice IntegralClosure
+syn keyword magmaBuiltin IntegralGroup IntegralHeckeOperator IntegralHomology
+syn keyword magmaBuiltin Integrally IntegralMapping IntegralMatrix
+syn keyword magmaBuiltin IntegralMatrixGroupDatabase IntegralMatrixOverQ
+syn keyword magmaBuiltin IntegralModel IntegralMultiple IntegralNormEquation
+syn keyword magmaBuiltin IntegralPart IntegralPoints IntegralPointsSequence
+syn keyword magmaBuiltin IntegralQuarticPoints IntegralSplit IntegralUEA
+syn keyword magmaBuiltin IntegralUEAlgebra IntegralUniversalEnvelopingAlgebra
+syn keyword magmaBuiltin InteractiveUserAttributes Interior InteriorPoints
+syn keyword magmaBuiltin Internal InternalEdges Interpolate Interpolation
+syn keyword magmaBuiltin Intersection IntersectionArray IntersectionForm
+syn keyword magmaBuiltin IntersectionForms IntersectionGroup IntersectionMatrix
+syn keyword magmaBuiltin IntersectionNumber IntersectionNumbers
+syn keyword magmaBuiltin IntersectionOfImages IntersectionPairing
+syn keyword magmaBuiltin IntersectionPairingIntegral Intersections
+syn keyword magmaBuiltin IntersectionWithNormalSubgroup Interval Into Intrinsic
+syn keyword magmaBuiltin Intrinsics IntrIsCart IntrLeftStringLength
+syn keyword magmaBuiltin Introduction IntrRightStringLength IntrRootDatum
+syn keyword magmaBuiltin IntrRootSystemN IntrStandardActionGroup
+syn keyword magmaBuiltin IntrStandardRootDatum IntrStandardRootSystem Intseq
+syn keyword magmaBuiltin InvarField1 InvarField2 Invariant Invariant100
+syn keyword magmaBuiltin InvariantBilinearForms InvariantFactors InvariantField
+syn keyword magmaBuiltin InvariantFormBases InvariantForms
+syn keyword magmaBuiltin InvariantQuadraticForms InvariantRing Invariants
+syn keyword magmaBuiltin InvariantSesquilinearForms InvariantsMetacyclicPGroup
+syn keyword magmaBuiltin InvariantsOfDegree Inverse InverseDefiningPolynomials
+syn keyword magmaBuiltin InverseJeuDeTaquin InverseKrawchouk
+syn keyword magmaBuiltin InverseMattsonSolomonTransform InverseMod InverseRoot
+syn keyword magmaBuiltin InverseRowInsert InverseRSKCorrespondenceDoubleWord
+syn keyword magmaBuiltin InverseRSKCorrespondenceMatrix
+syn keyword magmaBuiltin InverseRSKCorrespondenceSingleWord InverseSqrt
+syn keyword magmaBuiltin InverseSquareRoot InverseTransformation InverseWordMap
+syn keyword magmaBuiltin Invertible Involution InvolutionClassicalGroupEven
+syn keyword magmaBuiltin Involutions IO IO Iroot IrredMat Irreducibility
+syn keyword magmaBuiltin Irreducible IrreducibleCartanMatrix IrreducibleCoxeter
+syn keyword magmaBuiltin IrreducibleCoxeterGraph IrreducibleCoxeterGroup
+syn keyword magmaBuiltin IrreducibleCoxeterMatrix IrreducibleDynkinDigraph
+syn keyword magmaBuiltin IrreducibleLowTermGF2Polynomial
+syn keyword magmaBuiltin IrreducibleLowTermGF2Polynomial IrreducibleMatrixGroup
+syn keyword magmaBuiltin IrreducibleModule IrreducibleModules
+syn keyword magmaBuiltin IrreducibleModules2 IrreducibleModulesBurnside
+syn keyword magmaBuiltin IrreducibleModulesInit IrreducibleModulesSchur
+syn keyword magmaBuiltin IrreduciblePolynomial IrreducibleReflectionGroup
+syn keyword magmaBuiltin IrreducibleRepresentationsInit
+syn keyword magmaBuiltin IrreducibleRepresentationsSchur IrreducibleRootDatum
+syn keyword magmaBuiltin IrreducibleRootSystem Irreducibles
+syn keyword magmaBuiltin IrreducibleSecondaryInvariants
+syn keyword magmaBuiltin IrreducibleSimpleSubalgebrasOfSU
+syn keyword magmaBuiltin IrreducibleSimpleSubalgebrasOfSU
+syn keyword magmaBuiltin IrreducibleSimpleSubalgebraTreeSU
+syn keyword magmaBuiltin IrreducibleSimpleSubalgebraTreeSU
+syn keyword magmaBuiltin IrreducibleSolubleSubgroups
+syn keyword magmaBuiltin IrreducibleSparseGF2Polynomial
+syn keyword magmaBuiltin IrreducibleSparseGF2Polynomial IrreducibleSubgroups
+syn keyword magmaBuiltin Irregular Irregularity IrregularLDPCEnsemble
+syn keyword magmaBuiltin Irrelevant IrrelevantComponents IrrelevantGenerators
+syn keyword magmaBuiltin IrrelevantIdeal Is2 Is2T1 ISA ISABase ISABaseField
+syn keyword magmaBuiltin IsAbelian IsAbelianByFinite IsAbelianVariety
+syn keyword magmaBuiltin IsAbsoluteField IsAbsolutelyIrreducible
+syn keyword magmaBuiltin IsAbsoluteOrder IsAdditiveOrder IsAdditiveProjective
+syn keyword magmaBuiltin IsAdjoint IsAdjointG IsAdjointR IsAffine
+syn keyword magmaBuiltin IsAffineLinear IsAlgebraHomomorphism IsAlgebraic
+syn keyword magmaBuiltin IsAlgebraicallyDependent IsAlgebraicallyIsomorphic
+syn keyword magmaBuiltin IsAlgebraicDifferentialField IsAlgebraicField
+syn keyword magmaBuiltin IsAlgebraicGeometric IsAlternating IsAltsym IsAmbient
+syn keyword magmaBuiltin IsAmbientSpace IsAmple IsAnalyticallyIrreducible
+syn keyword magmaBuiltin IsAnisotropic IsAnticanonical IsArc
+syn keyword magmaBuiltin IsArithmeticallyCohenMacaulay
+syn keyword magmaBuiltin IsArithmeticallyGorenstein IsAssociative
+syn keyword magmaBuiltin IsAttachedToModularSymbols IsAttachedToNewform
+syn keyword magmaBuiltin IsAutomaticGroup IsAutomorphism IsBalanced
+syn keyword magmaBuiltin IsBasePointFree IsBass IsBiconnected IsBig IsBijective
+syn keyword magmaBuiltin IsBipartite IsBlock IsBlockTransitive
+syn keyword magmaBuiltin IsBogomolovUnstable IsBoundary IsBravaisEquivalent
+syn keyword magmaBuiltin IsCanonical IsCanonicalWithTwist IsCapacitated
+syn keyword magmaBuiltin IsCartanEquivalent IsCartanMatrix IsCartanSubalgebra
+syn keyword magmaBuiltin IsCartier IsCentral IsCentralByFinite
+syn keyword magmaBuiltin IsCentralCollineation IsChainMap IsCharacter
+syn keyword magmaBuiltin IsChevalleyBasis IsClassicalType IsCluster IsCM
+syn keyword magmaBuiltin IsCoercible IsCohenMacaulay IsCokernelTorsionFree
+syn keyword magmaBuiltin IsCollinear IsCommutative IsCompactHyperbolic
+syn keyword magmaBuiltin IsComplete IsCompletelyReducible IsComplex
+syn keyword magmaBuiltin IsConcurrent IsConditioned IsConfluent IsCongruence
+syn keyword magmaBuiltin IsConic IsConjugate IsConnected IsConsistent
+syn keyword magmaBuiltin IsConstant IsConstantCurve IsConway IsCorootSpace
+syn keyword magmaBuiltin IsCoxeterAffine IsCoxeterCompactHyperbolic
+syn keyword magmaBuiltin IsCoxeterFinite IsCoxeterGraph IsCoxeterHyperbolic
+syn keyword magmaBuiltin IsCoxeterIrreducible IsCoxeterIsomorphic
+syn keyword magmaBuiltin IsCoxeterMatrix IsCrystallographic IsCurve IsCusp
+syn keyword magmaBuiltin IsCuspidal IsCyclic IsDecomposable IsDefault
+syn keyword magmaBuiltin IsDeficient IsDefined IsDefinite IsDegenerate
+syn keyword magmaBuiltin IsDelPezzo IsDenselyRepresented IsDesarguesian
+syn keyword magmaBuiltin IsDesign IsDiagonal IsDifferenceSet
+syn keyword magmaBuiltin IsDifferentialField IsDifferentialIdeal
+syn keyword magmaBuiltin IsDifferentialLaurentSeriesRing
+syn keyword magmaBuiltin IsDifferentialOperatorRing IsDifferentialSeriesRing
+syn keyword magmaBuiltin IsDimensionCompatible IsDirected IsDirectSum
+syn keyword magmaBuiltin IsDirectSummand IsDiscriminant IsDisjoint
+syn keyword magmaBuiltin IsDistanceRegular IsDistanceTransitive IsDistinguished
+syn keyword magmaBuiltin IsDivisible IsDivisibleBy IsDivisionRing
+syn keyword magmaBuiltin IsDivisorialContraction IsDomain IsDominant
+syn keyword magmaBuiltin IsDoublePoint IsDoublyEven IsDualComputable
+syn keyword magmaBuiltin IsDynkinDigraph IsEdgeCapacitated IsEdgeLabelled
+syn keyword magmaBuiltin IsEdgeTransitive IsEdgeWeighted IsEffective IsEichler
+syn keyword magmaBuiltin IsEisenstein IsEisensteinSeries IsElementaryAbelian
+syn keyword magmaBuiltin IsEllipticCurve IsEllipticWeierstrass IsEmbedded
+syn keyword magmaBuiltin IsEmpty IsEmptySimpleQuotientProcess IsEmptyWord
+syn keyword magmaBuiltin IsEndomorphism IsEof IsEquationOrder IsEquidistant
+syn keyword magmaBuiltin IsEquitable IsEquivalent IsEtale Isetseq Isetset
+syn keyword magmaBuiltin IsEuclideanDomain IsEuclideanRing IsEulerian IsEven
+syn keyword magmaBuiltin IsExact IsExactlyDivisible IsExceptionalUnit
+syn keyword magmaBuiltin IsExtension IsExtensionOf IsExtraSpecial
+syn keyword magmaBuiltin IsExtraSpecialNormaliser IsFace IsFactorial
+syn keyword magmaBuiltin IsFactorisationPrime IsFaithful
+syn keyword magmaBuiltin IsFakeWeightedProjectiveSpace IsFanMap IsFano IsField
+syn keyword magmaBuiltin IsFinite IsFiniteMatrixGroup IsFiniteMatrixGroupF
+syn keyword magmaBuiltin IsFiniteMatrixGroupFF IsFiniteMatrixGroupFQ
+syn keyword magmaBuiltin IsFiniteOrder IsFirm IsFlag IsFlex IsFlipping IsForest
+syn keyword magmaBuiltin IsFree IsFrobenius IsFTGeometry IsFuchsianOperator
+syn keyword magmaBuiltin IsFundamental IsFundamentalDiscriminant IsGamma0
+syn keyword magmaBuiltin IsGamma1 IsGe IsGE IsGeneralizedCartanMatrix
+syn keyword magmaBuiltin IsGeneralizedCharacter IsGenuineWeightedDynkinDiagram
+syn keyword magmaBuiltin IsGenus IsGenusOneModel IsGeometricallyHyperelliptic
+syn keyword magmaBuiltin IsGL2Equivalent IsGLattice IsGLConjugate IsGlobal
+syn keyword magmaBuiltin IsGloballySplit IsGlobalUnit IsGlobalUnitWithPreimage
+syn keyword magmaBuiltin IsGLQConjugate IsGLZConjugate IsGood IsGorenstein
+syn keyword magmaBuiltin IsGorensteinSurface IsGraded IsGradedIsomorphic
+syn keyword magmaBuiltin IsGraph IsGroebner IsHadamard IsHadamardEquivalent
+syn keyword magmaBuiltin IsHeckeAlgebra IsHeckeOperator IsHereditary
+syn keyword magmaBuiltin IsHomeomorphic IsHomogeneous IsHomomorphism
+syn keyword magmaBuiltin IsHyperbolic IsHyperelementary IsHyperelliptic
+syn keyword magmaBuiltin IsHyperellipticCurve IsHyperellipticCurveOfGenus
+syn keyword magmaBuiltin IsHyperellipticWeierstrass IsHypersurface
+syn keyword magmaBuiltin IsHypersurfaceDivisor IsHypersurfaceSingularity IsId
+syn keyword magmaBuiltin IsIdeal IsIdempotent IsIdentical
+syn keyword magmaBuiltin IsIdenticalPresentation IsIdentity
+syn keyword magmaBuiltin IsInArtinSchreierRepresentation IsInCorootSpace
+syn keyword magmaBuiltin IsIndecomposable IsIndefinite IsIndependent
+syn keyword magmaBuiltin IsIndivisibleRoot IsInduced IsInert IsInertial
+syn keyword magmaBuiltin IsInfinite IsInflectionPoint IsInImage IsInInterior
+syn keyword magmaBuiltin IsInjective IsInKummerRepresentation IsInner
+syn keyword magmaBuiltin IsInRadical IsInRootSpace IsInSecantVariety
+syn keyword magmaBuiltin IsInSmallGroupDatabase IsInSmallModularCurveDatabase
+syn keyword magmaBuiltin IsInSupport IsInt IsInTangentVariety IsInteger
+syn keyword magmaBuiltin IsIntegral IsIntegralDomain IsIntegrallyClosed
+syn keyword magmaBuiltin IsIntegralModel IsInterior IsIntersection IsIntrinsic
+syn keyword magmaBuiltin IsInTwistedForm IsInvariant IsInvertible IsIrreducible
+syn keyword magmaBuiltin IsIrreducibleFiniteNilpotent IsIrregularSingularPlace
+syn keyword magmaBuiltin IsIsogenous IsIsogenousPeriodMatrices IsIsogeny
+syn keyword magmaBuiltin IsIsolated IsIsometric IsIsometry IsIsomorphic
+syn keyword magmaBuiltin IsIsomorphicBigPeriodMatrices IsIsomorphicCubicSurface
+syn keyword magmaBuiltin IsIsomorphicLie IsIsomorphicOverQt
+syn keyword magmaBuiltin IsIsomorphicSmallPeriodMatrices
+syn keyword magmaBuiltin IsIsomorphicSolubleGroup IsIsomorphicWithTwist
+syn keyword magmaBuiltin IsIsomorphism IsKEdgeConnected IsKnownIsomorphic
+syn keyword magmaBuiltin IsKnuthEquivalent IsKVertexConnected IsLabelled
+syn keyword magmaBuiltin IsLarge IsLargeReeGroup IsLDPC IsLe IsLE IsLeaf
+syn keyword magmaBuiltin IsLeftIdeal IsLeftIsomorphic IsLeftModule
+syn keyword magmaBuiltin IsLexicographicallyOrdered IsLie IsLinear
+syn keyword magmaBuiltin IsLinearGroup IsLinearGroup IsLinearlyDependent
+syn keyword magmaBuiltin IsLinearlyEquivalent IsLinearlyEquivalentToCartier
+syn keyword magmaBuiltin IsLinearlyIndependent IsLinearSpace
+syn keyword magmaBuiltin IsLinearSystemNonEmpty IsLineRegular IsLineTransitive
+syn keyword magmaBuiltin IsLittlewoodRichardson IsLocallyFree IsLocallySoluble
+syn keyword magmaBuiltin IsLocallySolvable IsLocallyTwoTransitive IsLocalNorm
+syn keyword magmaBuiltin IsLongRoot IsLowerTriangular IsMagmaEuclideanRing
+syn keyword magmaBuiltin IsMatrixRing IsMaximal IsMaximisingFunction
+syn keyword magmaBuiltin IsMaximumDimensional IsMaximumDistanceSeparable IsMDS
+syn keyword magmaBuiltin IsMemberBasicOrbit IsMetacyclicPGroup IsMinimal
+syn keyword magmaBuiltin IsMinimalModel IsMinimalTwist IsMinusOne IsMixed
+syn keyword magmaBuiltin IsMobile IsModularCurve IsModuleHomomorphism IsMonic
+syn keyword magmaBuiltin IsMoriFibreSpace IsMorphism IsNearLinearSpace
+syn keyword magmaBuiltin IsNearlyPerfect IsNeat IsNef IsNefAndBig IsNegative
+syn keyword magmaBuiltin IsNegativeDefinite IsNegativeSemiDefinite IsNew
+syn keyword magmaBuiltin IsNewform IsNewtonPolygonOf IsNilpotent
+syn keyword magmaBuiltin IsNilpotentByFinite IsNilpotentMatrixGroupF
+syn keyword magmaBuiltin IsNodalCurve IsNode IsNondegenerate IsNonsingular
+syn keyword magmaBuiltin IsNonSingular IsNorm IsNormal IsNormalised
+syn keyword magmaBuiltin IsNormalising IsNull IsNullHomotopy IsNumberField Iso
+syn keyword magmaBuiltin IsOdd Isogenous IsogenousCurves Isogeny
+syn keyword magmaBuiltin IsogenyFromKernel IsogenyFromKernelFactored
+syn keyword magmaBuiltin IsogenyGroup IsogenyGroups IsogenyMapOmega
+syn keyword magmaBuiltin IsogenyMapPhi IsogenyMapPhiMulti IsogenyMapPsi
+syn keyword magmaBuiltin IsogenyMapPsiMulti IsogenyMapPsiSquared Isol Isolated
+syn keyword magmaBuiltin IsolatedPointsFinder IsolatedPointsLifter
+syn keyword magmaBuiltin IsolatedPointsLiftToMinimalPolynomials IsolGroup
+syn keyword magmaBuiltin IsolGroupDatabase IsolGroupOfDegreeFieldSatisfying
+syn keyword magmaBuiltin IsolGroupOfDegreeSatisfying IsolGroupSatisfying
+syn keyword magmaBuiltin IsolGroupsOfDegreeFieldSatisfying
+syn keyword magmaBuiltin IsolGroupsOfDegreeSatisfying IsolGroupsSatisfying
+syn keyword magmaBuiltin IsolGuardian IsolInfo IsolIsPrimitive IsolMinBlockSize
+syn keyword magmaBuiltin IsolNumberOfDegreeField IsolOrder IsolProcess
+syn keyword magmaBuiltin IsolProcessOfDegree IsolProcessOfDegreeField
+syn keyword magmaBuiltin IsolProcessOfField Isom Isometric IsometricCircle
+syn keyword magmaBuiltin Isometry IsometryGroup Isomorphic IsomorphicCopy
+syn keyword magmaBuiltin IsomorphicG2 IsomorphicProjectionToSubspace
+syn keyword magmaBuiltin Isomorphism IsomorphismAndEquivalence IsomorphismData
+syn keyword magmaBuiltin IsomorphismIsogeny Isomorphisms IsomorphismToIsogeny
+syn keyword magmaBuiltin IsomorphismToStandardCopy
+syn keyword magmaBuiltin IsomorphismTypesOfBasicAlgebraSequence
+syn keyword magmaBuiltin IsomorphismTypesOfRadicalLayers
+syn keyword magmaBuiltin IsomorphismTypesOfSocleLayers IsOnBoundary IsOne
+syn keyword magmaBuiltin IsOneCoboundary IsOneCocycle IsOnlyMotivic IsOptimal
+syn keyword magmaBuiltin IsOrbit IsOrder IsOrdered IsOrderTerm IsOrdinary
+syn keyword magmaBuiltin IsOrdinaryProjective IsOrdinaryProjectiveSpace
+syn keyword magmaBuiltin IsOrdinarySingularity IsOrthogonal
+syn keyword magmaBuiltin IsOrthogonalCharacter IsOrthogonalGroup Isotropic
+syn keyword magmaBuiltin IsotropicSubspace IsOuter IsOverQ IsOverSmallerField
+syn keyword magmaBuiltin Isp IsParabolicSubgroup IsParallel IsParallelClass
+syn keyword magmaBuiltin IsParallelism IsPartialRoot IsPartition
+syn keyword magmaBuiltin IsPartitionRefined IsPath IsPathTree IsPerfect
+syn keyword magmaBuiltin IsPerfectlyCentered IsPermutationCharacter
+syn keyword magmaBuiltin IsPermutationModule IspGroup IsPID IspIntegral IsPIR
+syn keyword magmaBuiltin IsPlanar IsPlaneCurve IspLieAlgebra IspMaximal
+syn keyword magmaBuiltin IspMinimal IspNormal IsPoint IsPointed IsPointRegular
+syn keyword magmaBuiltin IsPointTransitive IsPolarSpace IsPolycyclic
+syn keyword magmaBuiltin IsPolycyclicByFinite IsPolygon IsPolynomial IsPolytope
+syn keyword magmaBuiltin IsPositive IsPositiveDefinite IsPositiveSemiDefinite
+syn keyword magmaBuiltin IsPower IsPRI IsPrimary IsPrime IsPrimeCertificate
+syn keyword magmaBuiltin IsPrimeField IsPrimePower IsPrimitive
+syn keyword magmaBuiltin IsPrimitiveFiniteNilpotent IsPrincipal
+syn keyword magmaBuiltin IsPrincipalIdealDomain IsPrincipalIdealRing
+syn keyword magmaBuiltin IsPrincipalSeries IsProbablePrime IsProbablyMaximal
+syn keyword magmaBuiltin IsProbablyPerfect IsProbablyPermutationPolynomial
+syn keyword magmaBuiltin IsProbablyPrime IsProbablySupersingular
+syn keyword magmaBuiltin IsProductOfParallelDescendingCycles IsProjective
+syn keyword magmaBuiltin IsProjectivelyIrreducible IsProper IsProperChainMap
+syn keyword magmaBuiltin IsProportional IsPseudoReflection
+syn keyword magmaBuiltin IsPseudoSymplecticSpace IspSubalgebra IsPure IsPyramid
+syn keyword magmaBuiltin IsQCartier IsQFactorial IsQGorenstein IsQGroup
+syn keyword magmaBuiltin IsQPrincipal Isqrt IsQuadratic IsQuadraticTwist
+syn keyword magmaBuiltin IsQuadricIntersection IsQuasisplit IsQuaternionAlgebra
+syn keyword magmaBuiltin IsQuaternionic IsQuotient IsRadical IsRamified
+syn keyword magmaBuiltin IsRational IsRationalCurve IsRationalFunctionField
+syn keyword magmaBuiltin IsRC IsReal IsRealisableOverSmallerField
+syn keyword magmaBuiltin IsRealisableOverSubfield IsRealReflectionGroup
+syn keyword magmaBuiltin IsReduced IsReductive IsReeGroup IsReflection
+syn keyword magmaBuiltin IsReflectionGroup IsReflectionSubgroup IsReflexive
+syn keyword magmaBuiltin IsRegular IsRegularLDPC IsRegularPlace
+syn keyword magmaBuiltin IsRegularSingularOperator IsRegularSingularPlace
+syn keyword magmaBuiltin IsResiduallyConnected IsResiduallyPrimitive
+syn keyword magmaBuiltin IsResiduallyWeaklyPrimitive IsResiduallyWealyPrimitive
+syn keyword magmaBuiltin IsResolution IsRestrictable IsRestricted
+syn keyword magmaBuiltin IsRestrictedSubalgebra IsReverseLatticeWord
+syn keyword magmaBuiltin IsRightIdeal IsRightIsomorphic IsRightModule IsRing
+syn keyword magmaBuiltin IsRingHomomorphism IsRingOfAllModularForms IsRoot
+syn keyword magmaBuiltin IsRootedTree IsRootSpace IsRPRI IsRWP IsRWPRI
+syn keyword magmaBuiltin IsSatisfied IsSaturated IsScalar IsSelfDual
+syn keyword magmaBuiltin IsSelfNormalising IsSelfNormalizing IsSelfOrthogonal
+syn keyword magmaBuiltin IsSemiLinear IsSemiregular IsSemisimple IsSeparable
+syn keyword magmaBuiltin IsSeparating IsServerSocket IsSharplyTransitive
+syn keyword magmaBuiltin IsShortExactSequence IsShortRoot IsSimilar
+syn keyword magmaBuiltin IsSimilarity IsSimple IsSimpleStarAlgebra
+syn keyword magmaBuiltin IsSimpleSurfaceSingularity IsSimplex IsSimplicial
+syn keyword magmaBuiltin IsSimplifiedModel IsSimplyConnected IsSimplyConnectedG
+syn keyword magmaBuiltin IsSimplyConnectedR IsSimplyLaced IsSinglePrecision
+syn keyword magmaBuiltin IsSingular IsSIntegral IsSkew IsSLZConjugate IsSmooth
+syn keyword magmaBuiltin IsSoluble IsSolubleAutomorphismGroupPGroup
+syn keyword magmaBuiltin IsSolubleByFinite IsSolvable
+syn keyword magmaBuiltin IsSolvableAutomorphismGroupPGroup IsSpecial
+syn keyword magmaBuiltin IsSpinorGenus IsSpinorNorm IsSplit IsSplitAsIdealAt
+syn keyword magmaBuiltin IsSplittingCartanSubalgebra IsSplittingField
+syn keyword magmaBuiltin IsSplitToralSubalgebra IsSPrincipal IsSquare
+syn keyword magmaBuiltin IsSquarefree IsStandard IsStandardAffinePatch
+syn keyword magmaBuiltin IsStandardParabolicSubgroup IsStarAlgebra IsSteiner
+syn keyword magmaBuiltin IsStrictlyConvex IsStronglyAG IsStronglyConnected
+syn keyword magmaBuiltin IsSubcanonicalCurve IsSubfield IsSubgraph IsSublattice
+syn keyword magmaBuiltin IsSubmodule IsSubnormal IsSubscheme IsSubsequence
+syn keyword magmaBuiltin IsSubspace IsSubsystem IsSUnit IsSUnitWithPreimage
+syn keyword magmaBuiltin IsSupercuspidal IsSuperlattice IsSupersingular
+syn keyword magmaBuiltin IsSuperSummitRepresentative IsSupportingHyperplane
+syn keyword magmaBuiltin IsSurjective IsSuzukiGroup IsSymmetric IsSymplectic
+syn keyword magmaBuiltin IsSymplecticCharacter IsSymplecticGroup
+syn keyword magmaBuiltin IsSymplecticMatrix IsSymplecticSelfDual
+syn keyword magmaBuiltin IsSymplecticSelfOrthogonal IsSymplecticSpace
+syn keyword magmaBuiltin IsTamelyRamified IsTangent IsTensor IsTensorInduced
+syn keyword magmaBuiltin IsTerminal IsTerminalThreefold IsThick IsThin
+syn keyword magmaBuiltin IsTorsionUnit IsTotallyEven IsTotallyIsotropic
+syn keyword magmaBuiltin IsTotallyPositive IsTotallyRamified IsTotallyReal
+syn keyword magmaBuiltin IsTotallySingular IsTotallySplit IsTransformation
+syn keyword magmaBuiltin IsTransitive IsTransvection IsTransverse IsTree
+syn keyword magmaBuiltin IsTriangleGroup IsTriconnected IsTrivial
+syn keyword magmaBuiltin IsTrivialOnUnits IsTwist IsTwisted IsTwoCoboundary
+syn keyword magmaBuiltin IsTwoSidedIdeal IsUFD IsUltraSummitRepresentative
+syn keyword magmaBuiltin IsUndirected IsUniform IsUnipotent
+syn keyword magmaBuiltin IsUniqueFactorizationDomain IsUniquePartialRoot IsUnit
+syn keyword magmaBuiltin IsUnital IsUnitary IsUnitaryGroup IsUnitarySpace
+syn keyword magmaBuiltin IsUnitWithPreimage IsUnivariate IsUnramified
+syn keyword magmaBuiltin IsUpperTriangular IsValid IsVerbose IsVertex
+syn keyword magmaBuiltin IsVertexLabelled IsVertexTransitive IsWeakFano
+syn keyword magmaBuiltin IsWeaklyAdjoint IsWeaklyAG IsWeaklyAGDual
+syn keyword magmaBuiltin IsWeaklyConnected IsWeaklyEqual IsWeaklyMonic
+syn keyword magmaBuiltin IsWeaklyPrimitive IsWeaklySimplyConnected IsWeaklyZero
+syn keyword magmaBuiltin IsWeierstrassModel IsWeierstrassPlace IsWeighted
+syn keyword magmaBuiltin IsWeightedProjectiveSpace IsWeil IsWGsymmetric
+syn keyword magmaBuiltin IsWildlyRamified IsWPRI IsWreathProduct IsZero
+syn keyword magmaBuiltin IsZeroAt IsZeroComplex IsZeroDimensional IsZeroDivisor
+syn keyword magmaBuiltin IsZeroMap IsZeroTerm J2 JacHyp JacHypPt Jacobi
+syn keyword magmaBuiltin Jacobian JacobianIdeal JacobianMatrix
+syn keyword magmaBuiltin JacobianOrdersByDeformation JacobianPoint JacobiSymbol
+syn keyword magmaBuiltin JacobiTheta JacobiThetaNullK Jacobson JacobsonRadical
+syn keyword magmaBuiltin JBessel Jellyfish JellyfishConstruction JellyfishImage
+syn keyword magmaBuiltin JellyfishPreimage Jennings JenningsLie
+syn keyword magmaBuiltin JenningsLieAlgebra JenningsSeries Jeu JeuDeTaquin JH
+syn keyword magmaBuiltin JInvariants Johnson JohnsonBound Join JOne Jordan
+syn keyword magmaBuiltin JordanForm Js Justesen JustesenCode Juxtaposition
+syn keyword magmaBuiltin JZero K3 K3Copy K3Database K3Surface K3SurfaceRaw
+syn keyword magmaBuiltin K3SurfaceToRecord Kac KacMoodyClass KacMoodyClass
+syn keyword magmaBuiltin KacMoodyClasses Kant KArc KBessel KBessel2 KBinomial
+syn keyword magmaBuiltin KCube KCubeGraph KDegree KEdge Kerdock KerdockCode
+syn keyword magmaBuiltin Kernel KernelBasis KernelEmbedding KernelMatrix
+syn keyword magmaBuiltin Kernels KernelZ2CodeZ4 Kets Keys KG Killing
+syn keyword magmaBuiltin KillingMatrix Kind Kissing KissingNumber Klein
+syn keyword magmaBuiltin KleinBottle KLPolynomial KMatrix KMatrixSpace
+syn keyword magmaBuiltin KMatrixSpaceWithBasis KModule KModuleWithBasis
+syn keyword magmaBuiltin Knapsack Knot Known KnownAutomorphismSubgroup
+syn keyword magmaBuiltin KnownIrreducibles Knuth Kodaira
+syn keyword magmaBuiltin KodairaEnriquesDimension KodairaEnriquesType
+syn keyword magmaBuiltin KodairaSymbol KodairaSymbols Kostka KostkaNumber
+syn keyword magmaBuiltin Koszul Krawchouk KrawchoukPolynomial
+syn keyword magmaBuiltin KrawchoukTransform Kronecker KroneckerCharacter
+syn keyword magmaBuiltin KroneckerProduct KroneckerSymbol KSpace
+syn keyword magmaBuiltin KSpaceWithBasis Kummer KummerRationalPoints
+syn keyword magmaBuiltin KummerSurface KummerSurfaceScheme KVertex L2
+syn keyword magmaBuiltin L2Quotient L2QuotientGetMatrices L2Quotients L3 L372
+syn keyword magmaBuiltin L3infinite L3Quotient L3Quotients Label Labelled
+syn keyword magmaBuiltin Labelling Labels Laced Ladder Laguerre
+syn keyword magmaBuiltin LaguerrePolynomial Lambda Lang Laplace Large Larger
+syn keyword magmaBuiltin LargeReeElementToWord LargeReeGroup LargeReeSylow
+syn keyword magmaBuiltin Largest LargestConductor LargestDimension Last
+syn keyword magmaBuiltin LastIndexOfColumn LastIndexOfRow Lat Lat Lattice
+syn keyword magmaBuiltin LatticeBasisInCone LatticeCoordinates LatticeCreate
+syn keyword magmaBuiltin LatticeData LatticeDatabase LatticeElementToMonomial
+syn keyword magmaBuiltin LatticeFunctions LatticeMap LatticeName
+syn keyword magmaBuiltin LatticeOperations LatticeOps Lattices LatticeVector
+syn keyword magmaBuiltin LatticeWithBasis LatticeWithGram Laurent
+syn keyword magmaBuiltin LaurentSeriesRing Law Layer LayerBoundary LayerLength
+syn keyword magmaBuiltin Layers Lazy LazyPowerSeriesRing LazySeries LCf
+syn keyword magmaBuiltin LCfRequired LCLM Lcm LCM LCS LCT LDPC LDPCBinary
+syn keyword magmaBuiltin LDPCBinarySymmetricThreshold LDPCCode LDPCDecode
+syn keyword magmaBuiltin LDPCDensity LDPCEnsemble LDPCEnsembleRate LDPCGaussian
+syn keyword magmaBuiltin LDPCGaussianThreshold LDPCGirth LDPCMatrix
+syn keyword magmaBuiltin LDPCSimulate Le LE Leaders Leading LeadingCoefficient
+syn keyword magmaBuiltin LeadingExponent LeadingGenerator LeadingMonomial
+syn keyword magmaBuiltin LeadingMonomialIdeal LeadingTerm LeadingTerms
+syn keyword magmaBuiltin LeadingTotalDegree LeadingWeightedDegree Leaf Least
+syn keyword magmaBuiltin LeastCommonLeftMultiple LeastCommonMultiple Lee
+syn keyword magmaBuiltin LeeBrickellsAttack Leech LeeDistance LeeWeight
+syn keyword magmaBuiltin LeeWeightDistribution LeeWeightEnumerator Left
+syn keyword magmaBuiltin LeftAnnihilator LeftConjugate LeftCosetSpace
+syn keyword magmaBuiltin LeftDescentSet LeftDiv LeftExactExtension LeftGcd
+syn keyword magmaBuiltin LeftGCD LeftGreatestCommonDivisor LeftIdeal
+syn keyword magmaBuiltin LeftIdealClasses LeftInverse LeftInverseMorphism
+syn keyword magmaBuiltin LeftIsomorphism LeftLcm LeftLCM
+syn keyword magmaBuiltin LeftLeastCommonMultiple LeftMixedCanonicalForm
+syn keyword magmaBuiltin LeftNormalForm LeftOrder LeftRepresentationMatrix
+syn keyword magmaBuiltin LeftString LeftStringLength LeftZeroExtension Legendre
+syn keyword magmaBuiltin LegendreModel LegendrePolynomial LegendreSymbol Lehner
+syn keyword magmaBuiltin Length Lengthen LengthenCode Lengths Lens LensSpace
+syn keyword magmaBuiltin Leons LeonsAttack Less Level Levels Levenshtein
+syn keyword magmaBuiltin LevenshteinBound Levi Lex Lexicographical
+syn keyword magmaBuiltin Lexicographically LexicographicalOrdering LexProduct
+syn keyword magmaBuiltin LFSRSequence LFSRStep Lfunction LFunction
+syn keyword magmaBuiltin LFunctionbyhand LGet LGetCoefficients LHS Li Libraries
+syn keyword magmaBuiltin LIBRARIES Library Lichtenbaum Lie LieAlgebra
+syn keyword magmaBuiltin LieAlgebra LieAlgebraCons LieAlgebraHomorphism
+syn keyword magmaBuiltin LieAlgebraIsogeny LieAlgebraOfDerivations
+syn keyword magmaBuiltin LieAlgebraQuotient LieAlgebraQuotientPullback
+syn keyword magmaBuiltin LieAlgebraRnQ LieBracket LieCharacteristic LieConstant
+syn keyword magmaBuiltin LieIntro LiEMaximalSubgroups LieModules
+syn keyword magmaBuiltin LieRepDecRestrictionMatrix
+syn keyword magmaBuiltin LieRepresentationDecomposition LieReps LieRing LieType
+syn keyword magmaBuiltin Lift LiftCharacter LiftCharacters LiftCocycle
+syn keyword magmaBuiltin LiftDescendant Lifter LiftHomomorphism LiftMap
+syn keyword magmaBuiltin LiftPoint LiftToChainmap Limit LIMIT Line Linear
+syn keyword magmaBuiltin LinearCharacters LinearCode LinearCovariants
+syn keyword magmaBuiltin LinearElimination LinearIndependence Linearly
+syn keyword magmaBuiltin LinearlyEquivalentDivisorWithNoSupportOn
+syn keyword magmaBuiltin LinearRelation LinearRelationlabel LinearRelations
+syn keyword magmaBuiltin LinearSpace LinearSpanEquations LinearSpanGenerators
+syn keyword magmaBuiltin LinearSubspaceGenerators LinearSystem
+syn keyword magmaBuiltin LinearSystemTrace LinearTrans LineAtInfinity LineCount
+syn keyword magmaBuiltin LineGraph LineGroup LineOrbits Lines LineSet Linking
+syn keyword magmaBuiltin LinkingNumbers Lint List List ListAttributes
+syn keyword magmaBuiltin ListCategories ListSignatures ListTypes ListVerbose
+syn keyword magmaBuiltin Littlewood LittlewoodRichardsonTensor Lix1 Lix2 Lix3
+syn keyword magmaBuiltin Lix4 Lix5 Ljunggren LLL LLLBasis LLLBasisMatrix
+syn keyword magmaBuiltin LLLGram LLLGramMatrix LLLPolFact LLLUsage LLLXGCD LMG
+syn keyword magmaBuiltin LMGCenter LMGCentraliser LMGCentralizer LMGCentre
+syn keyword magmaBuiltin LMGChief LMGChiefFactors LMGChiefSeries LMGClasses
+syn keyword magmaBuiltin LMGCommutator LMGCommutatorSubgroup LMGComposition
+syn keyword magmaBuiltin LMGCompositionFactors LMGCompositionSeries
+syn keyword magmaBuiltin LMGConjugacy LMGConjugacyClasses LMGCoset
+syn keyword magmaBuiltin LMGCosetAction LMGCosetActionInverseImage
+syn keyword magmaBuiltin LMGCosetImage LMGDerived LMGDerivedGroup LMGEqual
+syn keyword magmaBuiltin LMGex LMGFactored LMGFactoredOrder LMGFitting
+syn keyword magmaBuiltin LMGFittingSubgroup LMGIndex LMGInitialise
+syn keyword magmaBuiltin LMGInitialize LMGIs LMGIsConjugate LMGIsIn
+syn keyword magmaBuiltin LMGIsNilpotent LMGIsNormal LMGIsSoluble LMGIsSolvable
+syn keyword magmaBuiltin LMGIsSubgroup LMGLow LMGLowIndexSubgroups LMGMaximal
+syn keyword magmaBuiltin LMGMaximalSubgroups LMGMeet LMGNormal LMGNormalClosure
+syn keyword magmaBuiltin LMGNormaliser LMGNormalizer LMGNormalSubgroups
+syn keyword magmaBuiltin LMGOrder LMGRadical LMGRadicalQuotient LMGRight
+syn keyword magmaBuiltin LMGRightTransversal LMGSchreier LMGSocle LMGSocleStar
+syn keyword magmaBuiltin LMGSocleStarAction LMGSocleStarActionKernel
+syn keyword magmaBuiltin LMGSocleStarFactors LMGSocleStarQuotient LMGSoluble
+syn keyword magmaBuiltin LMGSolubleRadical LMGSolvable LMGSolvableRadical
+syn keyword magmaBuiltin LMGSylow LMGUnipotent LMGUnipotentRadical Local
+syn keyword magmaBuiltin LocalComponent LocalCoxeterGroup LocalDegree
+syn keyword magmaBuiltin LocalFactorization LocalField LocalGenera LocalGlobal
+syn keyword magmaBuiltin LocalHeight LocalInformation Localization Locally
+syn keyword magmaBuiltin LocalPolynomialAlgebra LocalPolynomialRing LocalRing
+syn keyword magmaBuiltin LocalTwoSelmerMap LocalUniformizer Locus Log Logarithm
+syn keyword magmaBuiltin Logarithmic LogarithmicFieldExtension
+syn keyword magmaBuiltin LogCanonicalThreshold LogCanonicalThresholdAtOrigin
+syn keyword magmaBuiltin LogCanonicalThresholdOverExtension LogDerivative
+syn keyword magmaBuiltin LogGamma LogIntegral Logs Long Longest
+syn keyword magmaBuiltin LongestCoxeterElements LongestElement
+syn keyword magmaBuiltin LongExactSequence LongExactSequenceOnHomology Low
+syn keyword magmaBuiltin Lower LowerCentralSeries LowerFaces LowerSlopes
+syn keyword magmaBuiltin LowerTriangularMatrix LowerVertices
+syn keyword magmaBuiltin LowIndexMatrixGroup LowIndexNormalSubgroups
+syn keyword magmaBuiltin LowIndexProcess LowIndexSubgroups LowIndexSubgroupsCT
+syn keyword magmaBuiltin LP LPCreation LPolynomial LPProcess LRatio
+syn keyword magmaBuiltin LRatioOddPart LRMZ4 LRTensor Lseries LSeries
+syn keyword magmaBuiltin LSeriesData LSeriesLeadingCoefficient LSet
+syn keyword magmaBuiltin LSetCoefficients LSetPrecision LSPath LSPaths LStar
+syn keyword magmaBuiltin LTaylor Lucas Mac Macaulay MacWilliams
+syn keyword magmaBuiltin MacWilliamsTransform Maeda MaedaInvariants Magic
+syn keyword magmaBuiltin MagicNumber Magma Main MainAntiautomorphism
+syn keyword magmaBuiltin MainInvolution Make MakeBasket MakeCoprime
+syn keyword magmaBuiltin MakeDirected MakePCMap MakeProjectiveClosureMap
+syn keyword magmaBuiltin MakeResolutionGraph MakeSpliceDiagram MakeType
+syn keyword magmaBuiltin Manifold ManifoldDatabase Manin ManinConstant
+syn keyword magmaBuiltin ManinSymbol Mantissa MantissaExponent Map Map Map1
+syn keyword magmaBuiltin Mapping Maps Margulis MargulisCode Mark MarkGroebner
+syn keyword magmaBuiltin Marks Mass Massey MasseyProduct Mat Mat Match Matching
+syn keyword magmaBuiltin MatRep MatRepCharacteristics MatRepDegrees
+syn keyword magmaBuiltin MatRepFieldSizes MatRepKeys Matrices MatricesAndGraphs
+syn keyword magmaBuiltin Matrix MatrixAlgebra MatrixGroup MatrixLieAlgebra
+syn keyword magmaBuiltin MatrixLieAlgebra MatrixOfElement MatrixOfInequalities
+syn keyword magmaBuiltin MatrixOfIsomorphism MatrixRepresentation MatrixRing
+syn keyword magmaBuiltin MatrixUnit Mattson MattsonSolomonTransform Max
+syn keyword magmaBuiltin MaxCones Maxdeg Maximal MaximalAbelianSubfield
+syn keyword magmaBuiltin MaximalCommutativeSubalgebra MaximalExtension
+syn keyword magmaBuiltin MaximalIdeals MaximalIdempotent
+syn keyword magmaBuiltin MaximalIncreasingSequence MaximalIncreasingSequences
+syn keyword magmaBuiltin MaximalIntegerSolution MaximalLeftIdeals
+syn keyword magmaBuiltin MaximalNormalSubgroup MaximalNumberOfCosets
+syn keyword magmaBuiltin MaximalOrder MaximalOrderFinite MaximalOrderInfinite
+syn keyword magmaBuiltin MaximalOrders MaximalOvergroup MaximalParabolics
+syn keyword magmaBuiltin MaximalPartition MaximalRightIdeals Maximals
+syn keyword magmaBuiltin MaximalSolution MaximalSubfields MaximalSubgroups
+syn keyword magmaBuiltin MaximalSubgroupsData MaximalSublattices
+syn keyword magmaBuiltin MaximalSubmodules MaximalTotallyIsotropicSubspace
+syn keyword magmaBuiltin MaximalTotallySingularSubspace
+syn keyword magmaBuiltin MaximalVertexFacetHeightMatrix MaximalZeroOneSolution
+syn keyword magmaBuiltin Maximise Maximising Maximum MaximumBettiDegree
+syn keyword magmaBuiltin MaximumClique MaximumDegree MaximumFlow
+syn keyword magmaBuiltin MaximumInDegree MaximumIndependentSet MaximumMatching
+syn keyword magmaBuiltin MaximumOutDegree Maxindeg MaxMatching MaxNorm
+syn keyword magmaBuiltin Maxoutdeg MaxParabolics Mc McElieceEtAlAsymptoticBound
+syn keyword magmaBuiltin McEliecesAttack MCPolynomials MDS MDSCode Mean MEANS
+syn keyword magmaBuiltin Meataxe Melikian MelikianLieAlgebra Member Memory
+syn keyword magmaBuiltin Merge MergeFields MergeFiles MergeUnits Mestre Meta
+syn keyword magmaBuiltin Metabolic MetabolicSpace Metacyclic MetacyclicPGroups
+syn keyword magmaBuiltin Mij Mij2 Mij2EltRootTable Milnor MilnorNumber
+syn keyword magmaBuiltin MilnorNumberAnalyticHypersurface Min Mindeg Minima
+syn keyword magmaBuiltin Minimal MinimalAlgebraGenerators
+syn keyword magmaBuiltin MinimalAndCharacteristicPolynomials
+syn keyword magmaBuiltin MinimalBaseRingCharacter MinimalBasis MinimalBlocks
+syn keyword magmaBuiltin MinimalChernNumber MinimalCyclotomicField
+syn keyword magmaBuiltin MinimalDecomposition MinimalDegreeModel
+syn keyword magmaBuiltin MinimalElementConjugatingToPositive
+syn keyword magmaBuiltin MinimalElementConjugatingToSuperSummit
+syn keyword magmaBuiltin MinimalElementConjugatingToUltraSummit MinimalField
+syn keyword magmaBuiltin MinimalFreeResolution MinimalGeneratorForm
+syn keyword magmaBuiltin MinimalGeneratorFormAlgebra MinimalHeckePolynomial
+syn keyword magmaBuiltin MinimalIdeals MinimalIdentity MinimalInequalities
+syn keyword magmaBuiltin MinimalInteger MinimalIntegerSolution
+syn keyword magmaBuiltin MinimalLeftIdeals MinimalModel MinimalModelGeneralType
+syn keyword magmaBuiltin MinimalModelKodairaDimensionOne
+syn keyword magmaBuiltin MinimalModelKodairaDimensionZero
+syn keyword magmaBuiltin MinimalModelRationalSurface MinimalModelRuledSurface
+syn keyword magmaBuiltin MinimalNormalSubgroup MinimalNormalSubgroups
+syn keyword magmaBuiltin MinimalOverfields MinimalOvergroup MinimalOvergroups
+syn keyword magmaBuiltin MinimalParabolics MinimalPartition MinimalPartitions
+syn keyword magmaBuiltin MinimalPolynomial MinimalQuadraticTwist
+syn keyword magmaBuiltin MinimalRelations MinimalRGenerators MinimalRightIdeals
+syn keyword magmaBuiltin Minimals MinimalSimpleElements MinimalSolution
+syn keyword magmaBuiltin MinimalSubmodule MinimalSubmodules
+syn keyword magmaBuiltin MinimalSuperlattices MinimalSupermodules
+syn keyword magmaBuiltin MinimalSyzygyModule MinimalVectorSequence
+syn keyword magmaBuiltin MinimalWeierstrassModel MinimalZeroOneSolution
+syn keyword magmaBuiltin Minimise MinimiseWeights Minimize Minimize
+syn keyword magmaBuiltin MinimizeCubicSurface MinimizeDeg4delPezzo
+syn keyword magmaBuiltin MinimizeGenerators MinimizePlaneQuartic MinimizeReduce
+syn keyword magmaBuiltin MinimizeReduceCubicSurface MinimizeReduceDeg4delPezzo
+syn keyword magmaBuiltin MinimizeReducePlaneQuartic Minimum MinimumCut
+syn keyword magmaBuiltin MinimumDegree MinimumDistance MinimumDominatingSet
+syn keyword magmaBuiltin MinimumEuclideanDistance MinimumEuclideanWeight
+syn keyword magmaBuiltin MinimumInDegree MinimumLeeDistance MinimumLeeWeight
+syn keyword magmaBuiltin MinimumOutDegree MinimumWeight MinimumWeightBounds
+syn keyword magmaBuiltin MinimumWeightTree MinimumWord MinimumWords Minindeg
+syn keyword magmaBuiltin Minkowski MinkowskiBound MinkowskiLattice
+syn keyword magmaBuiltin MinkowskiSpace Minor MinorBoundary MinorLength Minors
+syn keyword magmaBuiltin Minoutdeg MinParabolics Minus MinusInfinity
+syn keyword magmaBuiltin MinusTamagawaNumber MinusVolume Miscellaneous Mixed
+syn keyword magmaBuiltin MixedCanonicalForm MMap MMP Mobile Mod Mod ModAbVar
+syn keyword magmaBuiltin ModAlg ModBrdt ModByPowerOf2 ModCpx ModDed ModDed Mode
+syn keyword magmaBuiltin Model Models ModelToSequence ModelToString ModelType
+syn keyword magmaBuiltin Modexp ModFld ModFrm ModFrmBianchi ModFrmHil ModGrp
+syn keyword magmaBuiltin Modify ModifySelfintersection
+syn keyword magmaBuiltin ModifyTransverseIntersection Modinv ModMatFld
+syn keyword magmaBuiltin ModMatRng Modorder ModRng ModRng Modsqrt ModSS ModSym
+syn keyword magmaBuiltin ModTupEd ModTupFld ModTupRng Modular
+syn keyword magmaBuiltin ModularAbelianVariety ModularAbVarArithmetic
+syn keyword magmaBuiltin ModularAbVarCompGrp ModularAbVarRational ModularCurve
+syn keyword magmaBuiltin ModularCurveDatabase ModularCurveQuotient
+syn keyword magmaBuiltin ModularDegree ModularEmbedding ModularEquation
+syn keyword magmaBuiltin ModularFinite ModularForm ModularForms
+syn keyword magmaBuiltin ModularHyperellipticCurve ModularKernel
+syn keyword magmaBuiltin ModularNonHyperellipticCurveGenus3
+syn keyword magmaBuiltin ModularParameterization ModularParametrisation
+syn keyword magmaBuiltin ModularParametrization ModularPolarization
+syn keyword magmaBuiltin ModularSolution ModularSymbols
+syn keyword magmaBuiltin ModularSymbolToIntegralHomology
+syn keyword magmaBuiltin ModularSymbolToRationalHomology Module
+syn keyword magmaBuiltin ModuleExtensions ModuleHomomorphism ModuleMap
+syn keyword magmaBuiltin ModuleMaps ModuleOverSmallerField Modules
+syn keyword magmaBuiltin ModulesOverCommonField ModulesOverSmallerField
+syn keyword magmaBuiltin ModuleWithBasis Moduli ModuliOfLieAlgebra ModuliPoints
+syn keyword magmaBuiltin Modulus Moebius MoebiusMu MoebiusStrip Molien
+syn keyword magmaBuiltin MolienSeries MolienSeriesApproximation Monic
+syn keyword magmaBuiltin MonicDifferentialOperator Monodromy MonodromyPairing
+syn keyword magmaBuiltin MonodromyWeights Monoid Monomial MonomialBasis
+syn keyword magmaBuiltin MonomialCoefficient MonomialGroup
+syn keyword magmaBuiltin MonomialGroupStabilizer MonomialLattice MonomialOrder
+syn keyword magmaBuiltin MonomialOrderWeightVectors Monomials MonomialsOfDegree
+syn keyword magmaBuiltin MonomialsOfWeightedDegree MonomialSubgroup
+syn keyword magmaBuiltin MonomialToElementaryMatrix MonomialToHomogeneousMatrix
+syn keyword magmaBuiltin MonomialToPowerSumMatrix MonomialToSchurMatrix MonRWS
+syn keyword magmaBuiltin MonRWS MonRWSElt Monte Moody Moore MooreDeterminant
+syn keyword magmaBuiltin Mordell MordellWeil MordellWeilGroup
+syn keyword magmaBuiltin MordellWeilLattice MordellWeilRank
+syn keyword magmaBuiltin MordellWeilRankBounds MordellWeilShaInformation Mori
+syn keyword magmaBuiltin MoriCone Morphism Motive Motivic MotivicWeight Movable
+syn keyword magmaBuiltin MovablePart MOVWithWeilPairing MPCVersion MPFRVersion
+syn keyword magmaBuiltin MPolynomial MPQS Mu Muller Multi Multidegree
+syn keyword magmaBuiltin MultiDigraph MultiExtension MultiGraph MultiGraph
+syn keyword magmaBuiltin Multinomial Multipartite MultipartiteGraph Multiple
+syn keyword magmaBuiltin MultipleReturns Multiplication MultiplicationByMMap
+syn keyword magmaBuiltin MultiplicationTable MultiplicationTableL
+syn keyword magmaBuiltin MultiplicationTableLproc Multiplicative
+syn keyword magmaBuiltin MultiplicativeGroup MultiplicativeJordanDecomposition
+syn keyword magmaBuiltin MultiplicativeOrder Multiplicator MultiplicatorRing
+syn keyword magmaBuiltin Multiplicities Multiplicity MultiplicityFast
+syn keyword magmaBuiltin Multiplied Multiplier Multiply MultiplyByTranspose
+syn keyword magmaBuiltin MultiplyColumn MultiplyDivisor MultiplyFrobenius
+syn keyword magmaBuiltin MultiplyRow MultiplyTransformations Multiset Multisets
+syn keyword magmaBuiltin MultisetToSet Multivariate MultivariatePolynomial
+syn keyword magmaBuiltin MultTabCreate1 Mumford Murphy MurphyAlphaApproximation
+syn keyword magmaBuiltin MutationAssignment MValue MWSIref MyRat Nagata
+syn keyword magmaBuiltin NagataAutomorphism Nagens Naive NaiveHeight Nalggens
+syn keyword magmaBuiltin Name Name2 Name2Mij NameAndDiagram NameConversion
+syn keyword magmaBuiltin Names NamesDiagrams NameSimple Natural
+syn keyword magmaBuiltin NaturalActionGenerator NaturalBlackBoxGroup
+syn keyword magmaBuiltin NaturalFreeAlgebraCover NaturalGroup NaturalMap
+syn keyword magmaBuiltin NaturalMaps Nclasses Ncols Near Nearfield
+syn keyword magmaBuiltin NearLinearSpace Nearly Neat Nef NefCone Negation
+syn keyword magmaBuiltin NegationMap Negative NegativeGammaOrbitsOnRoots
+syn keyword magmaBuiltin NegativePrimeDivisors NegativeRelativeRoots Neighbor
+syn keyword magmaBuiltin NeighborClosure Neighbors Neighbour NeighbourClosure
+syn keyword magmaBuiltin Neighbours NEQ NestedExists NestedIteration Network
+syn keyword magmaBuiltin Network New Newform NewformDecomposition
+syn keyword magmaBuiltin NewformLabeling Newforms NewformsOfDegree1 NewLevel
+syn keyword magmaBuiltin NewModularHyperellipticCurve
+syn keyword magmaBuiltin NewModularHyperellipticCurves
+syn keyword magmaBuiltin NewModularNonHyperellipticCurveGenus3
+syn keyword magmaBuiltin NewModularNonHyperellipticCurvesGenus3 NewQuotient
+syn keyword magmaBuiltin NewSubspace NewSubvariety Newton Newton NewtonPolygon
+syn keyword magmaBuiltin NewtonPolynomial NewtonPolynomials Next NextClass
+syn keyword magmaBuiltin NextElement NextExtension NextGraph NextModule
+syn keyword magmaBuiltin NextPrime NextRepresentation NextSimpleQuotient
+syn keyword magmaBuiltin NextSubgroup NextVector NF NFaces NForm NFS NFSProcess
+syn keyword magmaBuiltin Ngens NGrad Nice NilpOrbGenuine Nilpotency
+syn keyword magmaBuiltin NilpotencyClass Nilpotent NilpotentBoundary
+syn keyword magmaBuiltin NilpotentLength NilpotentLieAlgebra NilpotentOrbit
+syn keyword magmaBuiltin NilpotentOrbits NilpotentPresentation
+syn keyword magmaBuiltin NilpotentQuotient NilpotentQuotient0
+syn keyword magmaBuiltin NilpotentQuotient1 NilpotentQuotient2
+syn keyword magmaBuiltin NilpotentQuotient3 NilpotentSubgroups Nilradical Nine
+syn keyword magmaBuiltin NineDescent NineSelmerSet NInvariant NLAC NLACIdData
+syn keyword magmaBuiltin NLACNrk NNZEntries No NoByRep NOD4 Nodal Node Nodes
+syn keyword magmaBuiltin Noether NoetherNormalisation NoetherNormalization
+syn keyword magmaBuiltin NoetherNumerator NoetherWeights Non
+syn keyword magmaBuiltin NonCuspidalQRationalPoints Nondegenerate
+syn keyword magmaBuiltin NonIdempotentActionGenerators NonIdempotentGenerators
+syn keyword magmaBuiltin Nonisomorphism1 Nonisomorphism2 NonNilpotentElement
+syn keyword magmaBuiltin NonPrimitiveAlternantCode NonquadraticTwists
+syn keyword magmaBuiltin NonQuantCombs NonSimplicialCones Nonsingular
+syn keyword magmaBuiltin Nonsolvable NonsolvableSubgroups NonSpecialDivisor
+syn keyword magmaBuiltin Norm NormAbs Normal NormalClosure
+syn keyword magmaBuiltin NormalClosureMonteCarlo NormalComplements NormalCone
+syn keyword magmaBuiltin NormalEdgeCones NormalElement NormalFan NormalForm
+syn keyword magmaBuiltin NormalFormOfHypersurfaceSingularity Normalisation
+syn keyword magmaBuiltin NormalisationCoefficient Normalise Normalised
+syn keyword magmaBuiltin NormalisedCone Normaliser NormaliserCode
+syn keyword magmaBuiltin NormaliserMatrix Normalising Normalization
+syn keyword magmaBuiltin NormalizationCoefficient Normalize Normalizer
+syn keyword magmaBuiltin NormalizerCode NormalizerGLZ NormalizerMatrix
+syn keyword magmaBuiltin Normalizing NormalLattice NormalNumber Normals
+syn keyword magmaBuiltin NormalStructure NormalSubfields NormalSubgroups
+syn keyword magmaBuiltin NormEquation NormGroup NormGroupDiscriminant
+syn keyword magmaBuiltin NormInduction NormKernel NormModule NormOneGroup
+syn keyword magmaBuiltin NormResidueSymbol Norms NormsEtc NormSpace Not
+syn keyword magmaBuiltin NPCGenerators NPCgens Nqubits Nrels Nrows Nsgens Nth
+syn keyword magmaBuiltin NthPrime Nthreads Nuclear NuclearRank Null NullGraph
+syn keyword magmaBuiltin Nullhomotopy NullHomotopy Nullity Nullspace NullSpace
+syn keyword magmaBuiltin NullspaceMatrix NullspaceOfTranspose Num Number
+syn keyword magmaBuiltin NumberField NumberFieldDatabase NumberFields
+syn keyword magmaBuiltin NumberFieldSieve Numbering NumberingMap
+syn keyword magmaBuiltin NumberOfActionGenerators NumberOfAffinePatches
+syn keyword magmaBuiltin NumberOfAlgebraicGenerators NumberOfAntisymmetricForms
+syn keyword magmaBuiltin NumberOfBlocks NumberOfBoundaryPoints NumberOfCells
+syn keyword magmaBuiltin NumberOfClasses NumberOfColumns NumberOfComponents
+syn keyword magmaBuiltin NumberOfConstantWords NumberOfConstraints
+syn keyword magmaBuiltin NumberOfCoordinates NumberOfCurves NumberOfDivisors
+syn keyword magmaBuiltin NumberOfEdges NumberOfExtensions NumberOfFaces
+syn keyword magmaBuiltin NumberOfFacets NumberOfFields NumberOfFixedSpaces
+syn keyword magmaBuiltin NumberOfGenerators NumberOfGradings NumberOfGraphs
+syn keyword magmaBuiltin NumberOfGroups NumberOfInclusions
+syn keyword magmaBuiltin NumberOfInteriorPoints NumberOfInvariantForms
+syn keyword magmaBuiltin NumberOfIrreducibleMatrixGroups NumberOfIsogenyClasses
+syn keyword magmaBuiltin NumberOfLattices NumberOfLevels NumberOfLines
+syn keyword magmaBuiltin NumberOfMatrices NumberOfMetacyclicPGroups
+syn keyword magmaBuiltin NumberOfNewformClasses NumberOfNonZeroEntries
+syn keyword magmaBuiltin NumberOfPartitions NumberOfPCGenerators
+syn keyword magmaBuiltin NumberOfPermutations NumberOfPlacesDegECF
+syn keyword magmaBuiltin NumberOfPlacesOfDegreeOne NumberOfPlacesOfDegreeOneECF
+syn keyword magmaBuiltin NumberOfPlacesOfDegreeOneECFBound
+syn keyword magmaBuiltin NumberOfPlacesOfDegreeOneOverExactConstantField
+syn keyword magmaBuiltin NumberOfPlacesOfDegreeOneOverExactConstantFieldBound
+syn keyword magmaBuiltin NumberOfPlacesOfDegreeOverExactConstantField
+syn keyword magmaBuiltin NumberOfPoints NumberOfPointsAtInfinity
+syn keyword magmaBuiltin NumberOfPointsOnCubicSurface NumberOfPointsOnSurface
+syn keyword magmaBuiltin NumberOfPositiveRoots NumberOfPrimePolynomials
+syn keyword magmaBuiltin NumberOfPrimitiveAffineGroups
+syn keyword magmaBuiltin NumberOfPrimitiveAlmostSimpleGroups
+syn keyword magmaBuiltin NumberOfPrimitiveDiagonalGroups
+syn keyword magmaBuiltin NumberOfPrimitiveGroups NumberOfPrimitiveProductGroups
+syn keyword magmaBuiltin NumberOfPrimitiveSolubleGroups NumberOfProjectives
+syn keyword magmaBuiltin NumberOfPunctures NumberOfQubits
+syn keyword magmaBuiltin NumberOfQuotientGradings NumberOfRationalPoints
+syn keyword magmaBuiltin NumberOfRelations NumberOfRelationsRequired
+syn keyword magmaBuiltin NumberOfRepresentations NumberOfRows NumberOfSkewRows
+syn keyword magmaBuiltin NumberOfSmallGroups NumberOfSmoothDivisors
+syn keyword magmaBuiltin NumberOfSolubleIrreducibleMatrixGroups
+syn keyword magmaBuiltin NumberOfStandardTableaux
+syn keyword magmaBuiltin NumberOfStandardTableauxOnWeight NumberOfStrings
+syn keyword magmaBuiltin NumberOfStrongGenerators
+syn keyword magmaBuiltin NumberOfSubgroupsAbelianPGroup NumberOfSymmetricForms
+syn keyword magmaBuiltin NumberOfTableauxOnAlphabet NumberOfTransitiveGroups
+syn keyword magmaBuiltin NumberOfVariables NumberOfVariants NumberOfVertices
+syn keyword magmaBuiltin NumberOfWords NumbersOfPointsOnSurface
+syn keyword magmaBuiltin Numerator Numeric Numerical NumericalDerivative
+syn keyword magmaBuiltin NumericalEigenvectors NumericalInverse
+syn keyword magmaBuiltin NumericalIsConsistent NumericalKernel
+syn keyword magmaBuiltin NumericalPseudoinverse NumericalRank NumericalSolution
+syn keyword magmaBuiltin NumericClebschTransfer NumExtraspecialPairs
+syn keyword magmaBuiltin NumPosRoots Objective ObjectiveFunction Objects
+syn keyword magmaBuiltin Obstruction ObstructionDescentBuildingBlock Odd OddDim
+syn keyword magmaBuiltin OddGraph Oddity Of2 Old OldQuotient OldSubvariety
+syn keyword magmaBuiltin Omega OmegaMinus OmegaPlus On One OneCocycle
+syn keyword magmaBuiltin OneCohomology OneParameterSubgroupsLattice OneSkeleton
+syn keyword magmaBuiltin Only OnlyUpToIsogeny Onto Open OpenGraphFile
+syn keyword magmaBuiltin OpenSmallGroupDatabase Operation Operations
+syn keyword magmaBuiltin OperationsForTwistedRootData Operator Operators
+syn keyword magmaBuiltin Opposite OppositeAlgebra OPS Optimal
+syn keyword magmaBuiltin OptimalEdgeColouring OptimalSkewness
+syn keyword magmaBuiltin OptimalVertexColouring Optimised
+syn keyword magmaBuiltin OptimisedRepresentation Optimized
+syn keyword magmaBuiltin OptimizedRepresentation Options Or Orbit OrbitAction
+syn keyword magmaBuiltin OrbitActionBounded OrbitActions Orbital OrbitalGraph
+syn keyword magmaBuiltin OrbitBounded OrbitClosure OrbitImage OrbitImageBounded
+syn keyword magmaBuiltin OrbitKernel OrbitKernelBounded OrbitRepresentatives
+syn keyword magmaBuiltin Orbits OrbitsOfSpaces OrbitsOnSimples OrbitsPartition
+syn keyword magmaBuiltin Order Order11 OrderAutomorphismGroupAbelianPGroup
+syn keyword magmaBuiltin Ordered OrderedIntegerMonoid OrderedMonoid
+syn keyword magmaBuiltin OrderedPartitionStack OrderedPartitionStackZero
+syn keyword magmaBuiltin Ordering OrderLattice OrderOfRootOfUnity Orders
+syn keyword magmaBuiltin Ordinary Ore OreConditions Orientated OrientatedGraph
+syn keyword magmaBuiltin Origin Original OriginalRing Orthogonal
+syn keyword magmaBuiltin OrthogonalComplement OrthogonalDecomposition
+syn keyword magmaBuiltin Orthogonalize OrthogonalizeGram OrthogonalReflection
+syn keyword magmaBuiltin OrthogonalSum OrthogonalSymmetrization
+syn keyword magmaBuiltin OrthogonalTensorProduct Orthonormalize Other OtherMod
+syn keyword magmaBuiltin Others Out OutDegree Outer OuterFaces OuterFPGroup
+syn keyword magmaBuiltin OuterNormal OuterNormals OuterOrder OuterShape
+syn keyword magmaBuiltin OuterVertices OutNeighbors OutNeighbours Output Oval
+syn keyword magmaBuiltin OvalDerivation Over Overconvergent
+syn keyword magmaBuiltin OverconvergentHeckeSeries
+syn keyword magmaBuiltin OverconvergentHeckeSeriesDegreeBound Overdatum
+syn keyword magmaBuiltin OverDimension Overfield Overfields Overgroup
+syn keyword magmaBuiltin Overgroups Overview P3 P4 PackageUserAttributes
+syn keyword magmaBuiltin Packing PackingRadius Pad PadCode Pade
+syn keyword magmaBuiltin PadeHermiteApproximant PadHermApp Pair Pairing
+syn keyword magmaBuiltin PairingsFiniteFields PairReduce PairReduceGram Pairs
+syn keyword magmaBuiltin Paley PaleyGraph PaleyTournament PALPNormal
+syn keyword magmaBuiltin PALPNormalForm Parabolic Parabolics Parallel
+syn keyword magmaBuiltin ParallelClass ParallelClasses Parallelism Parallelisms
+syn keyword magmaBuiltin ParallelSort Parameter Parameterization Parameters
+syn keyword magmaBuiltin Parametrisation Parametrization ParametrizationMatrix
+syn keyword magmaBuiltin ParametrizationToPuiseux Parametrize
+syn keyword magmaBuiltin ParametrizeDegree5DelPezzo ParametrizeDegree6DelPezzo
+syn keyword magmaBuiltin ParametrizeDegree7DelPezzo ParametrizeDegree8DelPezzo
+syn keyword magmaBuiltin ParametrizeDegree9DelPezzo ParametrizeDelPezzo
+syn keyword magmaBuiltin ParametrizeDelPezzoDeg6 ParametrizeOrdinaryCurve
+syn keyword magmaBuiltin ParametrizePencil ParametrizeProjectiveHypersurface
+syn keyword magmaBuiltin ParametrizeProjectiveSurface ParametrizeQuadric
+syn keyword magmaBuiltin ParametrizeRationalNormalCurve
+syn keyword magmaBuiltin ParametrizeSingularDegree3DelPezzo
+syn keyword magmaBuiltin ParametrizeSingularDegree4DelPezzo Parent ParentCell
+syn keyword magmaBuiltin ParentGraph ParentPlane ParentRing Parity
+syn keyword magmaBuiltin ParityCheckMatrix Part PartEx Partial PartialDual
+syn keyword magmaBuiltin PartialFact PartialFactorization
+syn keyword magmaBuiltin PartialFractionDecomposition PartialWeightDistribution
+syn keyword magmaBuiltin Partition Partition2 Partition2WGtable PartitionCovers
+syn keyword magmaBuiltin Partitions PartitionToWeight Parts Pascal
+syn keyword magmaBuiltin PascalTriangle Passants Patch Patches Path PATH
+syn keyword magmaBuiltin PathExists PathGraph Paths PathTree PC PCClass
+syn keyword magmaBuiltin PCExponents PCGenerators PCGroup
+syn keyword magmaBuiltin PCGroupAutomorphismGroupPGroup PCMap PCPresentation
+syn keyword magmaBuiltin PCPrimes Pencil Pentahedron PentahedronIdeal Perfect
+syn keyword magmaBuiltin PerfectForms PerfectGroupDatabase Perfectly
+syn keyword magmaBuiltin PerfectSubgroups Period PeriodMapping Periods Perm
+syn keyword magmaBuiltin PermRep PermRepDegrees PermRepKeys Permutation
+syn keyword magmaBuiltin PermutationActionD8 PermutationAutomorphism
+syn keyword magmaBuiltin PermutationCharacter PermutationCode PermutationGroup
+syn keyword magmaBuiltin PermutationMatrix PermutationModule
+syn keyword magmaBuiltin PermutationRepresentation Permutations
+syn keyword magmaBuiltin PermutationSupport Permute PermuteWeights Pezzo
+syn keyword magmaBuiltin Pfaffian Pfaffians PGamma PGammaL PGammaU PGL PGO
+syn keyword magmaBuiltin PGOMinus PGOPlus PGroup PGroups PGroupStrong
+syn keyword magmaBuiltin PGroupToForms PGU Phase PhaseFlip Phi PhiModule
+syn keyword magmaBuiltin PhiModuleElement PhiSelmerGroup PHom Pi Picard
+syn keyword magmaBuiltin PicardClass PicardGroup PicardLattice PicardNumber
+syn keyword magmaBuiltin PicardToClassGroupsMap PicardToClassLatticesMap PID
+syn keyword magmaBuiltin Pipe PIR Place PlaceEnumCopy PlaceEnumCurrent
+syn keyword magmaBuiltin PlaceEnumInit PlaceEnumNext PlaceEnumPosition Places
+syn keyword magmaBuiltin Plactic PlacticIntegerMonoid PlacticMonoid Planar
+syn keyword magmaBuiltin PlanarDual PlanarGraphDatabase Planarity Plane Plane
+syn keyword magmaBuiltin PlaneToDisc PlayWithPoints PlcNumElt Plethysm Plotkin
+syn keyword magmaBuiltin PlotkinAsymptoticBound PlotkinBound PlotkinSum
+syn keyword magmaBuiltin Plurigenus PlurigenusOfDesingularization Plus PMat
+syn keyword magmaBuiltin PMod Point PointArithmetic1 PointArithmetic2
+syn keyword magmaBuiltin PointDegree PointDegrees Pointed PointEnumeration
+syn keyword magmaBuiltin PointFinding PointGraph PointGroup PointOnRegularModel
+syn keyword magmaBuiltin PointPredicates PointReduction Points PointsAtInfinity
+syn keyword magmaBuiltin PointsCubicModel PointSearch PointSet PointSets
+syn keyword magmaBuiltin PointsKnown PointsOverSplittingField PointsQI Polar
+syn keyword magmaBuiltin Polarisation Polarised PolarisedVariety Polarization
+syn keyword magmaBuiltin PolarSpaceType PolarToComplex Pole PoleDivisor Poles
+syn keyword magmaBuiltin Pollard PollardRho Poly Polycyclic
+syn keyword magmaBuiltin PolycyclicGenerators PolycyclicGroup Polygon
+syn keyword magmaBuiltin PolygonGraph Polygons Polyhedra Polyhedron
+syn keyword magmaBuiltin PolyhedronInSublattice PolyhedronWithInequalities
+syn keyword magmaBuiltin Polylog PolylogD PolylogDold PolylogP PolyMapKernel
+syn keyword magmaBuiltin Polynomial PolynomialAlgebra PolynomialCoefficient
+syn keyword magmaBuiltin PolynomialMap PolynomialRing Polynomials
+syn keyword magmaBuiltin PolynomialSieve Polytope PolytopeOfProjectiveSpace
+syn keyword magmaBuiltin PolytopeOfWPS PolyToSeries POmega POmegaMinus
+syn keyword magmaBuiltin POmegaPlus Pop POpen Pos Position Positions Positive
+syn keyword magmaBuiltin PositiveConjugates PositiveConjugatesProcess
+syn keyword magmaBuiltin PositiveCoroots PositiveDefiniteForm
+syn keyword magmaBuiltin PositiveGammaOrbitsOnRoots PositiveQuadrant
+syn keyword magmaBuiltin PositiveRelativeRoots PositiveRoots PositiveRootsPerm
+syn keyword magmaBuiltin PositiveSum Possible PossibleCanonicalDissidentPoints
+syn keyword magmaBuiltin PossibleHypergeometricData
+syn keyword magmaBuiltin PossibleSimpleCanonicalDissidentPoints POT POTPERM
+syn keyword magmaBuiltin Power PowerFormalSet PowerGroup PowerGroupTwo
+syn keyword magmaBuiltin PowerIdeal PowerIndexedSet PowerMap PowerMultiset
+syn keyword magmaBuiltin PowerPolynomial PowerProduct PowerRelation
+syn keyword magmaBuiltin PowerResidueCode PowerSequence PowerSeries
+syn keyword magmaBuiltin PowerSeriesRing PowerSet PowerSumToElementaryMatrix
+syn keyword magmaBuiltin PowerSumToElementarySymmetric
+syn keyword magmaBuiltin PowerSumToHomogeneousMatrix PowerSumToMonomialMatrix
+syn keyword magmaBuiltin PowerSumToSchurMatrix PQuotients PRank Precision
+syn keyword magmaBuiltin PrecisionBound Precomputation Predicates Preface
+syn keyword magmaBuiltin Prefix Preimage PreimageIdeal PreimageRing Preparata
+syn keyword magmaBuiltin PreparataCode Preparation Preprune Presentation
+syn keyword magmaBuiltin PresentationIsSmall PresentationLength
+syn keyword magmaBuiltin PresentationMatrix Pretty PrettyPrintInvariant
+syn keyword magmaBuiltin Previous PreviousPrime PRI Primality
+syn keyword magmaBuiltin PrimalityCertificate Primary PrimaryAbelianBasis
+syn keyword magmaBuiltin PrimaryAbelianInvariants PrimaryAlgebra
+syn keyword magmaBuiltin PrimaryComponents PrimaryDecomposition PrimaryIdeal
+syn keyword magmaBuiltin PrimaryInvariantFactors PrimaryInvariants
+syn keyword magmaBuiltin PrimaryRationalForm Prime PrimeBasis PrimeComponents
+syn keyword magmaBuiltin PrimeDivisors PrimeFactorisation PrimeField PrimeForm
+syn keyword magmaBuiltin PrimeIdeal PrimePolynomials PrimePowerRepresentation
+syn keyword magmaBuiltin PrimeRing Primes PrimesInInterval PrimesUpTo Primitive
+syn keyword magmaBuiltin PrimitiveData PrimitiveElement PrimitiveGroup
+syn keyword magmaBuiltin PrimitiveGroupDatabaseLimit PrimitiveGroupDescription
+syn keyword magmaBuiltin PrimitiveGroupIdentification PrimitiveGroupProcess
+syn keyword magmaBuiltin PrimitiveGroups PrimitiveId PrimitiveIdempotentData
+syn keyword magmaBuiltin PrimitiveIdempotents PrimitiveLatticeVector
+syn keyword magmaBuiltin PrimitivePart PrimitivePolynomial PrimitiveProcess
+syn keyword magmaBuiltin PrimitiveQuotient PrimitiveRoot PrimitiveStructure
+syn keyword magmaBuiltin PrimitiveWreathProduct Principal PrincipalCharacter
+syn keyword magmaBuiltin PrincipalDivisor PrincipalDivisorMap PrincipalIdealMap
+syn keyword magmaBuiltin PrincipalSeriesParameters PrincipalUnitGroup
+syn keyword magmaBuiltin PrincipalUnitGroupGenerators Print PrintFile
+syn keyword magmaBuiltin PrintFileMagma Printing PrintProbabilityDistribution
+syn keyword magmaBuiltin PrintSortedProbabilityDistribution
+syn keyword magmaBuiltin PrintSylowSubgroupStructure PrintTermsOfDegree
+syn keyword magmaBuiltin PrintToPrecision PrintTreesSU Probability
+syn keyword magmaBuiltin ProbabilityDistribution Probable
+syn keyword magmaBuiltin ProbableAutomorphismGroup ProbableRadicalDecomposition
+syn keyword magmaBuiltin Probably Problem Procedures Process ProcessLadder
+syn keyword magmaBuiltin Product ProductCode ProductProjectiveSpace
+syn keyword magmaBuiltin ProductRepresentation Products Prof Profile
+syn keyword magmaBuiltin ProfileGraph ProfileHTMLOutput
+syn keyword magmaBuiltin ProfilePrintByTotalCount ProfilePrintByTotalTime
+syn keyword magmaBuiltin ProfilePrintChildrenByCount ProfilePrintChildrenByTime
+syn keyword magmaBuiltin Profiler ProfileReset Progression Proj Projection
+syn keyword magmaBuiltin ProjectionFromNonsingularPoint ProjectionMap
+syn keyword magmaBuiltin ProjectionOnto ProjectionOntoImage Projective
+syn keyword magmaBuiltin ProjectiveClosure ProjectiveClosureMap ProjectiveCover
+syn keyword magmaBuiltin ProjectiveEmbedding ProjectiveFunction
+syn keyword magmaBuiltin ProjectiveGammaLinearGroup ProjectiveGammaUnitaryGroup
+syn keyword magmaBuiltin ProjectiveGeneralLinearGroup
+syn keyword magmaBuiltin ProjectiveGeneralOrthogonalGroup
+syn keyword magmaBuiltin ProjectiveGeneralOrthogonalGroupMinus
+syn keyword magmaBuiltin ProjectiveGeneralOrthogonalGroupPlus
+syn keyword magmaBuiltin ProjectiveGeneralUnitaryGroup
+syn keyword magmaBuiltin ProjectiveIndecomposableDimensions
+syn keyword magmaBuiltin ProjectiveIndecomposableModule
+syn keyword magmaBuiltin ProjectiveIndecomposableModules Projectively
+syn keyword magmaBuiltin ProjectiveMap ProjectiveModule ProjectiveOmega
+syn keyword magmaBuiltin ProjectiveOmegaMinus ProjectiveOmegaPlus
+syn keyword magmaBuiltin ProjectiveOrder ProjectivePlane
+syn keyword magmaBuiltin ProjectiveRationalFunction ProjectiveResolution
+syn keyword magmaBuiltin ProjectiveResolutionPGroup Projectives
+syn keyword magmaBuiltin ProjectiveSigmaLinearGroup
+syn keyword magmaBuiltin ProjectiveSigmaSymplecticGroup
+syn keyword magmaBuiltin ProjectiveSigmaUnitaryGroup ProjectiveSpace
+syn keyword magmaBuiltin ProjectiveSpaceAsToricVariety
+syn keyword magmaBuiltin ProjectiveSpecialLinearGroup
+syn keyword magmaBuiltin ProjectiveSpecialOrthogonalGroup
+syn keyword magmaBuiltin ProjectiveSpecialOrthogonalGroupMinus
+syn keyword magmaBuiltin ProjectiveSpecialOrthogonalGroupPlus
+syn keyword magmaBuiltin ProjectiveSpecialUnitaryGroup ProjectiveSuzukiGroup
+syn keyword magmaBuiltin ProjectiveSymplecticGroup Projectivity Prompt Proof
+syn keyword magmaBuiltin PRoot Proper Properties Property Proportional
+syn keyword magmaBuiltin Prospector Pruefer PrueferRankBound Prune
+syn keyword magmaBuiltin PSeminvariant Pseudo PseudoAdd PseudoAddMultiple
+syn keyword magmaBuiltin PseudoBasis PseudoDimension PseudoGenerators
+syn keyword magmaBuiltin Pseudoinverse PseudoMatrix PseudoRandom PseudoRandom
+syn keyword magmaBuiltin PseudoReflection PseudoReflectionGroup PseudoRemainder
+syn keyword magmaBuiltin Psi PSigma PSigmaL PSigmaSp PSigmaU PSL PSL2 PSO
+syn keyword magmaBuiltin PSOMinus PSOPlus PSp PSU PSz PtHyp Puiseux
+syn keyword magmaBuiltin PuiseuxExpansion PuiseuxExponents
+syn keyword magmaBuiltin PuiseuxExponentsCommon PuiseuxSeriesRing
+syn keyword magmaBuiltin PuiseuxToParametrization Pullback Puncture
+syn keyword magmaBuiltin PunctureCode Punctures Pure PureBraidGroup PureLattice
+syn keyword magmaBuiltin Purely PurelyRamifiedExtension PureRayIndices PureRays
+syn keyword magmaBuiltin Push Pushforward Pushout PushThroughIsogeny Put Puts
+syn keyword magmaBuiltin Pyramid QCartier QEAtoUEA QECC QECC QECCBounds
+syn keyword magmaBuiltin QECCLower QECCLowerBound QECCUpper QECCUpperBound
+syn keyword magmaBuiltin QFactorial QFactorialisation QGorenstein QGroup
+syn keyword magmaBuiltin QGrpAutoms QGrpAutoms2 QGrpComult QGrpConstr
+syn keyword magmaBuiltin QGrpEltOps QGrpGauss QGrpRelStr QI QLDecomposition
+syn keyword magmaBuiltin QMatrix QNF QPrincipal QRational QRCode QRCodeZ4 QRMZ4
+syn keyword magmaBuiltin Qround QSeminvariant Qt QuadBin Quade QuadeIdeal
+syn keyword magmaBuiltin QuadForm Quadrangle Quadrant Quadratic
+syn keyword magmaBuiltin QuadraticClassGroupTwoPart QuadraticField
+syn keyword magmaBuiltin QuadraticForm QuadraticFormMatrix
+syn keyword magmaBuiltin QuadraticFormPolynomial QuadraticForms QuadraticNorm
+syn keyword magmaBuiltin QuadraticOrder QuadraticOrderElim QuadraticOrderGB
+syn keyword magmaBuiltin QuadraticResidueCode QuadraticSpace
+syn keyword magmaBuiltin QuadraticTransformation QuadraticTwist QuadraticTwists
+syn keyword magmaBuiltin Quadrature Quadric QuadricIntersection Quadrics
+syn keyword magmaBuiltin Quantized QuantizedUEA QuantizedUEAlgebra
+syn keyword magmaBuiltin QuantizedUniversalEnvelopingAlgebra QuantMinWeight
+syn keyword magmaBuiltin Quantum QuantumAuto QuantumBasisElement
+syn keyword magmaBuiltin QuantumBinaryErrorGroup QuantumCode QuantumCyclicCode
+syn keyword magmaBuiltin QuantumDimension QuantumErrorGroup
+syn keyword magmaBuiltin QuantumQuasiCyclicCode QuantumState QuantumStateCreate
+syn keyword magmaBuiltin QuantumStateCreateCoerce QuantumStateNormalisation
+syn keyword magmaBuiltin QuantumStateProbabilities
+syn keyword magmaBuiltin QuantumStateSortedProbabilities QuantumStateUnitary
+syn keyword magmaBuiltin QuantWeightDist Quartic QuarticG4Covariant
+syn keyword magmaBuiltin QuarticHSeminvariant QuarticIInvariant QuarticMinimise
+syn keyword magmaBuiltin QuarticMinimize QuarticNumberOfRealRoots
+syn keyword magmaBuiltin QuarticPSeminvariant QuarticQSeminvariant
+syn keyword magmaBuiltin QuarticReduce QuarticRSeminvariant Quasi
+syn keyword magmaBuiltin QuasiCyclicCode QuasiCyclicQuantCode Quasisimple
+syn keyword magmaBuiltin QuasisimpleMatrixGroup QuasisimpleMatrixGroups
+syn keyword magmaBuiltin Quasisplit QuasiTwistedCyclicCode Quaternary
+syn keyword magmaBuiltin QuaternaryPlotkinSum Quaternion QuaternionAlgebra
+syn keyword magmaBuiltin Quaternionic QuaternionicAutomorphismGroup
+syn keyword magmaBuiltin QuaternionicBasis QuaternionicFunctions
+syn keyword magmaBuiltin QuaternionicGModule QuaternionicMatrixGroupDatabase
+syn keyword magmaBuiltin QuaternionicTranspose QuaternionOrder QUATo
+syn keyword magmaBuiltin QUAToIntegralUEAMap Qubits Quit QuoAlgFPLie QUOTE
+syn keyword magmaBuiltin QUOTEQUOTE Quotient QuotientDimension
+syn keyword magmaBuiltin QuotientGenerators QuotientGradings QuotientMap
+syn keyword magmaBuiltin QuotientModule QuotientModuleAction
+syn keyword magmaBuiltin QuotientModuleImage QuotientRepresentation
+syn keyword magmaBuiltin QuotientRing Quotients Quotients1 Quotients2
+syn keyword magmaBuiltin Quotients3 QuotientWithPullback Quotrem Radical
+syn keyword magmaBuiltin RadicalDecomposition RadicalExtension RadicalLayers
+syn keyword magmaBuiltin RadicalQuotient Radicals Radicand Radius Ramification
+syn keyword magmaBuiltin RamificationDegree RamificationDivisor
+syn keyword magmaBuiltin RamificationField RamificationGroup RamificationIndex
+syn keyword magmaBuiltin Ramified RamifiedPlaces RamifiedPrimes
+syn keyword magmaBuiltin RamifiedRepresentation Random RandomAbelianSurface
+syn keyword magmaBuiltin RandomAdditiveCode RandomAutomorphism RandomBaseChange
+syn keyword magmaBuiltin RandomBits RandomCFP RandomCompleteIntersection
+syn keyword magmaBuiltin RandomCone RandomConsecutiveBits RandomCurveByGenus
+syn keyword magmaBuiltin RandomDigraph RandomElementOfNormalClosure
+syn keyword magmaBuiltin RandomElementOfOrder RandomEllipticFibration
+syn keyword magmaBuiltin RandomEnriquesSurface RandomExtension
+syn keyword magmaBuiltin RandomGenusOneModel RandomGLnZ RandomGraph
+syn keyword magmaBuiltin RandomHookWalk RandomIdealGeneratedBy
+syn keyword magmaBuiltin RandomIrreduciblePolynomial RandomLinearCode
+syn keyword magmaBuiltin RandomMatrix RandomModel RandomNodalCurve
+syn keyword magmaBuiltin RandomOperations RandomOrdinaryPlaneCurve
+syn keyword magmaBuiltin RandomPartition RandomPlace RandomPolytope
+syn keyword magmaBuiltin RandomPositiveCone RandomPrime RandomPrimePolynomial
+syn keyword magmaBuiltin RandomProcess RandomProcessWithValues
+syn keyword magmaBuiltin RandomProcessWithWords RandomProcessWithWordsAndValues
+syn keyword magmaBuiltin RandomProspector RandomQuantConstr RandomQuantumCode
+syn keyword magmaBuiltin RandomRationalSurface RandomSchreier
+syn keyword magmaBuiltin RandomSequenceBlumBlumShub RandomSequenceRSA
+syn keyword magmaBuiltin RandomSLnZ RandomSubcomplex RandomSubset
+syn keyword magmaBuiltin RandomSymplecticMatrix RandomTableau
+syn keyword magmaBuiltin RandomTransformation RandomTree RandomUnimodularMatrix
+syn keyword magmaBuiltin RandomWord Range Rank RankBound RankBounds
+syn keyword magmaBuiltin RankDimension Ranks RanksOfPrimitiveIdempotents RankZ2
+syn keyword magmaBuiltin Rate Rational RationalCharacterTable RationalCurve
+syn keyword magmaBuiltin RationalCurveExample RationalCuspidalSubgroup
+syn keyword magmaBuiltin RationalDifferentialField
+syn keyword magmaBuiltin RationalExtensionRepresentation RationalField
+syn keyword magmaBuiltin RationalForm RationalFunction RationalFunctionField
+syn keyword magmaBuiltin RationalHomology RationalMap RationalMapping
+syn keyword magmaBuiltin RationalMatrixGroupDatabase RationalParametrization
+syn keyword magmaBuiltin RationalPoint RationalPoints RationalPointsByFibration
+syn keyword magmaBuiltin RationalPointsCrvHyplabel RationalPuiseux
+syn keyword magmaBuiltin RationalReconstruction RationalRuledSurface Rationals
+syn keyword magmaBuiltin RationalsAsNumberField RationalScroll RationalSequence
+syn keyword magmaBuiltin RationalSolutions Raw RawBasket RawEval Ray
+syn keyword magmaBuiltin RayClassField RayClassGroup RayClassGroupDiscLog
+syn keyword magmaBuiltin RayLattice RayLatticeMap RayResidueRing Rays RC Re
+syn keyword magmaBuiltin Reachable Read ReadBinary ReadBytes Real
+syn keyword magmaBuiltin RealEmbeddings RealField RealHomology RealInjection
+syn keyword magmaBuiltin RealIntro Realisable RealMatrix RealPeriod RealPlaces
+syn keyword magmaBuiltin RealReflectionGroupByCartan
+syn keyword magmaBuiltin RealReflectionGroupByRootDatum RealSigns
+syn keyword magmaBuiltin RealTamagawaNumber Realtime RealVectorSpace RealVolume
+syn keyword magmaBuiltin Rec Reciprocal ReciprocalPolynomial Recognise
+syn keyword magmaBuiltin RecogniseAbelian RecogniseAdjoint RecogniseAlternating
+syn keyword magmaBuiltin RecogniseAlternatingOrSymmetric
+syn keyword magmaBuiltin RecogniseAlternatingSquare RecogniseAltsym2
+syn keyword magmaBuiltin RecogniseClassicalSSA RecogniseDelta
+syn keyword magmaBuiltin RecogniseExchangeSSA RecogniseLargeRee RecogniseRee
+syn keyword magmaBuiltin RecogniseSL RecogniseSL3 RecogniseSp4Even
+syn keyword magmaBuiltin RecogniseSpOdd RecogniseStarAlgebra RecogniseSU3
+syn keyword magmaBuiltin RecogniseSU4 RecogniseSymmetric
+syn keyword magmaBuiltin RecogniseSymmetricSquare RecogniseSz Recognition
+syn keyword magmaBuiltin Recognize RecognizeClassical RecognizeLargeRee
+syn keyword magmaBuiltin RecognizeRee RecognizeSL RecognizeSL2 RecognizeSp4Even
+syn keyword magmaBuiltin RecognizeSpOdd RecognizeSU3 RecognizeSU4 RecognizeSz
+syn keyword magmaBuiltin Reconstruct Reconstruction ReconstructionEnvironment
+syn keyword magmaBuiltin ReconstructLatticeBasis Record RecordAccess
+syn keyword magmaBuiltin RecordFormat Rectify Recursion Redo RedoEnumeration
+syn keyword magmaBuiltin Reduce ReduceCharacters ReduceCluster
+syn keyword magmaBuiltin ReduceCubicSurface Reduced ReducedAteTPairing
+syn keyword magmaBuiltin ReducedBasis ReducedDiscriminant ReducedEtaTPairing
+syn keyword magmaBuiltin ReducedFactorisation ReducedForm ReducedForms
+syn keyword magmaBuiltin ReducedGramMatrix ReducedLegendreModel
+syn keyword magmaBuiltin ReducedLegendrePolynomial
+syn keyword magmaBuiltin ReducedMinimalWeierstrassModel ReducedModel
+syn keyword magmaBuiltin ReducedOrbits ReducedSubscheme ReducedTatePairing
+syn keyword magmaBuiltin ReduceGeneratingSet ReduceGenerators
+syn keyword magmaBuiltin ReduceGroebnerBasis ReduceHom ReducePlaneCurve
+syn keyword magmaBuiltin ReduceQuadrics ReduceToTriangleVertices ReduceVector
+syn keyword magmaBuiltin Reducible Reduction Reductionmodp ReductionOrbit
+syn keyword magmaBuiltin Reductions ReductionsAndEmbeddings ReductionStep
+syn keyword magmaBuiltin ReductionType Reductive ReductiveLieAlgebra
+syn keyword magmaBuiltin ReductiveRank ReductiveType Reductum Redundancy
+syn keyword magmaBuiltin Redundant Ree ReeConjugacyClasses Reed ReedMullerCode
+syn keyword magmaBuiltin ReedMullerCodeQRMZ4 ReedMullerCodeRMZ4
+syn keyword magmaBuiltin ReedMullerCodesLRMZ4 ReedMullerCodesRMZ4
+syn keyword magmaBuiltin ReedMullerCodeZ4 ReedSolomonCode ReeElementToWord
+syn keyword magmaBuiltin ReeGroup ReeIrreducibleRepresentation
+syn keyword magmaBuiltin ReeMaximalSubgroups ReeMaximalSubgroupsConjugacy Rees
+syn keyword magmaBuiltin ReesIdeal ReeSylow ReeSylowConjugacy Reference Refine
+syn keyword magmaBuiltin Refined RefineSection Reflection ReflectionFactors
+syn keyword magmaBuiltin ReflectionGroup ReflectionGroupConversion
+syn keyword magmaBuiltin ReflectionGroupNames ReflectionGroups
+syn keyword magmaBuiltin ReflectionMatrices ReflectionMatrix
+syn keyword magmaBuiltin ReflectionPermutation ReflectionPermutations
+syn keyword magmaBuiltin Reflections ReflectionSubgroup ReflectionSubgroups
+syn keyword magmaBuiltin ReflectionWord ReflectionWords Reflexive Regexp
+syn keyword magmaBuiltin Regular Regularity RegularLDPCEnsemble RegularModel
+syn keyword magmaBuiltin RegularRepresentation RegularSequence
+syn keyword magmaBuiltin RegularSpliceDiagram RegularSubgroups Regulator
+syn keyword magmaBuiltin RegulatorLowerBound Related Relation RelationIdeal
+syn keyword magmaBuiltin RelationMatrix RelationModule Relations Relative
+syn keyword magmaBuiltin RelativeField RelativeInvariant RelativePrecision
+syn keyword magmaBuiltin RelativePrecisionOfDerivation RelativeProj
+syn keyword magmaBuiltin RelativeRank RelativeRootDatum RelativeRootElement
+syn keyword magmaBuiltin RelativeRootElts RelativeRoots RelativeRootSpace
+syn keyword magmaBuiltin Relator Relevant Remainder Remaining Remove
+syn keyword magmaBuiltin RemoveColumn RemoveConstraint RemoveEdge RemoveEdges
+syn keyword magmaBuiltin RemoveFiles RemoveIrreducibles RemoveLinearRelations
+syn keyword magmaBuiltin RemoveRow RemoveRowColumn RemoveVertex RemoveVertices
+syn keyword magmaBuiltin RemoveWeight RemoveZeroRows Rep Repetition
+syn keyword magmaBuiltin RepetitionCode Replace ReplaceRelation Replication
+syn keyword magmaBuiltin ReplicationNumber RepLoc Represent Representation
+syn keyword magmaBuiltin RepresentationConversion RepresentationDimension
+syn keyword magmaBuiltin RepresentationDimensionRv RepresentationMatrix
+syn keyword magmaBuiltin RepresentationNumber Representations
+syn keyword magmaBuiltin RepresentationTheory RepresentationType Representative
+syn keyword magmaBuiltin RepresentativeCocycles RepresentativePoint
+syn keyword magmaBuiltin Representatives Represented Reps RepSym RepUnits
+syn keyword magmaBuiltin Required Res Reset ResetMaximumMemoryUsage
+syn keyword magmaBuiltin ResetMinimumWeightBounds Residual Residually Residue
+syn keyword magmaBuiltin ResidueClassDegree ResidueClassField ResidueClassRing
+syn keyword magmaBuiltin ResidueField ResidueSystem Resolution ResolutionData
+syn keyword magmaBuiltin ResolutionGraph ResolutionGraphVertex Resolutions
+syn keyword magmaBuiltin Resolve ResolveAffineCurve ResolveAffineMonicSurface
+syn keyword magmaBuiltin ResolveFanMap ResolveLinearSystem
+syn keyword magmaBuiltin ResolveProjectiveCurve ResolveProjectiveSurface
+syn keyword magmaBuiltin Restrict Restrictable RestrictDegree Restricted
+syn keyword magmaBuiltin RestrictedPartitions RestrictedSubalgebra
+syn keyword magmaBuiltin RestrictEndomorphism RestrictField Restriction
+syn keyword magmaBuiltin RestrictionChainMap RestrictionData RestrictionMap
+syn keyword magmaBuiltin RestrictionMatrix RestrictionOfGenerators
+syn keyword magmaBuiltin RestrictionOfScalars RestrictionOfScalars Restrictions
+syn keyword magmaBuiltin RestrictionToImage RestrictionToPatch
+syn keyword magmaBuiltin RestrictionToSubtorus RestrictPartitionLength
+syn keyword magmaBuiltin RestrictParts RestrictResolution Resultant Resume
+syn keyword magmaBuiltin ResumeEnumeration Retrieve Reverse ReverseColumns
+syn keyword magmaBuiltin ReverseRows Reversion Revert RevertClass Rewind
+syn keyword magmaBuiltin Rewrite Rewrite2 Reynolds ReynoldsOperator RGenerators
+syn keyword magmaBuiltin Rho RHS Richardson Richelot RichelotIsogenousSurface
+syn keyword magmaBuiltin RichelotIsogenousSurface RichelotIsogenousSurfaces
+syn keyword magmaBuiltin RichelotIsogenousSurfaces Riemann RiemannRochBasis
+syn keyword magmaBuiltin RiemannRochCoordinates RiemannRochDimension
+syn keyword magmaBuiltin RiemannRochPolytope RiemannRochSpace RiemannZeta Right
+syn keyword magmaBuiltin RightAction RightActionGenerator RightAdjointMatrix
+syn keyword magmaBuiltin RightAnnihilator RightCosetSpace RightDescentSet
+syn keyword magmaBuiltin RightExactExtension RightGcd RightGCD
+syn keyword magmaBuiltin RightGreatestCommonDivisor RightHandFactors RightIdeal
+syn keyword magmaBuiltin RightIdealClasses RightInverse RightInverseMorphism
+syn keyword magmaBuiltin RightIsomorphism RightLcm RightLCM
+syn keyword magmaBuiltin RightLeastCommonMultiple RightMixedCanonicalForm
+syn keyword magmaBuiltin RightNormalForm RightOrder RightRegularModule
+syn keyword magmaBuiltin RightRepresentationMatrix RightString
+syn keyword magmaBuiltin RightStringLength RightTransversal RightZeroExtension
+syn keyword magmaBuiltin Ring RingClassGroup RingGeneratedBy RingMap
+syn keyword magmaBuiltin RingOfFractions RingOfIntegers RMatrix RMatrixSpace
+syn keyword magmaBuiltin RMatrixSpaceWithBasis RModule RModuleWithAction
+syn keyword magmaBuiltin RModuleWithBasis RMZ4 RngCycElt RngDiff RngDiff
+syn keyword magmaBuiltin RngDiffElt RngFunFrac RngFunFracElt RngFunFracSch
+syn keyword magmaBuiltin RngFunFracSchElt RngGal RngInt RngIntElt RngIntRes RngIntro
+syn keyword magmaBuiltin RngInvar RngLaz RngLazElt RngLoc RngLocA RngMPol RngMPolElt
+syn keyword magmaBuiltin RngMPolLoc RngMPolLocElt RngMPolRes RngMPolResElt RngOrd RngOrdGal
+syn keyword magmaBuiltin RngOrdRecoEnv RngPadElt RngPadResExt RngPadResExtElt
+syn keyword magmaBuiltin RngPol RngPowAlg RngPowAlgElt RngQuad RngQuadElt
+syn keyword magmaBuiltin RngSer RngSlope RngSLPol RngSLPolElt RngUPolTwst
+syn keyword magmaBuiltin RngUPolTwstElt RngVal RngWitt RngWittElt Roch Romberg
+syn keyword magmaBuiltin RombergQuadrature Root ROOT RootAction RootArithmetic
+syn keyword magmaBuiltin RootClosure RootDatum RootDtm RootDtmDecomp
+syn keyword magmaBuiltin RootDtmSums Rooted RootGSet RootHeight RootImages
+syn keyword magmaBuiltin RootLattice RootNorm RootNorms RootNumber RootOfUnity
+syn keyword magmaBuiltin RootOperations RootPermutation RootPosition Roots
+syn keyword magmaBuiltin RootsAndCoroots RootsCoroots RootSequence RootSide
+syn keyword magmaBuiltin RootsInSplittingField RootsNonExact RootSpace
+syn keyword magmaBuiltin RootSubdata RootSys RootSysSums RootSystem RootVertex
+syn keyword magmaBuiltin Rosenhain RosenhainInvariants RosenhainInvariantslabel
+syn keyword magmaBuiltin Rotate RotateWord Round Round2 RoundDownDivisor
+syn keyword magmaBuiltin RoundUpDivisor Row RowColumnOps RowInsert RowLength
+syn keyword magmaBuiltin RowNullSpace RowReductionHomomorphism Rows RowSequence
+syn keyword magmaBuiltin RowSkewLength Rowspace RowSpace RowSubmatrix
+syn keyword magmaBuiltin RowSubmatrixRange RowWeight RowWeights RowWord
+syn keyword magmaBuiltin RPolynomial RPRI RQDecomposition RSA RSAModulus
+syn keyword magmaBuiltin RSeminvariant RSKCorrespondence RSpace RSpaceWithBasis
+syn keyword magmaBuiltin RtIsSpace RtLat Rubin RubinSilverbergPolynomials Ruled
+syn keyword magmaBuiltin RuledSurface RungeKutta2 RWP RWPRI RWSGroup RWSMonoid
+syn keyword magmaBuiltin S5Degree10 Safe SafeUniformizer Salmon SAT Satisfied
+syn keyword magmaBuiltin Satisfies SatisfiesSzPresentation Satisfying Satref
+syn keyword magmaBuiltin Saturate Saturated SaturateSheaf Saturation Save
+syn keyword magmaBuiltin Scalar ScalarLattice ScalarMatrix Scalarproduct
+syn keyword magmaBuiltin Scalars ScalarSparseMatrix Scale Scaled
+syn keyword magmaBuiltin ScaledIgusaInvariants ScaledLattice ScaleGenerators
+syn keyword magmaBuiltin Scaling ScalingFactor Scheme Scheme SchemeGraphMap
+syn keyword magmaBuiltin SchemeGraphMapToSchemeMap SchemeMap Schreier
+syn keyword magmaBuiltin SchreierGenerators SchreierGraph SchreierSystem
+syn keyword magmaBuiltin SchreierVector SchreierVectors Schur SchurAlgebra
+syn keyword magmaBuiltin SchurIndex SchurIndexGroup SchurIndices
+syn keyword magmaBuiltin SchurToElementaryMatrix SchurToHomogeneousMatrix
+syn keyword magmaBuiltin SchurToMonomialMatrix SchurToPowerSumMatrix SClass
+syn keyword magmaBuiltin SClassGroup SClassGroupAbelianInvariants
+syn keyword magmaBuiltin SClassGroupExactSequence SClassNumber Scroll SEA SEAf
+syn keyword magmaBuiltin Search SearchEqual SearchForDecomposition
+syn keyword magmaBuiltin SearchForIso1 SearchForIso2 SearchForIsomorphism
+syn keyword magmaBuiltin SearchPGroups Sec Secant Secants SecantVariety Sech
+syn keyword magmaBuiltin Second Secondary SecondaryInvariants Section
+syn keyword magmaBuiltin SectionCentraliser SectionCentralizer Sections Seed
+syn keyword magmaBuiltin Seek Segre SegreEmbedding SegreProduct Self
+syn keyword magmaBuiltin SelfComplementaryGraphDatabase SelfDual SelfDualZ4
+syn keyword magmaBuiltin Selfintersection SelfIntersection SelfIntersections
+syn keyword magmaBuiltin SelfOrthogonal Selmer SelmerGroup Sem Semi Semidir
+syn keyword magmaBuiltin Semidirect SemidirectProduct Semigroup
+syn keyword magmaBuiltin SemiInvariantBilinearForms SemiInvariantQuadraticForms
+syn keyword magmaBuiltin SemiInvariantSesquilinearForms Semilinear
+syn keyword magmaBuiltin SemilinearDual SemiLinearGroup Semilinearity
+syn keyword magmaBuiltin Seminormal SemiOrthogonalBasis Semiregular Semisimple
+syn keyword magmaBuiltin SemisimpleDecomposition SemisimpleEFAModuleMaps
+syn keyword magmaBuiltin SemisimpleEFAModules SemisimpleEFASeries
+syn keyword magmaBuiltin SemisimpleGeneratorData SemisimpleRank SemisimpleType
+syn keyword magmaBuiltin Semisimplification Separable Separating
+syn keyword magmaBuiltin SeparatingElement Separation SeparationVertices
+syn keyword magmaBuiltin Separator Seq Seq Seqelt SeqFact SeqFromClifford
+syn keyword magmaBuiltin Seqint Seqlist Seqset SeqToClifford Sequence
+syn keyword magmaBuiltin SequenceOfRadicalGenerators Sequences
+syn keyword magmaBuiltin SequenceToElement SequenceToFactorization
+syn keyword magmaBuiltin SequenceToInteger SequenceToList SequenceToMultiset
+syn keyword magmaBuiltin SequenceToSet Series Series2 Serre SerreBound Server
+syn keyword magmaBuiltin Sesquilinear Set Set SetAllInvariantsOfDegree
+syn keyword magmaBuiltin SetAssertions SetAutoColumns SetAutoCompact SetBeep
+syn keyword magmaBuiltin SetBufferSize SetClassGroupBounds SetColumns
+syn keyword magmaBuiltin SetDebugOnError SetDefaultRealField SetDisplayLevel
+syn keyword magmaBuiltin SetEchoInput SetElementPrintFormat SetEntry
+syn keyword magmaBuiltin SetEvaluationComparison SetForceCFP
+syn keyword magmaBuiltin SetGlobalTCParameters SetGPU SetHeckeBound
+syn keyword magmaBuiltin SetHelpExternalBrowser SetHelpExternalSystem
+syn keyword magmaBuiltin SetHelpUseExternalBrowser SetHelpUseExternalSystem
+syn keyword magmaBuiltin SetHistorySize SetIgnorePrompt SetIgnoreSpaces
+syn keyword magmaBuiltin SetIndent SetIntegerSolutionVariables SetKantPrecision
+syn keyword magmaBuiltin SetKantPrinting SetLibraries SetLibraryRoot
+syn keyword magmaBuiltin SetLineEditor SetLMGSchreierBound SetLogFile
+syn keyword magmaBuiltin SetLowerBound SetMaximiseFunction SetMemoryLimit
+syn keyword magmaBuiltin SetNthreads SetObjectiveFunction SetOperations
+syn keyword magmaBuiltin SetOptions SetOrderMaximal SetOrderTorsionUnit
+syn keyword magmaBuiltin SetOrderUnitsAreFundamental SetOutputFile SetPath
+syn keyword magmaBuiltin SetPowerPrinting SetPrecision SetPresentation
+syn keyword magmaBuiltin SetPreviousSize SetPrimitiveElement
+syn keyword magmaBuiltin SetPrintKetsInteger SetPrintLevel SetProcessParameters
+syn keyword magmaBuiltin SetProfile SetPrompt SetQuitOnError SetRationalBasis
+syn keyword magmaBuiltin SetRows Sets SetSeed Setseq SetShowRealTime
+syn keyword magmaBuiltin SetsOfSingularPlaces SetStoreModularForms
+syn keyword magmaBuiltin SetTargetRing SetToIndexedSet SetToMultiset
+syn keyword magmaBuiltin SetToSequence SetTraceback Setup SetUpperBound
+syn keyword magmaBuiltin SetVerbose SetViMode Seysen SeysenGram SFA
+syn keyword magmaBuiltin SFAElementary SFAHomogeneous SFAMonomial SFAPower
+syn keyword magmaBuiltin SFASchur SgpFP Sha Shadow ShadowSpace Shape Sharply
+syn keyword magmaBuiltin Sheaf Sheaf SheafHomomorphism SheafHoms
+syn keyword magmaBuiltin SheafOfDifferentials SheafToDivisor Shephard
+syn keyword magmaBuiltin ShephardTodd ShephardToddNumber Shift ShiftLeft
+syn keyword magmaBuiltin ShiftRight Shifts ShiftToDegreeZero ShiftValuation
+syn keyword magmaBuiltin Shimura ShimuraConjugates ShimuraReduceUnit Shioda
+syn keyword magmaBuiltin ShiodaAlgebraicInvariants ShiodaInvariants
+syn keyword magmaBuiltin ShiodaInvariantsEqual Shor Short ShortBasis
+syn keyword magmaBuiltin ShortCosets Shortcuts ShortCuts Shorten ShortenCode
+syn keyword magmaBuiltin Shortest ShortestPath ShortestPaths ShortestVectors
+syn keyword magmaBuiltin ShortestVectorsMatrix ShortVectors ShortVectorsMatrix
+syn keyword magmaBuiltin ShortVectorsProcess Show ShowIdentifiers
+syn keyword magmaBuiltin ShowMemoryUsage ShowOptions ShowPrevious ShowValues
+syn keyword magmaBuiltin Shrikhande ShrikhandeGraph Shrinking
+syn keyword magmaBuiltin ShrinkingGenerator Shub Side Sided Siegel
+syn keyword magmaBuiltin SiegelTransformation Sieve Sigma Sign Signature
+syn keyword magmaBuiltin Signatures SignDecomposition Signs Siksek SiksekBound
+syn keyword magmaBuiltin Silverberg Silverman SilvermanBound
+syn keyword magmaBuiltin SilvermanHeightBounds Sim Similar Similarity
+syn keyword magmaBuiltin SimilarityGroup SimNEQ Simple
+syn keyword magmaBuiltin SimpleCanonicalDissidentPoints SimpleCodeChain
+syn keyword magmaBuiltin SimpleCohomologyDimensions SimpleCoreflectionMatrices
+syn keyword magmaBuiltin SimpleCoroots SimpleEpimorphisms SimpleExtension
+syn keyword magmaBuiltin SimpleGroupName SimpleGroupOfLieType
+syn keyword magmaBuiltin SimpleHomologyDimensions SimpleModule SimpleOrders
+syn keyword magmaBuiltin SimpleParameters SimpleQuantAdditiveConstr
+syn keyword magmaBuiltin SimpleQuantConstr SimpleQuantConstrMat
+syn keyword magmaBuiltin SimpleQuantExtendedConstr SimpleQuantSelfDualConstr
+syn keyword magmaBuiltin SimpleQuotientAlgebras SimpleQuotientProcess
+syn keyword magmaBuiltin SimpleQuotients SimpleReflectionMatrices
+syn keyword magmaBuiltin SimpleReflectionPermutations SimpleReflections
+syn keyword magmaBuiltin SimpleRelativeRoots SimpleRoots Simples
+syn keyword magmaBuiltin SimpleStarAlgebra SimpleSubgroups Simplex
+syn keyword magmaBuiltin SimplexAlphaCodeZ4 SimplexBetaCodeZ4 SimplexCode
+syn keyword magmaBuiltin Simplicial SimplicialComplex SimplicialProjectivePlane
+syn keyword magmaBuiltin SimplicialSubcone SimplicialSubdivision Simplified
+syn keyword magmaBuiltin SimplifiedModel Simplify Simplify1 SimplifyLength
+syn keyword magmaBuiltin SimplifyPresentation SimplifyRep Simply
+syn keyword magmaBuiltin SimplyConnectedVersion Simpson SimpsonQuadrature Sims
+syn keyword magmaBuiltin SimsSchreier Sin Sincos Singer SingerDifferenceSet
+syn keyword magmaBuiltin Single Singleton SingletonAsymptoticBound
+syn keyword magmaBuiltin SingletonBound Singular SingularCones SingularElements
+syn keyword magmaBuiltin Singularities Singularity SingularPoints
+syn keyword magmaBuiltin SingularRadical SingularRank SingularSubscheme Sinh
+syn keyword magmaBuiltin SIntegral SIntegralDesbovesPoints
+syn keyword magmaBuiltin SIntegralLjunggrenPoints SIntegralPoints
+syn keyword magmaBuiltin SIntegralQuarticPoints Six SixDescent Size Sizes
+syn keyword magmaBuiltin Skeleton Skew SkewHadamardDatabase SkewInvariant100
+syn keyword magmaBuiltin Skewness SkewShape SkewWeight SL SL2 SL2Characteristic
+syn keyword magmaBuiltin SL2ElementToWord SL2Triple SL3 SL3ElementToWord SL4
+syn keyword magmaBuiltin SL4Invariants SLAC SLACIdData SLACLnk SLn Slope Slopes
+syn keyword magmaBuiltin SlopeValuation SLPGroup SLPolynomial SLPolynomialRing
+syn keyword magmaBuiltin SLZConjugate Small SmallBasis Smaller SmallerField
+syn keyword magmaBuiltin SmallerFieldBasis SmallerFieldImage SmallGraphDatabase
+syn keyword magmaBuiltin SmallGroup SmallGroupDatabase SmallGroupDatabaseLimit
+syn keyword magmaBuiltin SmallGroupDecoding SmallGroupEncoding
+syn keyword magmaBuiltin SmallGroupIsInsoluble SmallGroupIsInsolvable
+syn keyword magmaBuiltin SmallGroupIsSoluble SmallGroupIsSolvable
+syn keyword magmaBuiltin SmallGroupProcess SmallGroups SmallIdentify
+syn keyword magmaBuiltin SmallInternal SmallModCrv SmallModularCurve
+syn keyword magmaBuiltin SmallPeriodMatrix SmallRoots SmallRootsUsage SMat
+syn keyword magmaBuiltin SMaximal SMaximalOrder Smith SmithForm Smooth SmpCpx
+syn keyword magmaBuiltin Snu SnuRing SO Socket SocketInformation Sockets Socle
+syn keyword magmaBuiltin SocleAction SocleFactor SocleFactors SocleImage
+syn keyword magmaBuiltin SocleKernel SocleQuotient SocleSeries Solomon Soluble
+syn keyword magmaBuiltin SolubleNormalQuotient SolubleQuotient SolubleQuotient1
+syn keyword magmaBuiltin SolubleQuotient2 SolubleRadical SolubleResidual
+syn keyword magmaBuiltin SolubleSchreier SolubleSubgroups Solution Solutions
+syn keyword magmaBuiltin Solvable SolvableLieAlgebra SolvableQuotient
+syn keyword magmaBuiltin SolvableRadical SolvableResidual SolvableSchreier
+syn keyword magmaBuiltin SolvableSubgroups Solve SolveByRadicals SolveOverGF2
+syn keyword magmaBuiltin SOMinus SOPlus Sort SortDecomposition Sorted Sp SP Sp4
+syn keyword magmaBuiltin Space SpaceOfDifferentialsFirstKind
+syn keyword magmaBuiltin SpaceOfHolomorphicDifferentials Spaces Span Spanning
+syn keyword magmaBuiltin SpanningFan SpanningForest SpanningTree SpanZ2CodeZ4
+syn keyword magmaBuiltin Sparse SparseIrreducibleRootDatum SparseMatrix
+syn keyword magmaBuiltin SparseMatrixStructure SparseReps SparseRootDatum
+syn keyword magmaBuiltin SparseStandardRootDatum Spec SPEC SpechtWgraph Special
+syn keyword magmaBuiltin SpecialEvaluate Speciality SpecialLieAlgebra
+syn keyword magmaBuiltin SpecialLinearGroup SpecialOrthogonalGroup
+syn keyword magmaBuiltin SpecialOrthogonalGroupMinus SpecialOrthogonalGroupPlus
+syn keyword magmaBuiltin SpecialPresentation SpecialQuotient
+syn keyword magmaBuiltin SpecialUnitaryGroup SpecialWeights Specify
+syn keyword magmaBuiltin SpecifyCharacteristic Spectrum Sphere
+syn keyword magmaBuiltin SpherePackingBound Spin SpinMinus Spinor
+syn keyword magmaBuiltin SpinorCharacters SpinorGenera SpinorGenerators
+syn keyword magmaBuiltin SpinorGenus SpinorNorm SpinorRepresentatives SpinPlus
+syn keyword magmaBuiltin Spiral Splice SpliceDiagram SpliceDiagramVertex Split
+syn keyword magmaBuiltin SplitAllByValues SplitCell SplitCellsByValues
+syn keyword magmaBuiltin Splitcomponents SplitExtension
+syn keyword magmaBuiltin SplitMaximalToralSubalgebra
+syn keyword magmaBuiltin SplitMaximalToralSubalgebra SplitRealPlace
+syn keyword magmaBuiltin SplitRootDatum Splitting SplittingCartanSubalgebra
+syn keyword magmaBuiltin SplittingField SplitToral SplitToralSubalgebra
+syn keyword magmaBuiltin SplitToralSubalgebra SpMatrix SpMatrixSpace
+syn keyword magmaBuiltin SPolynomial SporadicJ1 SPrincipal SPrincipalDivisorMap
+syn keyword magmaBuiltin SpRing Sprint Sprintf SprsRD SprsRDsumsub SpSpace
+syn keyword magmaBuiltin SpVector Sqrt Sqrts Square Squared Squarefree
+syn keyword magmaBuiltin SquarefreeFactorization SquareFreeFactorization
+syn keyword magmaBuiltin SquarefreePart SquarefreePartialFractionDecomposition
+syn keyword magmaBuiltin SquareLatticeGraph SquareRoot SQUFOF Sr SrAutomorphism
+syn keyword magmaBuiltin SRegulator SrfKum SrfKumPt Srivastava SrivastavaCode
+syn keyword magmaBuiltin SSA SSGalois SSGaloisRepresentation SSSDB SSSDBRestr
+syn keyword magmaBuiltin Stabiliser StabiliserCode StabiliserGroup
+syn keyword magmaBuiltin StabiliserMatrix StabiliserOfSpaces Stabilizer
+syn keyword magmaBuiltin StabilizerCode StabilizerGroup StabilizerLadder
+syn keyword magmaBuiltin StabilizerMatrix Stabilizers Stack Standard
+syn keyword magmaBuiltin StandardAction StandardActionGroup
+syn keyword magmaBuiltin StandardAlternatingForm StandardBasis StandardBasis2
+syn keyword magmaBuiltin StandardCopy StandardForm
+syn keyword magmaBuiltin StandardFormConjugationMatrices StandardGenerators
+syn keyword magmaBuiltin StandardGeneratorsGroupNames StandardGraph
+syn keyword magmaBuiltin StandardGroup StandardGroups StandardHermitianForm
+syn keyword magmaBuiltin StandardLattice StandardMaximalTorus
+syn keyword magmaBuiltin StandardMetacyclicPGroup StandardParabolicSubgroup
+syn keyword magmaBuiltin StandardPresentation StandardPseudoAlternatingForm
+syn keyword magmaBuiltin StandardQuadraticForm StandardRepresentation
+syn keyword magmaBuiltin StandardRootDatum StandardRootSystem StandardSimplex
+syn keyword magmaBuiltin StandardSymmetricForm StandardTableaux
+syn keyword magmaBuiltin StandardTableauxOfWeight Star StarInvolution
+syn keyword magmaBuiltin StarOnGroupAlgebra Start StartEnumeration
+syn keyword magmaBuiltin StartNewClass Startup State State Stauduhar Steane
+syn keyword magmaBuiltin Steenrod SteenrodOperation Steiner Steinitz
+syn keyword magmaBuiltin SteinitzClass SteinitzForm Step Sterns SternsAttack
+syn keyword magmaBuiltin Stirling StirlingFirst StirlingSecond Store Stored
+syn keyword magmaBuiltin StoreFactor Strictly String Strings StringToCode
+syn keyword magmaBuiltin StringToInteger StringToIntegerSequence Strip Strong
+syn keyword magmaBuiltin StrongApproximation StrongGenerators Strongly
+syn keyword magmaBuiltin StronglyConnectedComponents StronglyRegularGraphs
+syn keyword magmaBuiltin StronglyRegularGraphsDatabase StructuralOperations
+syn keyword magmaBuiltin Structure StructureConstant StructureConstants
+syn keyword magmaBuiltin Structures StructureSheaf Su SU SU3 SU4 Sub Subalgebra
+syn keyword magmaBuiltin SubAlgebra SubalgebraFromBasis SubalgebraModule
+syn keyword magmaBuiltin Subalgebras SubalgebrasInclusionGraph Subcanonical
+syn keyword magmaBuiltin SubcanonicalCurve Subcode SubcodeBetweenCode
+syn keyword magmaBuiltin SubcodeWordsOfWeight Subcomplex Subcone Subdatum
+syn keyword magmaBuiltin Subdivision Subfield SubfieldCode SubfieldLattice
+syn keyword magmaBuiltin SubfieldRepresentationCode
+syn keyword magmaBuiltin SubfieldRepresentationParityCode Subfields
+syn keyword magmaBuiltin SubfieldSubcode SubfieldSubplane Subgraph Subgroup
+syn keyword magmaBuiltin SubgroupClasses SubgroupConstructions SubgroupCreation
+syn keyword magmaBuiltin SubgroupDB SubgroupLattice SubgroupOfTorus SubgroupOps
+syn keyword magmaBuiltin Subgroups Subgroups1 Subgroups2 SubgroupScheme
+syn keyword magmaBuiltin SubgroupSchemes SubgroupsData SubgroupsLift
+syn keyword magmaBuiltin SubgroupsQuotientsTransfer SubgroupStructure
+syn keyword magmaBuiltin SubgroupStructure2 Sublattice SublatticeClasses
+syn keyword magmaBuiltin SublatticeLattice SublatticeLattice2
+syn keyword magmaBuiltin SublatticeLatticeCreate Sublattices Sublattices2
+syn keyword magmaBuiltin Submatrix SubmatrixRange Submodule SubmoduleAction
+syn keyword magmaBuiltin SubmoduleImage SubmoduleLattice SubmoduleLatticeAbort
+syn keyword magmaBuiltin Submodules Subnormal SubnormalSeries SubOrder Subplane
+syn keyword magmaBuiltin SubQuoEmbedded SubQuoReduced Subring Subscheme
+syn keyword magmaBuiltin Subsequence Subsequences Subset Subsets Subspace
+syn keyword magmaBuiltin Subspace1 Subspace2 Subspaces Substitute Substring
+syn keyword magmaBuiltin SubSU SubSuperQuo Subsystem SubsystemSubgroup Subtorus
+syn keyword magmaBuiltin Subvariety SubWeights Subword Successive
+syn keyword magmaBuiltin SuccessiveMinima Suggested SuggestedPrecision Sum
+syn keyword magmaBuiltin SuMatrix SuMatrixSpace SumDual SumIntersection Summand
+syn keyword magmaBuiltin Summands Summit SumNorm SumOf
+syn keyword magmaBuiltin SumOfBettiNumbersOfSimpleModules SumOfDivisors
+syn keyword magmaBuiltin SumOfImages SumOfMorphismImages Sums SUnit SUnitAction
+syn keyword magmaBuiltin SUnitCohomologyProcess SUnitDiscLog SUnitGroup Super
+syn keyword magmaBuiltin Supercuspidal Superlattice Superlattices Supermodules
+syn keyword magmaBuiltin SuperScheme Supersingular SupersingularEllipticCurve
+syn keyword magmaBuiltin SupersingularModule SupersingularPolynomial
+syn keyword magmaBuiltin SuperSummitCanonicalLength SuperSummitInfimum
+syn keyword magmaBuiltin SuperSummitProcess SuperSummitRepresentative
+syn keyword magmaBuiltin SuperSummitSet SuperSummitSupremum Supplement
+syn keyword magmaBuiltin Supplements Support Supported Supporting
+syn keyword magmaBuiltin SupportingCone Supremum Surface Surfaces SuRing
+syn keyword magmaBuiltin Surjective SurjectivePart SuSpace Suspension SuVector
+syn keyword magmaBuiltin Suzuki SuzukiGroup SuzukiIrreducibleRepresentation
+syn keyword magmaBuiltin SuzukiMaximalSubgroups SuzukiMaximalSubgroupsConjugacy
+syn keyword magmaBuiltin SuzukiSylow SuzukiSylowConjugacy SVPermutation SVWord
+syn keyword magmaBuiltin Swap SwapColumns SwapRows Swinnerton SwinnertonDyer
+syn keyword magmaBuiltin SwinnertonDyerPolynomial Switch Sylow SylowBasis
+syn keyword magmaBuiltin SylowSubgroup SylowSystem Sym Symbol Symbols Symmetric
+syn keyword magmaBuiltin Symmetric1 Symmetric2 SymmetricBilinearForm
+syn keyword magmaBuiltin SymmetricCharacter SymmetricCharacterTable
+syn keyword magmaBuiltin SymmetricCharacterValue SymmetricElementToWord
+syn keyword magmaBuiltin SymmetricForms SymmetricFunctionAlgebra
+syn keyword magmaBuiltin SymmetricFunctionAlgebraElementary
+syn keyword magmaBuiltin SymmetricFunctionAlgebraHomogeneous
+syn keyword magmaBuiltin SymmetricFunctionAlgebraMonomial
+syn keyword magmaBuiltin SymmetricFunctionAlgebraPower
+syn keyword magmaBuiltin SymmetricFunctionAlgebraSchur SymmetricGroup
+syn keyword magmaBuiltin SymmetricMatrix SymmetricNormaliser
+syn keyword magmaBuiltin SymmetricNormalizer SymmetricPower
+syn keyword magmaBuiltin SymmetricRepresentation
+syn keyword magmaBuiltin SymmetricRepresentationOrthogonal
+syn keyword magmaBuiltin SymmetricRepresentationSeminormal SymmetricSquare
+syn keyword magmaBuiltin SymmetricSquarePreimage SymmetricToQuadraticForm
+syn keyword magmaBuiltin SymmetricWeightEnumerator Symmetrization Symplectic
+syn keyword magmaBuiltin SymplecticDual SymplecticEg SymplecticForm
+syn keyword magmaBuiltin SymplecticGroup SymplecticInnerProduct
+syn keyword magmaBuiltin SymplecticMatrixGroupDatabase SymplecticSpace
+syn keyword magmaBuiltin SymplecticSymmetrization SymplecticTransvection
+syn keyword magmaBuiltin Syndrome SyndromeSpace System SystemAttributes
+syn keyword magmaBuiltin SystemNormaliser SystemNormalizer SystemOfEigenvalues
+syn keyword magmaBuiltin Syzygy SyzygyMatrix SyzygyModule Sz SzClassMap
+syn keyword magmaBuiltin SzClassRepresentative SzConjugacyClasses
+syn keyword magmaBuiltin SzElementToWord SzIsConjugate SzPresentation T1
+syn keyword magmaBuiltin Table Tableau Tableau TableauIntegerMonoid
+syn keyword magmaBuiltin TableauMonoid Tableaux TableauxOfShape
+syn keyword magmaBuiltin TableauxOnShapeWithContent TableauxWithContent
+syn keyword magmaBuiltin TableOfMarks Taft TaftDcomposition TaftDecomposition
+syn keyword magmaBuiltin Tails Talpha Tamagawa TamagawaNumber TamagawaNumbers
+syn keyword magmaBuiltin Tame Tamely TameOrder Tan Tangent TangentAngle
+syn keyword magmaBuiltin TangentCone TangentLine Tangents TangentSheaf
+syn keyword magmaBuiltin TangentSpace TangentVariety Tanh Tanner TannerGraph
+syn keyword magmaBuiltin Taquin Target TargetRestriction Tate
+syn keyword magmaBuiltin TateLichtenbaumPairing TatePairing TateTwist Tau
+syn keyword magmaBuiltin TCParameters Teichmueller TeichmuellerLift
+syn keyword magmaBuiltin TeichmuellerSystem Tell Temp Tempname Tensor
+syn keyword magmaBuiltin TensorBasis TensorFactors TensorInduced
+syn keyword magmaBuiltin TensorInducedAction TensorInducedBasis
+syn keyword magmaBuiltin TensorInducedPermutations TensorPower TensorProduct
+syn keyword magmaBuiltin TensorWreathProduct Term Terminal TerminalIndex
+syn keyword magmaBuiltin Terminalisation TerminalPolarisation TerminalVertex
+syn keyword magmaBuiltin Terms TernaryGolayCode Test TestHeckeRep Testing Tests
+syn keyword magmaBuiltin TestWG Tetrahedral Theorem Theta ThetaOperator
+syn keyword magmaBuiltin ThetaSeries ThetaSeriesIntegral ThetaSeriesModularForm
+syn keyword magmaBuiltin ThetaSeriesModularFormSpace Thick Thin Three
+syn keyword magmaBuiltin ThreeDescent ThreeDescentByIsogeny ThreeDescentCubic
+syn keyword magmaBuiltin Threefold ThreeInvols ThreeIsogenyDescent
+syn keyword magmaBuiltin ThreeIsogenyDescentCubic ThreeIsogenySelmerGroups
+syn keyword magmaBuiltin ThreeSelmerElement ThreeSelmerGroup
+syn keyword magmaBuiltin ThreeTorsionMatrices ThreeTorsionPoints
+syn keyword magmaBuiltin ThreeTorsionType Threshold Through Thue Tietze
+syn keyword magmaBuiltin TietzeProcess Time Tjurina TjurinaNumber
+syn keyword magmaBuiltin TjurinaNumberAnalyticHypersurface To2
+syn keyword magmaBuiltin To2DUpperHalfSpaceFundamentalDomian ToAnalyticJacobian
+syn keyword magmaBuiltin Todd ToddCoxeter ToddCoxeterSchreier ToFromLiEEx ToLiE
+syn keyword magmaBuiltin Top TOP TOPPOT TopQuotients TOPTOP TOPW Tor Toral
+syn keyword magmaBuiltin ToralRootData ToralRootDatum ToralRootSystem Tori
+syn keyword magmaBuiltin Toric Toric ToricAffinePatch ToricCode
+syn keyword magmaBuiltin ToricIdentityMap ToricLattice ToricVariety
+syn keyword magmaBuiltin ToricVarietyMap Torsion TorsionBound
+syn keyword magmaBuiltin TorsionCoefficients TorsionFreeRank
+syn keyword magmaBuiltin TorsionFreeSubgroup TorsionGroups TorsionInvariants
+syn keyword magmaBuiltin TorsionLowerBound TorsionMultiple TorsionSubgroup
+syn keyword magmaBuiltin TorsionSubgroupScheme TorsionUnitGroup Torus TorusTerm
+syn keyword magmaBuiltin Total TotalDegree TotalLinking Totally
+syn keyword magmaBuiltin TotallyRamifiedExtension TotallySingularComplement
+syn keyword magmaBuiltin TotallyUnitTrivialSubgroup TotalNumberOfCosets
+syn keyword magmaBuiltin Tournament Tower TPairing Trace TraceAbs Traceback
+syn keyword magmaBuiltin TraceInnerProduct TraceMatrix TraceOfFrobenius
+syn keyword magmaBuiltin TraceOfFrobeniusDirect TraceOfProduct Traces
+syn keyword magmaBuiltin TracesOfFrobenius TraceZeroSubspace Trailing
+syn keyword magmaBuiltin TrailingCoefficient TrailingTerm Transfer Transform
+syn keyword magmaBuiltin Transformation TransformationMatrix Transformations
+syn keyword magmaBuiltin TransformForm Transitive TransitiveGroup
+syn keyword magmaBuiltin TransitiveGroupDatabaseLimit
+syn keyword magmaBuiltin TransitiveGroupDescription
+syn keyword magmaBuiltin TransitiveGroupIdentification TransitiveGroupProcess
+syn keyword magmaBuiltin TransitiveGroups TransitiveGroupsDegree7 TransitiveId
+syn keyword magmaBuiltin TransitiveProcess TransitiveQuotient Transitivity
+syn keyword magmaBuiltin Translate Translation TranslationMap
+syn keyword magmaBuiltin TranslationOfSimplex TranslationToInfinity Transport
+syn keyword magmaBuiltin Transpose TransposePartition Transvection Transversal
+syn keyword magmaBuiltin TransversalElt TransversalProcess
+syn keyword magmaBuiltin TransversalProcessNext TransversalProcessRemaining
+syn keyword magmaBuiltin Transversals TransversalWords Transverse
+syn keyword magmaBuiltin TransverseIndex TransverseIntersections TransverseType
+syn keyword magmaBuiltin Trapezoidal TrapezoidalQuadrature Trasformation Tree
+syn keyword magmaBuiltin Trees Trial TrialDivision Triangle
+syn keyword magmaBuiltin Triangle239CMPoints1 Triangle239CMPoints2 Triangular
+syn keyword magmaBuiltin TriangularDecomposition TriangularGraph Triangulation
+syn keyword magmaBuiltin TriangulationOfBoundary Triconnected Triconnectivity
+syn keyword magmaBuiltin Trinomials Triple Triples Trivial
+syn keyword magmaBuiltin TrivialLieRepresentationDecomposition TrivialModule
+syn keyword magmaBuiltin TrivialOneCocycle TrivialRepresentation
+syn keyword magmaBuiltin TrivialRootDatum TrivialRootSystem Truncate
+syn keyword magmaBuiltin TruncateCoefficients Truncated TruncatedAlgebra
+syn keyword magmaBuiltin Truncation Tup Tuple Tuple TupleAccess TupleToList
+syn keyword magmaBuiltin Tuplist TutteCage Twelve TwelveDescent Twist Twisted
+syn keyword magmaBuiltin TwistedBasis TwistedBasis TwistedCartanName
+syn keyword magmaBuiltin TwistedDual TwistedGroup TwistedGroupOfLieType
+syn keyword magmaBuiltin TwistedGrpLieType TwistedLieAlgebra TwistedPolynomials
+syn keyword magmaBuiltin TwistedQRCode TwistedRootDatum TwistedSemilinearDual
+syn keyword magmaBuiltin TwistedTori TwistedToriOrders TwistedTorus
+syn keyword magmaBuiltin TwistedTorusOrder TwistedWindingElement
+syn keyword magmaBuiltin TwistedWindingSubmodule Twisting TwistingDegree Twists
+syn keyword magmaBuiltin Twists2 Two TwoCocycle TwoCover TwoCoverDescent
+syn keyword magmaBuiltin TwoCoverPullback
+syn keyword magmaBuiltin TwoDescendantsOverTwoIsogenyDescendant TwoDescent
+syn keyword magmaBuiltin TwoElement TwoElementNormal TwoGenerators TwoGenus
+syn keyword magmaBuiltin TwoIsogeny TwoIsogenyDescent TwoIsogenySelmerGroups
+syn keyword magmaBuiltin TwoPowerIsogenyDescentRankBound TwoSelmerGroup
+syn keyword magmaBuiltin TwoSidedIdealClasses TwoSidedIdealClassGroup
+syn keyword magmaBuiltin TwoTorsionPolynomial TwoTorsionSubgroup
+syn keyword magmaBuiltin TwoTransitiveGroupIdentification TwoTwistedEsixes Type
+syn keyword magmaBuiltin Type2 Type3 Type4 Type6 TypeOfContraction
+syn keyword magmaBuiltin TypeOfSequence Types TypesOfContractions
+syn keyword magmaBuiltin TypeStructures UEA UEACon UEAlgebra UEAMap UFD Ultra
+syn keyword magmaBuiltin UltraSummitProcess UltraSummitRepresentative
+syn keyword magmaBuiltin UltraSummitSet Uncapacitated UncapacitatedGraph
+syn keyword magmaBuiltin Undefine Underlying UnderlyingDigraph
+syn keyword magmaBuiltin UnderlyingElement UnderlyingField UnderlyingGraph
+syn keyword magmaBuiltin UnderlyingMultiDigraph UnderlyingMultiGraph
+syn keyword magmaBuiltin UnderlyingNetwork UnderlyingRing UnderlyingVertex
+syn keyword magmaBuiltin Underscore Undirected Ungetc Uniform Uniformizer
+syn keyword magmaBuiltin Uniformizing UniformizingElement UniformizingParameter
+syn keyword magmaBuiltin Unimodular Union Unipotent UnipotentMatrixGroup
+syn keyword magmaBuiltin UnipotentStabiliser UnipPC UnipPCPres UnipPCWordMap
+syn keyword magmaBuiltin Unique Unit Unital UnitalFeet Unitary UnitaryForm
+syn keyword magmaBuiltin UnitaryReflection UnitarySpace UnitaryTransvection
+syn keyword magmaBuiltin UnitDisc UnitDiscAngle UnitDiscBasics
+syn keyword magmaBuiltin UnitDiscPractice2 UnitEquation UnitGenerators
+syn keyword magmaBuiltin UnitGroup UnitGroupAsSubgroup UnitGroupGenerators
+syn keyword magmaBuiltin UnitRank Units UnitTrivialSubgroup UnitVector Unity
+syn keyword magmaBuiltin Univariate UnivariateEliminationIdealGenerator
+syn keyword magmaBuiltin UnivariateEliminationIdealGenerators
+syn keyword magmaBuiltin UnivariatePolynomial Universal
+syn keyword magmaBuiltin UniversalEnvelopingAlgebra UniversalMap
+syn keyword magmaBuiltin UniversalPropertyOfCokernel Universe UniverseCode
+syn keyword magmaBuiltin Unlabelled UnlabelledGraph Unramified
+syn keyword magmaBuiltin UnramifiedCharacter UnramifiedExtension
+syn keyword magmaBuiltin UnramifiedQuotientRing UnramifiedRepresentation
+syn keyword magmaBuiltin Unreduced Unset UnsetBounds UnsetGlobalTCParameters
+syn keyword magmaBuiltin UnsetLogFile UnsetOutputFile Unstable Untwisted
+syn keyword magmaBuiltin UntwistedOvergroup UntwistedRootDatum Unweighted
+syn keyword magmaBuiltin UnweightedGraph Up Update UpdateHadamardDatabase Upper
+syn keyword magmaBuiltin Upper0 Upper1 UpperCentralSeries UpperHalfPlane
+syn keyword magmaBuiltin UpperTriangularMatrix Usage Use User UserGenerators
+syn keyword magmaBuiltin UserRepresentation UserTypes2 Uses UsesBrandt
+syn keyword magmaBuiltin UsesMestre UseTwistedHopfStructure Using Valence
+syn keyword magmaBuiltin Valency Valid Validate ValidateCryptographicCurve
+syn keyword magmaBuiltin Valuation ValuationRing Valuations ValuationsOfRoots
+syn keyword magmaBuiltin Value ValueList Values ValuesOnUnitGenerators Van
+syn keyword magmaBuiltin Vandermonde VanLintBound Variable VariableExtension
+syn keyword magmaBuiltin Variables VariableWeights Variadic Variant
+syn keyword magmaBuiltin VariantRepresentatives Variants Variety
+syn keyword magmaBuiltin VarietySequence VarietySizeOverAlgebraicClosure
+syn keyword magmaBuiltin Various Varshamov Vector VectorAction Vectors
+syn keyword magmaBuiltin VectorSpace VectorSpaceWithBasis Verbose
+syn keyword magmaBuiltin VerboseBestCode Verbosity Verification Verify
+syn keyword magmaBuiltin VerifyLower VerifyMinimumDistanceLowerBound
+syn keyword magmaBuiltin VerifyMinimumDistanceUpperBound
+syn keyword magmaBuiltin VerifyMinimumWeightUpperBound VerifyRelation
+syn keyword magmaBuiltin Verschiebung VerschiebungImage VerschiebungMap Version
+syn keyword magmaBuiltin Vertex VertexConnectivity VertexEdgeIncidenceMatrix
+syn keyword magmaBuiltin VertexFacetHeightMatrix VertexFacetIncidenceMatrix
+syn keyword magmaBuiltin VertexLabels VertexPath VertexSeparator VertexSet
+syn keyword magmaBuiltin Vertical VerticalJoin Vertices Vi VI Virtual
+syn keyword magmaBuiltin VirtualDecomposition VirtualRayIndices VirtualRays
+syn keyword magmaBuiltin Volume VolumeOfBoundary Voronoi VoronoiCell
+syn keyword magmaBuiltin VoronoiData VoronoiGraph VoronoiRelevantVectors Wagner
+syn keyword magmaBuiltin Wait WaitForConnection WaitForIO Walk Wall
+syn keyword magmaBuiltin WallDecomposition WallForm WallIsometry WDD Weak
+syn keyword magmaBuiltin WeakDegree Weakly WeakOrder Wealy Weber
+syn keyword magmaBuiltin WeberClassPolynomial WeberF WeberF1 WeberF2
+syn keyword magmaBuiltin WeberToHilbertClassPolynomial Wedderburn
+syn keyword magmaBuiltin WedderburnDecomposition Weierstrass WeierstrassDegree
+syn keyword magmaBuiltin WeierstrassDegrees WeierstrassModel WeierstrassPlaces
+syn keyword magmaBuiltin WeierstrassPoints WeierstrassPreparation
+syn keyword magmaBuiltin WeierstrassSeries WeierstrassTerm WeierstrassTerms
+syn keyword magmaBuiltin Weight WeightClass WeightDistribution Weighted
+syn keyword magmaBuiltin WeightedAffinePatch WeightedDegree
+syn keyword magmaBuiltin WeightedDynkinDiagram WeightedProjectiveSpace
+syn keyword magmaBuiltin WeightEnumerator WeightLattice WeightOneHalfData
+syn keyword magmaBuiltin WeightOrbit Weights WeightsAndMultiplicities
+syn keyword magmaBuiltin WeightsAndVectors WeightSequence WeightsOfFlip
+syn keyword magmaBuiltin WeightToPartition WeightVectors Weil WeilDescent
+syn keyword magmaBuiltin WeilDescentDegree WeilDescentGenus WeilHeight
+syn keyword magmaBuiltin WeilPairing WeilPolynomialOverFieldExtension
+syn keyword magmaBuiltin WeilPolynomialToRankBound WeilRepresentation
+syn keyword magmaBuiltin WeilRestriction WeilToClassGroupsMap
+syn keyword magmaBuiltin WeilToClassLatticesMap Weyl WeylGroup WeylWord
+syn keyword magmaBuiltin WG2GroupRep WG2HeckeRep WGelement2 WGelement2WGtable
+syn keyword magmaBuiltin WGidealgens2 WGidealgens2WGtable WgraphIdeal
+syn keyword magmaBuiltin WGsymmetric WGtable WGtable2 WGtable2WG Width Widths
+syn keyword magmaBuiltin Wildly Williams Winding WindingElement WindingLattice
+syn keyword magmaBuiltin WindingSubmodule With Withj Witt WittDecomposition
+syn keyword magmaBuiltin WittDesign WittIndex WittInvariant WittInvariants
+syn keyword magmaBuiltin WittLieAlgebra WittRing Word WordAcceptor
+syn keyword magmaBuiltin WordAcceptorSize WordAccess WordArithmetic
+syn keyword magmaBuiltin WordDifferenceAutomaton WordDifferences
+syn keyword magmaBuiltin WordDifferenceSize WordGroup WordInStrongGenerators
+syn keyword magmaBuiltin WordMap WordOps WordProblem WordProblemData Words
+syn keyword magmaBuiltin WordsOfBoundedLeeWeight WordsOfBoundedWeight
+syn keyword magmaBuiltin WordsOfLeeWeight WordStrip WordToSequence
+syn keyword magmaBuiltin WordToTableau WPRI WPS Wreath WreathProduct Write
+syn keyword magmaBuiltin WriteBinary WriteBytes WriteGModuleOver
+syn keyword magmaBuiltin WriteHadamardDatabase WriteK3Data WriteOverLargerField
+syn keyword magmaBuiltin WriteOverSmallerField WriteRawHadamardData
+syn keyword magmaBuiltin WriteRepresentationOver WriteWG Wronskian
+syn keyword magmaBuiltin WronskianDeterminant WronskianMatrix WronskianOrders
+syn keyword magmaBuiltin WZWFusion X3 X3u XChain Xgcd XGCD Xor XX Yau
+syn keyword magmaBuiltin Young YoungSubgroup YoungSubgroupLadder Z2 Z4
+syn keyword magmaBuiltin Z4CodeFromBinaryChain Zariski ZariskiDecomposition
+syn keyword magmaBuiltin Zassenhaus ZassenhausNearfield ZBasis ZClasses Zech
+syn keyword magmaBuiltin ZechLog Zero ZeroChainMap ZeroCocycle ZeroCode
+syn keyword magmaBuiltin ZeroComplex ZeroCone ZeroDivisor Zeroes ZeroExtension
+syn keyword magmaBuiltin ZeroFan ZeroGammaOrbitsOnRoots ZeroMap ZeroMatrix
+syn keyword magmaBuiltin ZeroModularAbelianVariety ZeroModule
+syn keyword magmaBuiltin ZeroRepresentation ZeroRootLattice ZeroRootSpace Zeros
+syn keyword magmaBuiltin ZeroSubgroup ZeroSubscheme ZeroSubspace ZeroSubvariety
+syn keyword magmaBuiltin ZeroSumCode ZeroVector Zeta ZetaFunction
+syn keyword magmaBuiltin ZetaFunctionOfCurveModel ZetaFunctionsByDeformation
+syn keyword magmaBuiltin Zform ZGenerators Zinoviev ZinovievCode ZRadical
+" We need to treat the keyword 'Contains' differently, since it is also a
+" keyword in vim syntax...
+syn match magmaBuiltin "Contains"
+
+" Define Operators.
+syn keyword magmaOperator   adj and cmpeq cmpne div eq ge gt in le lt mod ne not
+syn keyword magmaOperator   notadj notin notsubset or subset xor
+syn match magmaOperator     "[-+*/&^]"
+syn match magmaOperator     "\.\."
+
+" We won't map "magmaAssignment" by default, but we need to map ":=" to
+" something or the "=" inside it will be mislabelled as an operator.
+" Note that in Magma, assignment (:=) is not considered an operator.
+syn match magmaAssignment               ":="
+
+
+" Numbers, including floating point, exponents, and alternate bases.
+syn match   magmaNumber         "\<\d[0-9_]*\(\.\d[0-9_]*\)\=\([Ee][+-]\=\d[0-9_]*\)\=\>"
+syn match   magmaNumber         "\<\d\d\=#\x[0-9A-Fa-f_]*\(\.\x[0-9A-Fa-f_]*\)\=#\([Ee][+-]\=\d[0-9_]*\)\="
+
+" Identify leading numeric signs. In "A-5" the "-" is an operator,
+" but in "A:=-5" the "-" is a sign. This handles "A3+-5" (etc.) correctly.
+" This assumes that if you put a don't put a space after +/- when it's used
+" as an operator, you won't put a space before it either -- which is true
+" in code I've seen.
+syn match magmaSign "[[:space:]<>=(,|:;&*/+-][+-]\d"lc=1,hs=s+1,he=e-1,me=e-1
+
+" Boolean Constants.
+syn keyword magmaBoolean        true false
+
+" Warn people who try to use C/C++ notation erroneously:
+syn match magmaError "=="
+syn match magmaError "="
+syn match magmaError "%"
+
+syn region magmaComment oneline contains=magmaTodo start="//" end="$"
+syn region magmaComment contains=magmaTodo start="/\*" end="\*/"
+
+" Repeats.
+syn keyword magmaRepeat         for to by do while repeat until break continue
+syn match magmaRepeat           "\<end\s\+for\>"
+syn match magmaRepeat           "\<end\s\+while\>"
+
+" Conditionals.
+syn match magmaConditional      "\<end\s\+if\>"
+syn match magmaConditional      "\<end\s\+case\>"
+syn keyword magmaConditional    if then else elif case when select
+
+" Exceptions
+syn keyword magmaException      try catch
+syn match magmaException        "\<end\s\+try\>"
+
+" These keywords begin various constructs, and you _might_ want to
+" highlight them differently.
+syn keyword magmaFunction       function procedure
+syn match magmaFunction         "\<end\s\+function\>"
+syn match magmaFunction         "\<end\s\+procedure\>"
+
+" String and character constants.
+syn region  magmaString         start=+L\="+ skip=+\\\\\|\\"+ end=+"+
+syn match   magmaCharacter      "'.'"
+
+" Other keywords
+syn keyword magmaKeyword assert assert2 assert3 assigned cat clear declare
+syn keyword magmaKeyword default delete diff error eval exists exit forall
+syn keyword magmaKeyword forward fprintf freeze iload import intrinsic is join
+syn keyword magmaKeyword load local meet print printf quit random read readi
+syn keyword magmaKeyword require requirege requirerange restore return save
+syn keyword magmaKeyword sdiff time to vprint vprintf vtime where
+
+" Todo (only highlighted in comments)
+syn keyword magmaTodo contained TODO FIXME HACK
+
+" Comments.
+" syn region  magmaComment      oneline contains=magmaTodo start="/*"  end="*/"
+" syn region  magmaComment      oneline contains=magmaTodo start="//"  end="\n"
+
+if version >= 508 || !exists("did_ada_syn_inits")
+    if version < 508
+        command -nargs=+ HiLink hi link <args>
+    else
+        command -nargs=+ HiLink hi def link <args>
+    endif
+
+    " The default methods for highlighting. Can be overridden later.
+    HiLink magmaBoolean Boolean
+    HiLink magmaBuiltin Function
+    HiLink magmaCharacter Character
+    HiLink magmaComment Comment
+    HiLink magmaConditional Conditional
+    HiLink magmaException Exception
+    HiLink magmaFunction Function
+    HiLink magmaKeyword Keyword
+    HiLink magmaNumber Number
+    HiLink magmaSign Number
+    HiLink magmaOperator Operator
+    HiLink magmaRepeat Repeat
+    HiLink magmaSpecial Special
+    HiLink magmaStatement Statement
+    HiLink magmaString String
+    HiLink magmaStructure Structure
+    HiLink magmaTodo Todo
+    HiLink magmaType Type
+    HiLink magmaTypedef Typedef
+    HiLink magmaError Error
+    HiLink magmaStorageClass StorageClass
+    HiLink magmaInc Include
+
+    delcommand HiLink
+endif
+
+let b:current_syntax = "magma"
