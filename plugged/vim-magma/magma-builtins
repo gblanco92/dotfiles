@@ -176,7 +176,6 @@ AGM
 AHom
 AInfinity
 AInfinityRecord
-Al
 Alarm
 Alg
 AlgAff
@@ -1814,9 +1813,6 @@ DimensionsOfHomology
 DimensionsOfInjectiveModules
 DimensionsOfProjectiveModules
 DimensionsOfTerms
-Dir
-DIR
-Direct
 Directed
 Directory
 DirectProduct
@@ -1832,7 +1828,6 @@ DirichletCharacterOverQ
 DirichletCharacters
 DirichletGroup
 DirichletRestriction
-Disc
 Disconnect
 DiscreteLog
 Discriminant
@@ -7961,10 +7956,7 @@ TerminalPolarisation
 TerminalVertex
 Terms
 TernaryGolayCode
-Test
 TestHeckeRep
-Testing
-Tests
 TestWG
 Tetrahedral
 The

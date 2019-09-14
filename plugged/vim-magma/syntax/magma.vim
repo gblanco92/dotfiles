@@ -86,7 +86,7 @@ syn keyword magmaBuiltin AffineSigmaSymplecticGroup AffineSpace
 syn keyword magmaBuiltin AffineSpecialLinearGroup AffineSymplecticGroup AFG
 syn keyword magmaBuiltin AFRNumber AG AGamma AGammaL AGCode AGDecode AGDual
 syn keyword magmaBuiltin AGDualCode Agemo Aggr AGL AGM AHom AInfinity
-syn keyword magmaBuiltin AInfinityRecord Al Alarm Alg AlgAff AlgAss AlgBas
+syn keyword magmaBuiltin AInfinityRecord Alarm Alg AlgAff AlgAss AlgBas
 syn keyword magmaBuiltin AlgChtrElt AlgClff AlgComb AlgCon Algebra
 syn keyword magmaBuiltin AlgebraGenerators Algebraic Algebraically
 syn keyword magmaBuiltin AlgebraicClosure AlgebraicGenerators
@@ -594,14 +594,14 @@ syn keyword magmaBuiltin DimensionOfGlobalSections DimensionOfHomology
 syn keyword magmaBuiltin DimensionOfKernelZ2 DimensionOfSpanZ2 Dimensions
 syn keyword magmaBuiltin DimensionsEstimate DimensionsEstimate
 syn keyword magmaBuiltin DimensionsOfHomology DimensionsOfInjectiveModules
-syn keyword magmaBuiltin DimensionsOfProjectiveModules DimensionsOfTerms Dir
-syn keyword magmaBuiltin DIR Direct Directed Directory DirectProduct
+syn keyword magmaBuiltin DimensionsOfProjectiveModules DimensionsOfTerms
+syn keyword magmaBuiltin Directed Directory DirectProduct
 syn keyword magmaBuiltin DirectProductDualRadical DirectSum
 syn keyword magmaBuiltin DirectSumDecomposition DirectSumDual
 syn keyword magmaBuiltin DirectSumDualRadical Dirichlet DirichletCharacter
 syn keyword magmaBuiltin DirichletCharacterOverNF DirichletCharacterOverQ
 syn keyword magmaBuiltin DirichletCharacters DirichletGroup
-syn keyword magmaBuiltin DirichletRestriction Disc Disconnect DiscreteLog
+syn keyword magmaBuiltin DirichletRestriction Disconnect DiscreteLog
 syn keyword magmaBuiltin Discriminant DiscriminantDivisor
 syn keyword magmaBuiltin DiscriminantFromShiodaInvariants
 syn keyword magmaBuiltin DiscriminantOfHeckeAlgebra DiscriminantRange
@@ -2494,7 +2494,7 @@ syn keyword magmaBuiltin TensorInducedAction TensorInducedBasis
 syn keyword magmaBuiltin TensorInducedPermutations TensorPower TensorProduct
 syn keyword magmaBuiltin TensorWreathProduct Term Terminal TerminalIndex
 syn keyword magmaBuiltin Terminalisation TerminalPolarisation TerminalVertex
-syn keyword magmaBuiltin Terms TernaryGolayCode Test TestHeckeRep Testing Tests
+syn keyword magmaBuiltin Terms TernaryGolayCode TestHeckeRep
 syn keyword magmaBuiltin TestWG Tetrahedral Theorem Theta ThetaOperator
 syn keyword magmaBuiltin ThetaSeries ThetaSeriesIntegral ThetaSeriesModularForm
 syn keyword magmaBuiltin ThetaSeriesModularFormSpace Thick Thin Three

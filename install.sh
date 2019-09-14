@@ -24,4 +24,4 @@ ln -s $DIR/ftplugin/tex/tex.vim ~/.config/nvim/ftplugin/text.vim
 rm -f ~/.vim/ftplugin/*.vim && ln -s $DIR/ftplugin/*.vim ~/.vim/ftplugin/
 rm -f ~/.vim/ftplugin/tex/*.vim && ln -s $DIR/ftplugin/tex/*.vim ~/.vim/ftplugin/tex/
 ln -s $DIR/ftplugin/tex/tex.vim ~/.vim/ftplugin/text.vim
-rm -Rf ~/.config/nvim/plugged/singular-syntax/ && cp -R $DIR/plugged/* ~/.config/nvim/plugged/
+cp -R $DIR/plugged/* ~/.config/nvim/plugged/
