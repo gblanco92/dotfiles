@@ -59,8 +59,7 @@ command! -bar -nargs=* -complete=file -range=% -bang Write
   \ <line1>,<line2>write<bang> <args>
 command! -bar -nargs=* -complete=file -range=% -bang Wq
   \ <line1>,<line2>wq<bang> <args>
-command! -bang Q
-  \ quit<bang>
+command! -bang Q qa<bang>
 
 " Use system clipboard instead of vim buffers
 set clipboard=unnamed
@@ -331,11 +330,11 @@ endif
 
 " K searches for the word unfer the cursor (:bo for quickfix across windows)
 nnoremap <silent> K :grep! --word-regexp "<C-R><C-W>" *
-  \ <CR>:bo cwindow<bar>set nobuflisted<CR>
+  \ <CR>:bo cwindow<CR>
 
 " Create the Ag command
 command! -nargs=+ -complete=file -bar
-  \ Ag silent! grep! <args> * | bo cwindow | set nobuflisted | redraw
+  \ Ag silent! grep! <args> * | bo cwindow | redraw
 
 " For some reason I do not understand the set nobuflisted in the
 " autogroup for QuickFix is not executed when opening this qf window
