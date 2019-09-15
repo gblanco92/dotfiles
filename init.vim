@@ -364,7 +364,7 @@ let g:rainbow_conf = { 'ctermfgs' : ['brown'],
 \                      'guifgs' : ['SaddleBrown'] }
 
 " Ctrl-P
-let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_working_path_mode = 0
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ 'file': '\v\.(exe|so|dll)$',
