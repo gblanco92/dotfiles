@@ -11,7 +11,7 @@ ZSH_THEME="eastwood"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew history history-substring-search terminalapp)
+plugins=(git brew history history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -23,13 +23,13 @@ export MANPATH="/usr/local/man:$MANPATH"
 export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-if [[ -a `brew --prefix`/bin/nvim ]]; then
+if [[ -a nvim ]]; then
   export EDITOR='nvim'
   alias vim='nvim'
 fi
 
 # Use exa instead of ls
-if [[ -a `brew --prefix`/bin/exa ]]; then
+if [[ -a exa ]]; then
   alias ls='exa'
 fi
 
