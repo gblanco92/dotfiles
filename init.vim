@@ -27,8 +27,8 @@ call plug#begin('~/.config/nvim/plugged')
   Plug '~/.config/nvim/plugged/singular-syntax'
 "" Others
   Plug 'luochen1990/rainbow' " Rainbow parenthesis
-  Plug 'kshenoy/vim-signature' " Display marks
   Plug 'tpope/vim-surround' " Surround objects
+  Plug 'SirVer/ultisnips' " UltiSnips
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
