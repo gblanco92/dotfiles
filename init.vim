@@ -377,15 +377,20 @@ let g:ctrlp_user_ignore = ['.git',
 " vimtex
 let maplocalleader = ','
 let g:vimtex_enabled = 1
-let g:vimtex_view_method = 'skim'
 let g:vimtex_view_automatic = 1
 let g:tex_flavor = 'latex'
 let g:vimtex_toc_config = { 'show_help' : 0 }
-let g:vimtex_view_skim_activate = 1
+" Select PDF viewer
+if has('macunix')
+  let g:vimtex_view_method = 'skim'
+  let g:vimtex_view_skim_activate = 1
+  let g:vimtex_view_skim_reading_bar = 0
+else
+  let g:vimtex_view_method = 'zathura'
+endif
 " Disable continuous compilations, i.e. enable single shot compilations
 "let g:vimtex_compiler_latexmk = {'continuous' : 0, }
-"
-let g:vimtex_view_skim_reading_bar = 0
+
 " Matching is too slow? Try a small number of lines...
 "let g:vimtex_matchparen_enabled = 0
 let g:vimtex_delim_stopline = 10
