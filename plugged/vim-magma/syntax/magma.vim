@@ -633,7 +633,7 @@ syn keyword magmaBuiltin DualLeeWeightDistribution DualMorphism DualQuotient
 syn keyword magmaBuiltin DualRS DualStarInvolution DualVectorSpace
 syn keyword magmaBuiltin DualWeightDistribution DUpper Duval
 syn keyword magmaBuiltin DuvalPuiseuxExpansion Dyer Dynkin DynkinDiagram
-syn keyword magmaBuiltin DynkinDigraph E1 E2 E2NForm E4 E4Form E6 E6Form
+syn keyword magmaBuiltin DynkinDigraph E2NForm E4Form E6Form
 syn keyword magmaBuiltin Ealpha EARNS EAS Easy EasyBasis EasyBasis EasyIdeal
 syn keyword magmaBuiltin EasyIdeal ECchabauty ECDL ECDom ECF ECFBound Echelon
 syn keyword magmaBuiltin EchelonForm Echelonise EcheloniseWord Echo ECM
@@ -2242,7 +2242,7 @@ syn keyword magmaBuiltin SemisimpleEFAModules SemisimpleEFASeries
 syn keyword magmaBuiltin SemisimpleGeneratorData SemisimpleRank SemisimpleType
 syn keyword magmaBuiltin Semisimplification Separable Separating
 syn keyword magmaBuiltin SeparatingElement Separation SeparationVertices
-syn keyword magmaBuiltin Separator Seq Seq Seqelt SeqFact SeqFromClifford
+syn keyword magmaBuiltin Separator Seq SeqEnum Seqelt SeqFact SeqFromClifford
 syn keyword magmaBuiltin Seqint Seqlist Seqset SeqToClifford Sequence
 syn keyword magmaBuiltin SequenceOfRadicalGenerators Sequences
 syn keyword magmaBuiltin SequenceToElement SequenceToFactorization

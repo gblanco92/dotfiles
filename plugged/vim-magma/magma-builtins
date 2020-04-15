@@ -1931,12 +1931,8 @@ Dyer
 Dynkin
 DynkinDiagram
 DynkinDigraph
-E1
-E2
 E2NForm
-E4
 E4Form
-E6
 E6Form
 Ealpha
 EARNS
@@ -7110,7 +7106,7 @@ Separation
 SeparationVertices
 Separator
 Seq
-Seq
+SeqEnum
 Seqelt
 SeqFact
 SeqFromClifford
