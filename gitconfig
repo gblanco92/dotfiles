@@ -5,5 +5,5 @@
 	email = gblanco92@gmail.com
 [core]
 	editor = vim
-[web]
-	browser = google-chrome
+[credential]
+	helper = store
