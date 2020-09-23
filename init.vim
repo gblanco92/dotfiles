@@ -19,13 +19,13 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'iCyMind/NeoSolarized'
-"" Maths
+" Maths
   Plug 'lervag/vimtex', { 'for' : 'tex' }
   Plug 'brennier/quicktex', { 'for' : 'tex' }
   Plug '~/.config/nvim/plugged/m2-syntax'
   Plug '~/.config/nvim/plugged/vim-magma'
   Plug '~/.config/nvim/plugged/singular-syntax'
-"" Others
+" Others
   Plug 'luochen1990/rainbow' " Rainbow parenthesis
   Plug 'tpope/vim-surround' " Surround objects
   Plug 'SirVer/ultisnips' " UltiSnips
