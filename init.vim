@@ -233,9 +233,11 @@ set switchbuf=useopen
 " Switch buffer using <leader> + <Tab>
 map <silent> <leader><Tab> :bn<CR>
 
-" Return to last edit position when opening files
-autocmd! BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-  \ | exe "normal! g`\"" | endif
+" Return to last edit position when opening files (breaks if using VSCode)
+if !exists('g:vscode')
+  autocmd! BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \ | exe "normal! g`\"" | endif
+endif
 
 " Disable arrows (all modes)
 noremap <Up> <NOP>
