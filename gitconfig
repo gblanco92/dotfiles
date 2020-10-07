@@ -4,6 +4,6 @@
 	name = Guillem Blanco
 	email = gblanco92@gmail.com
 [core]
-	editor = vim
+	editor = nvim
 [credential]
 	helper = store
