@@ -17,6 +17,7 @@ mkdir -p ~/.config/nvim/ftplugin/tex
 mkdir -p ~/.vim/ftplugin
 mkdir -p ~/.vim/ftplugin/tex
 mkdir -p ~/.config/nvim/plugged/
+mkdir -p ~/.config/nvim/spell/
 
 rm -f ~/.config/nvim/ftplugin/*.vim && ln -s $DIR/ftplugin/*.vim ~/.config/nvim/ftplugin/
 rm -f ~/.config/nvim/ftplugin/tex/* && ln -s $DIR/ftplugin/tex/*.vim ~/.config/nvim/ftplugin/tex/
@@ -25,3 +26,5 @@ rm -f ~/.vim/ftplugin/*.vim && ln -s $DIR/ftplugin/*.vim ~/.vim/ftplugin/
 rm -f ~/.vim/ftplugin/tex/*.vim && ln -s $DIR/ftplugin/tex/*.vim ~/.vim/ftplugin/tex/
 ln -s $DIR/ftplugin/tex/tex.vim ~/.vim/ftplugin/text.vim
 cp -R $DIR/plugged/* ~/.config/nvim/plugged/
+rm -f ~/.config/nvim/spell/en.utf-8.add && ln -s $DIR/spell/en.utf-8.add ~/.config/nvim/spell/en.utf-8.add
+rm -f ~/.config/nvim/spell/en.utf-8.add.spl && ln -s $DIR/spell/en.utf-8.add.spl ~/.config/nvim/spell/en.utf-8.add.spl
