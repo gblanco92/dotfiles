@@ -19,6 +19,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'iCyMind/NeoSolarized'
+  Plug 'altercation/vim-colors-solarized'
 " Maths
   Plug 'lervag/vimtex', { 'for' : 'tex' }
   Plug 'brennier/quicktex', { 'for' : 'tex' }
