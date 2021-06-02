@@ -168,7 +168,11 @@ if has('nvim')
 endif
 
 try
-  colorscheme NeoSolarized
+  if has('gui_vimr')
+    colorscheme solarized
+  else
+    colorscheme NeoSolarized
+  endif
 catch
   colorscheme desert
 endtry
@@ -358,6 +362,12 @@ set noshowmode
 " probably on the font not begin Powerline (or Powerline enough). Currently
 " using:  Inconsolata-dz for Powerline:14h for iTerm2 &
 "         Inconsolata for Powerline:h16 for MacVim.
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.linenr = ' L:'
+let g:airline_symbols.maxlinenr = ' ☰  '
+let g:airline_symbols.colnr = 'C:'
 
 " Rainbown parenthesis
 let g:rainbow_active = 1
