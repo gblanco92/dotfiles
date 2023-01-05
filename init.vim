@@ -6,6 +6,11 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
   exe '!curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'
 endif
 
+" Fixes VimPlug on vim
+if !has('nvim')
+  set rtp +=~/.config/nvim
+endif
+
 " Plug section
 call plug#begin('~/.config/nvim/plugged')
 " C/C++
@@ -29,13 +34,16 @@ call plug#begin('~/.config/nvim/plugged')
 " Others
   Plug 'luochen1990/rainbow' " Rainbow parenthesis
   Plug 'tpope/vim-surround' " Surround objects
+if has('nvim')
   Plug 'SirVer/ultisnips' " UltiSnips
+endif
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable filetype plugins
+filetype on
 filetype plugin on
 filetype indent off
 
@@ -331,6 +339,7 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 else
   set grepprg=grep\ -nR
+  " If silver searcher not present use find.
   let g:ctrlp_user_command = 'find %s -type f'
 endif
 " The following commands should work independently of the silver searcher
@@ -339,9 +348,15 @@ endif
 nnoremap <silent> K :grep! --word-regexp "<C-R><C-W>" *
   \ <CR>:bo cwindow<CR>
 
+" No scaping of spaces or quotes needed
+function! Ag(args) abort
+  execute "silent! grep!" shellescape(a:args)
+  cwindow
+  redraw!
+endfunction
+
 " Create the Ag command
-command! -nargs=+ -complete=file -bar
-  \ Ag silent! grep! <args> * | bo cwindow | redraw
+command -nargs=+ -complete=file Ag call Ag(<q-args>)
 
 " For some reason I do not understand the set nobuflisted in the
 " autogroup for QuickFix is not executed when opening this qf window
@@ -377,7 +392,8 @@ let g:rainbow_conf = { 'ctermfgs' : ['brown'],
 \                      'guifgs' : ['SaddleBrown'] }
 
 " Ctrl-P
-let g:ctrlp_working_path_mode = 0
+nmap <silent> <leader>p :CtrlP <CR>
+let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ 'file': '\v\.(exe|so|dll)$',
@@ -385,7 +401,6 @@ let g:ctrlp_custom_ignore = {
   \ }
 let g:ctrlp_user_ignore = ['.git',
   \ 'cd %s && git ls-files -co --exclude-standard']
-" If silver searcher not present use find.
 
 " vimtex
 let maplocalleader = ','
@@ -394,13 +409,9 @@ let g:vimtex_view_automatic = 1
 let g:tex_flavor = 'latex'
 let g:vimtex_toc_config = { 'show_help' : 0 }
 " Select PDF viewer
-if has('macunix')
-  let g:vimtex_view_method = 'skim'
-  let g:vimtex_view_skim_activate = 1
-  let g:vimtex_view_skim_reading_bar = 0
-else
-  let g:vimtex_view_method = 'zathura'
-endif
+let g:vimtex_view_method = 'skim'
+let g:vimtex_view_skim_activate = 1
+let g:vimtex_view_skim_reading_bar = 0
 " Disable continuous compilations, i.e. enable single shot compilations
 "let g:vimtex_compiler_latexmk = {'continuous' : 0, }
 
