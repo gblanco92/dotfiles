@@ -351,7 +351,7 @@ nnoremap <silent> K :grep! --word-regexp "<C-R><C-W>" *
 " No scaping of spaces or quotes needed
 function! Ag(args) abort
   execute "silent! grep!" shellescape(a:args)
-  cwindow
+  bo cwindow
   redraw!
 endfunction
 
@@ -414,6 +414,10 @@ let g:vimtex_view_skim_activate = 1
 let g:vimtex_view_skim_reading_bar = 0
 " Disable continuous compilations, i.e. enable single shot compilations
 "let g:vimtex_compiler_latexmk = {'continuous' : 0, }
+let g:vimtex_quickfix_ignore_filters = [
+      \ 'Underfull',
+      \ 'Overfull',
+      \]
 
 " Matching is too slow? Try a small number of lines...
 "let g:vimtex_matchparen_enabled = 0
