@@ -11,32 +11,29 @@ if !has('nvim')
   set rtp +=~/.config/nvim
 endif
 
+function! Cond(Cond, ...)
+  let opts = get(a:000, 0, {})
+  return a:Cond ? opts : extend(opts, { 'on': [], 'for': [] })
+endfunction
+
 " Plug section
 call plug#begin('~/.config/nvim/plugged')
 " C/C++
-  Plug 'octol/vim-cpp-enhanced-highlight', {'for' : ['c', 'cpp']} " Highlighting
-" Searching
-  Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'octol/vim-cpp-enhanced-highlight', Cond(!exists('g:vscode'), {'for' : ['c', 'cpp']})
 " Tmux
-  Plug 'christoomey/vim-tmux-navigator'
-  Plug 'edkolev/tmuxline.vim'
+  Plug 'christoomey/vim-tmux-navigator', Cond(!exists('g:vscode'))
+  Plug 'edkolev/tmuxline.vim', Cond(!exists('g:vscode'))
 " Themes
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-  Plug 'iCyMind/NeoSolarized'
-  Plug 'altercation/vim-colors-solarized'
+  Plug 'vim-airline/vim-airline', Cond(!exists('g:vscode'))
+  Plug 'vim-airline/vim-airline-themes', Cond(!exists('g:vscode'))
+  Plug 'iCyMind/NeoSolarized', Cond(!exists('g:vscode'))
+  Plug 'altercation/vim-colors-solarized', Cond(!exists('g:vscode'))
 " Maths
-  Plug 'lervag/vimtex', { 'for' : 'tex' }
+  Plug 'lervag/vimtex', Cond(!exists('g:vscode'), { 'for' : 'tex' })
   Plug 'brennier/quicktex', { 'for' : 'tex' }
-  Plug '~/.config/nvim/plugged/m2-syntax'
-  Plug '~/.config/nvim/plugged/vim-magma'
-  Plug '~/.config/nvim/plugged/singular-syntax'
-" Others
-  Plug 'luochen1990/rainbow' " Rainbow parenthesis
-  Plug 'tpope/vim-surround' " Surround objects
-if has('nvim')
-  Plug 'SirVer/ultisnips' " UltiSnips
-endif
+  Plug '~/.config/nvim/plugged/m2-syntax', Cond(!exists('g:vscode'))
+  Plug '~/.config/nvim/plugged/vim-magma', Cond(!exists('g:vscode'))
+  Plug '~/.config/nvim/plugged/singular-syntax', Cond(!exists('g:vscode'))
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -60,15 +57,6 @@ endif
 " With a map leader it's possible to do extra key combinations
 let mapleader = ","
 let g:mapleader = ","
-
-" Recognize :W as :w
-command! -bar -nargs=* -complete=file -range=% -bang W
-  \ <line1>,<line2>write<bang> <args>
-command! -bar -nargs=* -complete=file -range=% -bang Write
-  \ <line1>,<line2>write<bang> <args>
-command! -bar -nargs=* -complete=file -range=% -bang Wq
-  \ <line1>,<line2>wq<bang> <args>
-command! -bang Q qa<bang>
 
 " Use system clipboard instead of vim buffers
 set clipboard=unnamed
@@ -212,8 +200,8 @@ if !has('nvim')
 endif
 
 " 1 tab == 2 spaces
-set shiftwidth=2
-set tabstop=2
+set shiftwidth=4
+set tabstop=4
 
 " Autoindent
 if !has('nvim')
@@ -335,12 +323,8 @@ map <leader>r :%s/<C-r><C-w>/
 if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor\ -m\ 50
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 else
   set grepprg=grep\ -nR
-  " If silver searcher not present use find.
-  let g:ctrlp_user_command = 'find %s -type f'
 endif
 " The following commands should work independently of the silver searcher
 
@@ -391,17 +375,6 @@ let g:rainbow_active = 1
 let g:rainbow_conf = { 'ctermfgs' : ['brown'],
 \                      'guifgs' : ['SaddleBrown'] }
 
-" Ctrl-P
-nmap <silent> <leader>p :CtrlP <CR>
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
-  \ }
-let g:ctrlp_user_ignore = ['.git',
-  \ 'cd %s && git ls-files -co --exclude-standard']
-
 " vimtex
 let maplocalleader = ','
 let g:vimtex_enabled = 1
@@ -420,5 +393,5 @@ let g:vimtex_quickfix_ignore_filters = [
       \]
 
 " Matching is too slow? Try a small number of lines...
-"let g:vimtex_matchparen_enabled = 0
+let g:vimtex_matchparen_enabled = 0
 let g:vimtex_delim_stopline = 10
