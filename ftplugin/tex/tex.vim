@@ -30,8 +30,4 @@ augroup tex
 
   " Better performance when redrawing
   setlocal lazyredraw
-
-  " Disable several cosmetic options for better performance on tex(t) files
-  autocmd BufEnter * RainbowToggle
-  autocmd BufEnter * NoMatchParen
 augroup END
