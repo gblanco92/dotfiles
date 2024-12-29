@@ -7,11 +7,15 @@ augroup tex
   map <buffer> 0 g^
   map <buffer> $ g$
 
-  " Enable spell checking
-  setlocal spell
 
-  " Complete using dictionary words
-  setlocal complete+=kspell
+  " Disable spell checking inside VSCode
+  if !exists('g:vscode')
+    " Enable spell checking
+    setlocal spell
+
+    " Complete using dictionary words
+    setlocal complete+=kspell
+  endif
 
   " Disable column limit marker
   setlocal colorcolumn=

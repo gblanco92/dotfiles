@@ -122,7 +122,7 @@ set number
 set cursorline
 
 " Highlight column 81
-set colorcolumn=80
+"set colorcolumn=80
 
 " Always show the status line
 if !has('nvim')
