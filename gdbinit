@@ -26,3 +26,7 @@ end
 define hookpost-run
     skipstl
 end
+
+set auto-load safe-path /
+
+set print asm-demangle on
